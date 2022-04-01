@@ -22,7 +22,8 @@ void Character::Update(float _deltatime)
 		equippedWeapon->SetRotation(GetRotation());
 	}
 
-	SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), velocity));
+	
+	std::cout << GetRotation() << std::endl;
 	CheckForInput();
 
 	Move(velocity * (moveSpeed * _deltatime));
@@ -53,18 +54,22 @@ void Character::CheckForInput()
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ForwardKey))
 	{
 		velocity.y += -1;
+		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.BackwardKey))
 	{
 		velocity.y += 1;
+		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LeftKey))
 	{
 		velocity.x += -1;
+		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.RightKey))
 	{
 		velocity.x += 1;
+		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ShootKey))
 	{
