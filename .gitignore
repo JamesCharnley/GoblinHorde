@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+*.db
+AI_P01/.vs/AI_P01/v16/Browse.VC.db-shm
+AI_P01/.vs/AI_P01/v16/Browse.VC.db-wal
+AI_P01/.vs/AI_P01/v16/Browse.VC.opendb
+AI_P01/.vs/AI_P01/v16/ipch/AutoPCH/f45b04ee6dc1cbf6/SCENE.ipch
