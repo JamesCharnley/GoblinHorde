@@ -1,5 +1,6 @@
 #include "GameObject_Circle.h"
 #include <iostream>
+
 GameObject_Circle::GameObject_Circle(sf::RenderWindow* _window, Scene* _scene)
 {
 	// create sf::CircleShape with default radius of 1

@@ -1,13 +1,6 @@
 ﻿  Character.cpp
   Collider.cpp
-  Game.cpp
-  GameObject.cpp
-  GameObject_Circle.cpp
-  GameObject_Rectangle.cpp
-  GoblinHorde.cpp
-  Level_One.cpp
-  Main.cpp
-  Scene.cpp
+  Projectile.cpp
   SFML_VectorMath.cpp
   Generating Code...
   AI_P01.vcxproj -> C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\AI_P01.exe
