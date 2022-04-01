@@ -38,6 +38,7 @@ protected:
 
     FInputs selectedInputPreset;
 
+    class Weapon* equippedWeapon = nullptr;
 private:
 
     FInputs playerOnePreset = { sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::Space };

@@ -34,11 +34,23 @@ public:
 		return _vec;
 	}
 
-	sf::Vector2f MultiplyVector(sf::Vector2f _vecA, float _num)
+	static sf::Vector2f MultiplyVector(sf::Vector2f _vecA, float _num)
 	{
 		sf::Vector2f result(_vecA.x * _num, _vecA.y * _num);
 
 		return result;
+	}
+
+	static float DirectionToAngle(sf::Vector2f _position, sf::Vector2f _dir)
+	{
+		float angle = atan2(_dir.y - _position.y, _dir.x - _position.x);
+		return (angle * 180.0f / 3.14159265359f);
+	}
+
+	static sf::Vector2f AngleToDirection(float _angle)
+	{
+
+		return sf::Vector2f(std::cos(_angle / 180.0f * 3.14159265359f), std::sin(_angle / 180.0f * 3.14159265359f));
 	}
 };
 
