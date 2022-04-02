@@ -1,6 +1,8 @@
-﻿  Character.cpp
-  Collider.cpp
-  Projectile.cpp
-  SFML_VectorMath.cpp
-  Generating Code...
+﻿Weapon.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Weapon.obj' or at 'C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\vc142.pdb'; linking object as if no debug info
+SFML_VectorMath.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'SFML_VectorMath.obj' or at 'C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\vc142.pdb'; linking object as if no debug info
+Projectile.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Projectile.obj' or at 'C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\vc142.pdb'; linking object as if no debug info
+Level_One.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Level_One.obj' or at 'C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\vc142.pdb'; linking object as if no debug info
+GameObject_Circle.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'GameObject_Circle.obj' or at 'C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\vc142.pdb'; linking object as if no debug info
+Collider.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Collider.obj' or at 'C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\vc142.pdb'; linking object as if no debug info
+Character.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Character.obj' or at 'C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\vc142.pdb'; linking object as if no debug info
   AI_P01.vcxproj -> C:\Users\James\Documents\GitHub\GoblinHorde\AI_P01\Debug\AI_P01.exe
