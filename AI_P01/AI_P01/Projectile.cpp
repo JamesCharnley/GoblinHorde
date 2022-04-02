@@ -1,13 +1,13 @@
 #include "SFML_VectorMath.h"
 #include "Projectile.h"
 
-Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, sf::Vector2f _dir)
+Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation)
 {
 	window = _window;
 	_scene = scene;
-	direction = _dir;
-	direction = SFML_VectorMath::Normalize(direction);
 	SetRotation(_rotation);
+	direction = SFML_VectorMath::AngleToDirection(GetRotation());
+	direction = SFML_VectorMath::Normalize(direction);
 	SetRadius(20.0f);
 }
 
