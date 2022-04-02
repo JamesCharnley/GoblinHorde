@@ -33,6 +33,8 @@ public:
     // implement attack action
     void PerformAction();
 
+    GameObject* GetOwner() { return owner; };
+
 protected:
 
     void Cooldown(float _deltatime);

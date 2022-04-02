@@ -10,7 +10,7 @@ Scene::Scene()
 
 }
 
-Scene::Scene(class Game* _gameClass, sf::RenderWindow* _window)
+Scene::Scene(Game* _gameClass, sf::RenderWindow* _window)
 {
 	game = _gameClass;
 	window = _window;
@@ -50,13 +50,13 @@ void Scene::Update(float _deltaTime)
 	ClearDestroySceneObjectQueue();
 }
 
-void Scene::DestroySceneObject(class GameObject* _object)
+void Scene::DestroySceneObject(GameObject* _object)
 {
 	//Add CGameObject ptr to queue to be deleted at end of Update()
 	destroySceneObjectQueue.push_back(_object);
 }
 
-void Scene::AddSceneObject(class GameObject* _object)
+void Scene::AddSceneObject(GameObject* _object)
 {
 	//Add CGameObject ptr to queue to be added at end of Update()
 	addSceneObjectQueue.push_back(_object);
@@ -153,14 +153,23 @@ void Scene::CollisionCheck()
 	{
 		otherObjectIterator = sceneObjects.begin() + i;
 		GameObject* other = *otherObjectIterator;
-
-		std::vector<GameObject*>::iterator it;
-		for (int j = 0; j < (int)sceneObjects.size(); j++)
+		if (other->GetCollider() != nullptr)
 		{
-			it = sceneObjects.begin() + j;
-			GameObject* go = *it;
-			go->GetCollider()->CheckForCollision(other);
-		}
+			std::vector<GameObject*>::iterator it;
+			for (int j = 0; j < (int)sceneObjects.size(); j++)
+			{
+				it = sceneObjects.begin() + j;
+				GameObject* go = *it;
+				if (go != other)
+				{
+					if (go->GetCollider() != nullptr)
+					{
+						go->GetCollider()->CheckForCollision(other);
+					}
+					
+				}
 
+			}
+		}
 	}
 }

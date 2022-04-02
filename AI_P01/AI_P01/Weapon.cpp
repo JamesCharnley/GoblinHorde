@@ -14,6 +14,7 @@ Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner)
 void Weapon::Update(float _deltatime)
 {
 	SetPosition(owner->GetPosition());
+	
 	if (inAction)
 	{
 		Cooldown(_deltatime);
@@ -25,7 +26,7 @@ void Weapon::PerformAction()
 	if (!inAction)
 	{
 		// shoot 
-		Projectile* proj = new Projectile(window, scene, GetRotation());
+		Projectile* proj = new Projectile(window, scene, GetRotation(), this);
 		proj->SetPosition(GetPosition());
 		scene->AddSceneObject(proj);
 		cooldownTimer = 1 / weaponData.ActionsPerSecond;

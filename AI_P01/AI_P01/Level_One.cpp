@@ -1,13 +1,13 @@
 #include "Level_One.h"
 #include "GameObject_Rectangle.h"
-#include "Character.h"
+#include "Player.h"
 #include "Collider.h"
+#include "EnemySpawner.h"
 #include "Utility.h"
 
 Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window) 
 {
 	window = _window;
-	
 	game = _gameClass;
 }
 
@@ -18,19 +18,27 @@ void Level_One::Start()
 	window->setFramerateLimit(60);
 
 	// create all GameObjects
-	Character* player1 = new Character(window, this);
+	Player* player1 = new Player(window, this);
 	player1->SetRadius(50.0f);
 	player1->SetPlayersNumber(1);
 	player1->SetCollisionRadius(50.f);
 	player1->GetCollider()->SetCollisionType(ECollisionType::Block);
 	AddSceneObject(player1);
 
-	Character* player2 = new Character(window, this);
+	Player* player2 = new Player(window, this);
 	player2->SetRadius(50.0f);
 	player2->SetPlayersNumber(2);
 	player2->SetCollisionRadius(50.f);
 	player2->GetCollider()->SetCollisionType(ECollisionType::Block);
 	AddSceneObject(player2);
+
+	EnemySpawner* spawner = new EnemySpawner(window, this);
+	spawner->SetPosition(sf::Vector2f(-100, -100));
+	spawner->AddPlayer(player1);
+	spawner->AddPlayer(player2);
+	AddSceneObject(spawner);
+	
+
 
 	//Start scene
 	Scene::Start();

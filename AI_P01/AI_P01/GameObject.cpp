@@ -8,6 +8,7 @@ GameObject::GameObject()
 	// initialize defaults
 	objectShape = nullptr;
 	window = nullptr;
+	scene = nullptr;
 	collider = new Collider(this);
 }
 
