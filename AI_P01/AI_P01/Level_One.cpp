@@ -8,7 +8,7 @@ Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window)
 {
 	window = _window;
 	
-	
+	game = _gameClass;
 }
 
 void Level_One::Start()
