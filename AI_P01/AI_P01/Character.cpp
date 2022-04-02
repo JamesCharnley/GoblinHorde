@@ -10,7 +10,7 @@ Character::Character(sf::RenderWindow* _window, Scene* _scene)
 
 	selectedInputPreset = playerOnePreset;
 
-	equippedWeapon = new Weapon(window, scene);
+	equippedWeapon = new Weapon(window, scene, this);
 	scene->AddSceneObject(equippedWeapon);
 }
 
