@@ -5,7 +5,7 @@ class Projectile :
 {
 public:
 
-    Projectile(sf::RenderWindow* _window, class Scene* _scene, float _rotation);
+    Projectile(sf::RenderWindow* _window, class Scene* _scene, float _rotation, sf::Vector2f _dir);
 
     virtual void Update(float _deltatime) override;
 
