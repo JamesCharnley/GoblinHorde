@@ -23,6 +23,7 @@ void Level_One::Start()
 	player1->SetPlayersNumber(1);
 	player1->SetCollisionRadius(50.f);
 	player1->GetCollider()->SetCollisionType(ECollisionType::Block);
+	player1->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 - player1->GetRadius() * 3, Utils::WindowHeight / 2));
 	AddSceneObject(player1);
 
 	Player* player2 = new Player(window, this);
@@ -30,6 +31,7 @@ void Level_One::Start()
 	player2->SetPlayersNumber(2);
 	player2->SetCollisionRadius(50.f);
 	player2->GetCollider()->SetCollisionType(ECollisionType::Block);
+	player2->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 + player1->GetRadius() * 3, Utils::WindowHeight / 2));
 	AddSceneObject(player2);
 
 	EnemySpawner* spawner = new EnemySpawner(window, this);
@@ -38,8 +40,11 @@ void Level_One::Start()
 	spawner->AddPlayer(player2);
 	AddSceneObject(spawner);
 	
-
-
+	spawner = new EnemySpawner(window, this);
+	spawner->SetPosition(sf::Vector2f(-100, -100));
+	spawner->AddPlayer(player1);
+	spawner->AddPlayer(player2);
+	AddSceneObject(spawner);
 	//Start scene
 	Scene::Start();
 }

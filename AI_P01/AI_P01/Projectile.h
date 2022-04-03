@@ -11,10 +11,15 @@ public:
 
     virtual void OnCollision(GameObject* _other) override;
 
+    void SetDontDamagePlayers() { dontDamagePlayers = true; };
+    void SetDontDamageEnemies() { dontDamageEnemies = true; };
+
 protected:
 
     int damage = 20;
     float speed = 600.0f;
     sf::Vector2f direction;
+    bool dontDamagePlayers = false;
+    bool dontDamageEnemies = false;
 };
 

@@ -1,5 +1,7 @@
 #include "Projectile.h"
 #include "Scene.h"
+#include "Player.h"
+#include "Enemy.h"
 #include "Weapon.h"
 
 Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner)
@@ -31,6 +33,17 @@ void Weapon::PerformAction()
 		scene->AddSceneObject(proj);
 		cooldownTimer = 1 / weaponData.ActionsPerSecond;
 		inAction = true;
+
+		Enemy* enemy = dynamic_cast<Enemy*>(owner);
+		if (enemy)
+		{
+			proj->SetDontDamageEnemies();
+		}
+		Player* player = dynamic_cast<Player*>(owner);
+		if (player)
+		{
+			proj->SetDontDamagePlayers();
+		}
 	}
 }
 

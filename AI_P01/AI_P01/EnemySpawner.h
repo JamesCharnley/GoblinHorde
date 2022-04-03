@@ -18,7 +18,7 @@ public:
 
 protected:
 
-    int maximumEnemies = 2;
+    int maximumEnemies = 6;
     int currentEnemyCount = 0;
     float spawnInterval = 3.0f;
     float spawnTimer = 0;
