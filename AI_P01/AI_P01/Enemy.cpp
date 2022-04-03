@@ -5,13 +5,15 @@
 
 Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
-	moveSpeed = 150.0f;
+	moveSpeed = 100.0f;
+	circle.setFillColor(sf::Color::Red);
 }
 
 Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner) : Character(_window, _scene)
 {
 	moveSpeed = 150.0f;
 	spawner = _spawner;
+	circle.setFillColor(sf::Color::Red);
 }
 
 void Enemy::Update(float _deltatime)

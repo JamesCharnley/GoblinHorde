@@ -3,6 +3,8 @@
 #include "Weapon.h"
 #include "Scene.h"
 #include "ITakeDamage.h"
+#include "Enemy.h"
+#include "Player.h"
 #include "Projectile.h"
 
 Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner)
@@ -37,6 +39,23 @@ void Projectile::Update(float _deltatime)
 void Projectile::OnCollision(GameObject* _other)
 {
 	std::cout << "Projectile Collided" << std::endl;
+
+	if (dontDamageEnemies)
+	{
+		Enemy* enemy = dynamic_cast<Enemy*>(_other);
+		if (enemy)
+		{
+			return;
+		}
+	}
+	if (dontDamagePlayers)
+	{
+		Player* player = dynamic_cast<Player*>(_other);
+		if (player)
+		{
+			return;
+		}
+	}
 	// take damage code
 	ITakeDamage* takesDamage = dynamic_cast<ITakeDamage*>(_other);
 	if (takesDamage)

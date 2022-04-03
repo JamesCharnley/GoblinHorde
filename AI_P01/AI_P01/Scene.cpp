@@ -41,10 +41,10 @@ void Scene::Update(float _deltaTime)
 			sceneObjects[i]->Render();
 		}
 
-		CollisionCheck();
+		
 	}
 	window->display();
-
+	CollisionCheck();
 	//Add/Destroy any CGameObjects in queues
 	ClearAddSceneObjectQueue();
 	ClearDestroySceneObjectQueue();
@@ -52,6 +52,17 @@ void Scene::Update(float _deltaTime)
 
 void Scene::DestroySceneObject(GameObject* _object)
 {
+	// check if object already exists in queue
+	int length = (int)destroySceneObjectQueue.size();
+	for (int i = 0; i < length; i++)
+	{
+		std::vector<GameObject*>::iterator it = destroySceneObjectQueue.begin() + i;
+		if (*it == _object)
+		{
+			return;
+		}
+	}
+	
 	//Add CGameObject ptr to queue to be deleted at end of Update()
 	destroySceneObjectQueue.push_back(_object);
 }
@@ -73,11 +84,11 @@ void Scene::ChangeScene(std::string _sceneName)
 void Scene::ClearDestroySceneObjectQueue()
 {
 	//Check if there is anything to delete
-	if (destroySceneObjectQueue.size() > 0)
+	if ((int)destroySceneObjectQueue.size() > 0)
 	{
 		int Length = (int)sceneObjects.size();
 		//create iterator that points to start of queue
-		std::vector<GameObject*>::iterator iter = destroySceneObjectQueue.begin();
+    		std::vector<GameObject*>::iterator iter = destroySceneObjectQueue.begin();
 		//Loop through all CGameObjects stored in SceneObjects to find the one to delete
 		for (int i = 0; i < Length; i++)
 		{
