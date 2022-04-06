@@ -21,6 +21,7 @@ void Weapon::Update(float _deltatime)
 	{
 		Cooldown(_deltatime);
 	}
+
 }
 
 void Weapon::PerformAction()

@@ -14,10 +14,12 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
+	
 	if (collider != nullptr)
 	{
 		delete collider;
 	}
+
 }
 
 void GameObject::Update(float _deltaTime)
@@ -89,4 +91,5 @@ Collider* GameObject::GetCollider()
 void GameObject::OnCollision(GameObject* _other)
 {
 }
+
 

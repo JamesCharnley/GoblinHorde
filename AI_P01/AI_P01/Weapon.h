@@ -42,5 +42,6 @@ protected:
     FWeaponData weaponData;
     GameObject* owner = nullptr;
     bool inAction = false;
+
 };
 
