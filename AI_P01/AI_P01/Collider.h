@@ -19,6 +19,8 @@ public:
 	ECollisionType GetCollisionType();
 
 	bool GetCheckForCollision();
+	bool CheckForCollisionCircleToCircle(class GameObject_Circle* _thisCircle, class GameObject_Circle* _otherCircle);
+	bool CheckForCollisionCircleToRectangle(class GameObject_Circle* _circle, class GameObject_Rectangle* _rectangle);
 	void SetCheckForCollision(bool _checkForCollision);
 
 	void AddIgnoreObject(GameObject* _object);
