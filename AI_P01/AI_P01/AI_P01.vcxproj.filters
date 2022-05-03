@@ -71,35 +71,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject_Circle.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject_Rectangle.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level_One.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SFML_VectorMath.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="GoblinHorde.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Header Files</Filter>
@@ -123,6 +96,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sprite_Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject_Rectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML_VectorMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_One.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject_Circle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
