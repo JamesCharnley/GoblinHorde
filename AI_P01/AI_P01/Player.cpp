@@ -18,7 +18,7 @@ void Player::Update(float _deltatime)
 	Character::Update(_deltatime);
 
 	CheckForInput();
-	if (rotationDelayTimer <= 0)
+	if (rotationDelayTimer <= 0 && !lockRotation)
 	{
 		SetRotation(targetRotation);
 	}
@@ -60,6 +60,15 @@ void Player::CheckForInput()
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.RightKey))
 	{
 		velocity.x += 1;
+	}
+
+	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LockRotationKey))
+	{
+		lockRotation = true;
+	}
+	else
+	{
+		lockRotation = false;
 	}
 
 	if (SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity) != targetRotation && (velocity.x != 0 || velocity.y != 0))
