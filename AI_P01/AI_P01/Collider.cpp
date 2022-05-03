@@ -50,7 +50,7 @@ bool Collider::CheckForCollision(GameObject* _other)
 	float intersectionSize = combinedRadius - dist;
 
 	sf::Vector2f directionToOther = _other->GetPosition() - gameObject->GetPosition();
-	directionToOther = SFML_VectorMath::Normalize(directionToOther);
+	directionToOther = SFML_VectorMath::Clamp(directionToOther);
 
 	if (dist < combinedRadius)
 	{
@@ -90,7 +90,7 @@ bool Collider::CheckForCollisionCircleToCircle(GameObject_Circle* _thisCircle, G
 	float intersectionSize = combinedRadius - dist;
 
 	sf::Vector2f directionToOther = _otherCircle->GetPosition() - _thisCircle->GetPosition();
-	directionToOther = SFML_VectorMath::Normalize(directionToOther);
+	directionToOther = SFML_VectorMath::Clamp(directionToOther);
 
 	if (dist < combinedRadius)
 	{
@@ -135,7 +135,7 @@ bool Collider::CheckForCollisionCircleToRectangle(GameObject_Circle* _circle, Ga
 	if (cornerDistance_sq <= (_circle->GetRadius() * _circle->GetRadius()))
 	{
 		sf::Vector2f directionToOther = _other->GetPosition() - gameObject->GetPosition();
-		directionToOther = SFML_VectorMath::Normalize(directionToOther);
+		directionToOther = SFML_VectorMath::Clamp(directionToOther);
 
 		float intersectionSize = cornerDistance_sq - (_circle->GetRadius() * _circle->GetRadius());
 

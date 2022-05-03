@@ -163,7 +163,9 @@
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SFML_VectorMath.cpp" />
+    <ClCompile Include="SpawnPoint.cpp" />
     <ClCompile Include="Sprite_Component.cpp" />
+    <ClCompile Include="WaveManager.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,8 +186,10 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SFML_VectorMath.h" />
+    <ClInclude Include="SpawnPoint.h" />
     <ClInclude Include="Sprite_Component.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="WaveManager.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

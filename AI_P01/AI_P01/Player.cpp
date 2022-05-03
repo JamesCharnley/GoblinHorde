@@ -100,5 +100,5 @@ void Player::CheckForInput()
 		}
 	}
 
-	velocity = SFML_VectorMath::Normalize(velocity);
+	velocity = SFML_VectorMath::Clamp(velocity);
 }
