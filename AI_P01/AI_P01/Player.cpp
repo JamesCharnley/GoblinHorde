@@ -11,6 +11,8 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 	selectedInputPreset = playerOnePreset;
 
 	moveSpeed = 200.0f;
+
+	AddCollider(ECollisionType::Block);
 }
 
 void Player::Update(float _deltatime)

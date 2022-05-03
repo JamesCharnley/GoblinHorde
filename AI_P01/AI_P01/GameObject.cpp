@@ -10,7 +10,7 @@ GameObject::GameObject()
 	objectShape = nullptr;
 	window = nullptr;
 	scene = nullptr;
-	collider = new Collider(this);
+	collider = nullptr;
 	sprite = nullptr;
 }
 
@@ -26,6 +26,7 @@ GameObject::~GameObject()
 	{
 		delete sprite;
 	}
+	std::cout << "GameObject Destructor" << std::endl;
 }
 
 void GameObject::Update(float _deltaTime)
@@ -120,6 +121,12 @@ void GameObject::AddSprite(const char* _filePath)
 void GameObject::SetColor(sf::Color _color)
 {
 	objectShape->setFillColor(_color);
+}
+
+void GameObject::AddCollider(ECollisionType _collisionType)
+{
+	collider = new Collider(this);
+	collider->SetCollisionType(_collisionType);
 }
 
 
