@@ -54,6 +54,7 @@ void Enemy::AddPlayer(Player* _player)
 
 void Enemy::TakeDamage(int _amount, Character* _player)
 {
+	
 	currentHealth -= _amount;
 
 	if (currentHealth <= 0)

@@ -40,7 +40,6 @@ void Projectile::Update(float _deltatime)
 
 void Projectile::OnCollision(GameObject* _other)
 {
-	std::cout << "Projectile Collided" << std::endl;
 
 	if (dontDamageEnemies)
 	{

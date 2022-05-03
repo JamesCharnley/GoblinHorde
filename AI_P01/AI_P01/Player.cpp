@@ -45,6 +45,7 @@ void Player::SetPlayersNumber(int _number)
 void Player::AddGold(int _amount)
 {
 	currentGold += _amount;
+	std::cout << "Gold: " << currentGold << std::endl;
 }
 
 void Player::RemoveGold(int _amount)

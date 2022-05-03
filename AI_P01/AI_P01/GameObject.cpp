@@ -26,7 +26,6 @@ GameObject::~GameObject()
 	{
 		delete sprite;
 	}
-	std::cout << "GameObject Destructor" << std::endl;
 }
 
 void GameObject::Update(float _deltaTime)

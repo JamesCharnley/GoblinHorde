@@ -40,7 +40,7 @@ void Base::Render()
 
 void Base::TakeDamage(int _amount)
 {
-	if (currentHealth - _amount <= 0)
+	if ((currentHealth - _amount) <= 0)
 	{
 		currentHealth = 0;
 	}
@@ -48,10 +48,18 @@ void Base::TakeDamage(int _amount)
 	{
 		currentHealth -= _amount;
 	}
-	
 	healthBar->SetScale(sf::Vector2f(currentHealth / maxHealth, 1));
 }
 
 void Base::TakeDamage(int _amount, Character* _player)
 {
+	if ((currentHealth - _amount) <= 0)
+	{
+		currentHealth = 0;
+	}
+	else
+	{
+		currentHealth -= _amount;
+	}
+	healthBar->SetScale(sf::Vector2f(currentHealth / maxHealth, 1));
 }
