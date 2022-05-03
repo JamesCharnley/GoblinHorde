@@ -10,7 +10,7 @@ Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner)
 	scene = _scene;
 	owner = _owner;
 	weaponData = FWeaponData();
-	weaponData.ActionsPerSecond = 3;
+	weaponData.ActionsPerSecond = 8;
 }
 
 void Weapon::Update(float _deltatime)

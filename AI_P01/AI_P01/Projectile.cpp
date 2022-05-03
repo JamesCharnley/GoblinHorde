@@ -14,7 +14,7 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 	SetRotation(_rotation);
 	direction = SFML_VectorMath::AngleToDirection(GetRotation());
 	direction = SFML_VectorMath::Normalize(direction);
-	SetRadius(20.0f);
+	SetRadius(5.0f);
 	SetCollisionRadius(GetRadius());
 	GetCollider()->SetCollisionType(ECollisionType::Overlap);
 	GetCollider()->AddIgnoreObject(_owner);

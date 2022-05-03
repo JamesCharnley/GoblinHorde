@@ -42,8 +42,8 @@ void EnemySpawner::AddPlayer(Player* _player)
 void EnemySpawner::SpawnEnemy()
 {
 	Enemy* enemy = new Enemy(window, scene, this);
-	enemy->SetRadius(50.0f);
-	enemy->SetCollisionRadius(50.f);
+	enemy->SetRadius(25.0f);
+	enemy->SetCollisionRadius(25.0f);
 	enemy->GetCollider()->SetCollisionType(ECollisionType::Block);
 
 	for (int i = 0; i < (int)players.size(); i++)
