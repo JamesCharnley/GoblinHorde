@@ -31,6 +31,8 @@ protected:
 
     sf::Vector2f velocity;
 
+    float targetRotation = 0;
+
     class Weapon* equippedWeapon = nullptr;
 private:
 

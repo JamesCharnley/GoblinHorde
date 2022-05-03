@@ -22,6 +22,15 @@ void Player::Update(float _deltatime)
 	}
 	CheckForInput();
 	Move(velocity * (moveSpeed * _deltatime));
+
+	if (rotationDelayTimer <= 0)
+	{
+		SetRotation(targetRotation);
+	}
+	else
+	{
+		rotationDelayTimer -= _deltatime;
+	}
 }
 
 void Player::SetPlayersNumber(int _number)
@@ -44,23 +53,27 @@ void Player::CheckForInput()
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ForwardKey))
 	{
 		velocity.y += -1;
-		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.BackwardKey))
 	{
 		velocity.y += 1;
-		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LeftKey))
 	{
 		velocity.x += -1;
-		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.RightKey))
 	{
 		velocity.x += 1;
-		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
 	}
+
+	if (SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity) != targetRotation && (velocity.x != 0 || velocity.y != 0))
+	{
+		targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity);
+		rotationDelayTimer = rotationDelay;
+	}
+	
+
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ShootKey))
 	{
 		// shoot

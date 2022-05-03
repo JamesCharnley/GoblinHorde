@@ -28,6 +28,9 @@ protected:
 
     virtual void CheckForInput();
 
+    float rotationDelay = 1.0f;
+    float rotationDelayTimer = 0;
+
 private:
 
     FInputs playerOnePreset = { sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::Space };
