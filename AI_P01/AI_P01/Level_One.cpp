@@ -19,6 +19,8 @@ void Level_One::Start()
 
 	// create all GameObjects
 	Player* player1 = new Player(window, this);
+	player1->AddSprite("Resources/Textures/PlayerPH.png");
+	player1->SetColor(sf::Color::Transparent);
 	player1->SetRadius(50.0f);
 	player1->SetPlayersNumber(1);
 	player1->SetCollisionRadius(50.f);
@@ -27,6 +29,8 @@ void Level_One::Start()
 	AddSceneObject(player1);
 
 	Player* player2 = new Player(window, this);
+	player2->AddSprite("Resources/Textures/PlayerPH.png");
+	player2->SetColor(sf::Color::Transparent);
 	player2->SetRadius(50.0f);
 	player2->SetPlayersNumber(2);
 	player2->SetCollisionRadius(50.f);

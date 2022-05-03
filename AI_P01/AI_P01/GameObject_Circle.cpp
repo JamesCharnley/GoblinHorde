@@ -1,5 +1,7 @@
-#include "GameObject_Circle.h"
+#include "Sprite_Component.h"
 #include <iostream>
+#include "GameObject_Circle.h"
+
 
 GameObject_Circle::GameObject_Circle(sf::RenderWindow* _window, Scene* _scene)
 {
@@ -31,6 +33,8 @@ void GameObject_Circle::Render()
 {
 	// render SFML shape
 	window->draw(circle);
+
+	GameObject::Render();
 }
 
 float GameObject_Circle::GetRadius()
@@ -44,6 +48,12 @@ void GameObject_Circle::SetRadius(float _radius)
 
 	// update the origin to center of circle after radius change
 	circle.setOrigin(sf::Vector2f(_radius, _radius));
+
+	// update scale of sprite to match shape
+	if (sprite != nullptr)
+	{
+		sprite->UpdateSize(sf::Vector2f(_radius * 2, _radius * 2));
+	}
 }
 
 

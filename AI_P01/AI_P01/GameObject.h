@@ -11,9 +11,8 @@ public:
 	// Called every frame from Game.cpp
 	virtual void Update(float _deltaTime);
 
-	//ABSTRACT: MUST OVERRIDE
 	// Called every frame from Game.cpp. 
-	virtual void Render() = 0;
+	virtual void Render();
 
 	// Sets position of SFML shape
 	// IMPORTANT: If GameObject is using a Rigidbody you most likely want to set the position using Rigidbody::SetPosition()
@@ -52,7 +51,9 @@ public:
 
 	virtual void OnCollision(GameObject* _other);
 
+	virtual void AddSprite(const char* _filePath);
 
+	void SetColor(sf::Color _color);
 
 protected:
 
@@ -72,5 +73,9 @@ protected:
 	
 	class Collider* collider = nullptr;
 
+	// sprite overlay
+	sf::Texture texture;
+
+	class Sprite_Component* sprite;
 };
 

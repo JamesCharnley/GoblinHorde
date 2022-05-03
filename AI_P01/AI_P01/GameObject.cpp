@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Scene.h"
 #include "Collider.h"
+#include "Sprite_Component.h"
 #include "GameObject.h"
 
 GameObject::GameObject()
@@ -10,6 +11,7 @@ GameObject::GameObject()
 	window = nullptr;
 	scene = nullptr;
 	collider = new Collider(this);
+	sprite = nullptr;
 }
 
 GameObject::~GameObject()
@@ -19,12 +21,27 @@ GameObject::~GameObject()
 	{
 		delete collider;
 	}
-
+	// delete sprite
+	if (sprite != nullptr)
+	{
+		delete sprite;
+	}
 }
 
 void GameObject::Update(float _deltaTime)
 {
+	if (sprite != nullptr)
+	{
+		sprite->Update();
+	}
+}
 
+void GameObject::Render()
+{
+	if (sprite != nullptr)
+	{
+		sprite->Render(window);
+	}
 }
 
 void GameObject::SetPosition(sf::Vector2f _position)
@@ -90,6 +107,19 @@ Collider* GameObject::GetCollider()
 
 void GameObject::OnCollision(GameObject* _other)
 {
+}
+
+void GameObject::AddSprite(const char* _filePath)
+{
+	// load texture file
+	texture.loadFromFile(_filePath);
+	// create sprite class and give it the loaded texture
+	sprite = new Sprite_Component(this, texture);
+}
+
+void GameObject::SetColor(sf::Color _color)
+{
+	objectShape->setFillColor(_color);
 }
 
 

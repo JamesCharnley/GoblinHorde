@@ -13,6 +13,8 @@ Character::Character(sf::RenderWindow* _window, Scene* _scene)
 
 void Character::Update(float _deltatime)
 {
+	GameObject::Update(_deltatime);
+
 	if (equippedWeapon != nullptr)
 	{
 		equippedWeapon->SetPosition(GetPosition());

@@ -15,14 +15,9 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 
 void Player::Update(float _deltatime)
 {
-	if (equippedWeapon != nullptr)
-	{
-		equippedWeapon->SetPosition(GetPosition());
-		equippedWeapon->SetRotation(GetRotation());
-	}
-	CheckForInput();
-	Move(velocity * (moveSpeed * _deltatime));
+	Character::Update(_deltatime);
 
+	CheckForInput();
 	if (rotationDelayTimer <= 0)
 	{
 		SetRotation(targetRotation);
