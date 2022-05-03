@@ -49,11 +49,10 @@ public:
 
 	static sf::Vector2f AngleToDirection(float _angle)
 	{
-		_angle = _angle / 180.0f * 3.14159265359f;
+		_angle = _angle * 3.14159265359f / 180.0f;
 		float x = std::cos(_angle);
-		x = std::sin(x);
-		float y = std::cos(_angle);
-		y = std::sin(y);
+		float y = std::sin(_angle);
+		
 		return sf::Vector2f(x, y);
 	}
 };

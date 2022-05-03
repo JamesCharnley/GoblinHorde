@@ -8,10 +8,7 @@ Character::Character(sf::RenderWindow* _window, Scene* _scene)
 	window = _window;
 	scene = _scene;
 
-	selectedInputPreset = playerOnePreset;
-
-	equippedWeapon = new Weapon(window, scene);
-	scene->AddSceneObject(equippedWeapon);
+	currentHealth = maxHealth;
 }
 
 void Character::Update(float _deltatime)
@@ -22,63 +19,34 @@ void Character::Update(float _deltatime)
 		equippedWeapon->SetRotation(GetRotation());
 	}
 
-	
-	std::cout << GetRotation() << std::endl;
-	CheckForInput();
-
 	Move(velocity * (moveSpeed * _deltatime));
 }
 
-void Character::SetPlayersNumber(int _number)
-{
-	if (_number == 1)
-	{
-		selectedInputPreset = playerOnePreset;
-	}
-	else if (_number == 2)
-	{
-		selectedInputPreset = playerTwoPreset;
-	}
-}
+
 
 void Character::Move(sf::Vector2f _movement)
 {
 	SetPosition(GetPosition() + _movement);
 }
 
-void Character::CheckForInput()
+void Character::TakeDamage(int _amount)
 {
-	velocity.x = 0;
-	velocity.y = 0;
+	currentHealth -= _amount;
 
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ForwardKey))
+	if (currentHealth <= 0)
 	{
-		velocity.y += -1;
-		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
+		Destroy();
 	}
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.BackwardKey))
-	{
-		velocity.y += 1;
-		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
-	}
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LeftKey))
-	{
-		velocity.x += -1;
-		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
-	}
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.RightKey))
-	{
-		velocity.x += 1;
-		SetRotation(SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity));
-	}
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ShootKey))
-	{
-		// shoot
-		if (equippedWeapon != nullptr)
-		{
-			equippedWeapon->PerformAction();
-		}
-	}
-
-	velocity = SFML_VectorMath::Normalize(velocity);
 }
+
+void Character::Destroy()
+{
+	// destory weapon if exists
+	if (equippedWeapon != nullptr)
+	{
+		scene->DestroySceneObject(equippedWeapon);
+	}
+	scene->DestroySceneObject(this);
+}
+
+

@@ -1,0 +1,73 @@
+.vs/
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Visual Studio Trace Files
+*.e2e
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Executables
+*.exe
+*.out
+*.app
+*.db
+
+*.log
+*.tlog
+*.recipe
+AI_P01/.vs/AI_P01/v16/Browse.VC.db-shm
+AI_P01/.vs/AI_P01/v16/Browse.VC.db-wal
+AI_P01/.vs/AI_P01/v16/Browse.VC.opendb
+AI_P01/.vs/AI_P01/v16/ipch/AutoPCH/f45b04ee6dc1cbf6/SCENE.ipch
+AI_P01/.vs/AI_P01/v16/ipch/AutoPCH/53dc2bcf3082e811/CHARACTER.ipch
+AI_P01/.vs/AI_P01/v16/ipch/AutoPCH/6d5b2ed60f26e0e0/GAMEOBJECT_CIRCLE.ipch
+AI_P01\AI_P01\Debug
+AI_P01\AI_P01\Release

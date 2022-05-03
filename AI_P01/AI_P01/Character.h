@@ -1,18 +1,10 @@
 #pragma once
 #include "GameObject_Circle.h"
+#include "ITakeDamage.h"
 
-struct FInputs
-{
-public:
 
-    sf::Keyboard::Key ForwardKey;
-    sf::Keyboard::Key BackwardKey;
-    sf::Keyboard::Key LeftKey;
-    sf::Keyboard::Key RightKey;
-    sf::Keyboard::Key ShootKey;
-};
 class Character :
-    public GameObject_Circle
+    public GameObject_Circle, public ITakeDamage
 {
 
 public:
@@ -25,23 +17,25 @@ public:
 
     virtual void Move(sf::Vector2f _movement);
 
-    virtual void CheckForInput();
+    virtual void TakeDamage(int _amount) override;
 
-    void SetPlayersNumber(int _number);
+    virtual void Destroy() override;
 
 protected:
 
     float moveSpeed = 100.0f;
     float rotateSpeed = 100.0f;
 
+    int maxHealth = 100;
+    int currentHealth = 0;
+
     sf::Vector2f velocity;
 
-    FInputs selectedInputPreset;
+    float targetRotation = 0;
 
     class Weapon* equippedWeapon = nullptr;
 private:
 
-    FInputs playerOnePreset = { sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::Space };
-    FInputs playerTwoPreset = { sf::Keyboard::Up, sf::Keyboard::Down, sf::Keyboard::Left, sf::Keyboard::Right, sf::Keyboard::Enter };
+   
 };
 

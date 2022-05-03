@@ -26,18 +26,22 @@ class Weapon :
 public:
 
     // Custom constructor: takes ref to sf::RenderWindow and Scene() class
-    Weapon(sf::RenderWindow* _window, class Scene* _scene);
+    Weapon(sf::RenderWindow* _window, class Scene* _scene, GameObject* _owner);
 
     virtual void Update(float _deltatime) override;
 
     // implement attack action
     void PerformAction();
 
+    GameObject* GetOwner() { return owner; };
+
 protected:
 
     void Cooldown(float _deltatime);
     float cooldownTimer = 0;
     FWeaponData weaponData;
+    GameObject* owner = nullptr;
     bool inAction = false;
+
 };
 

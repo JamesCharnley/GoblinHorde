@@ -52,6 +52,8 @@ public:
 
 	virtual void OnCollision(GameObject* _other);
 
+
+
 protected:
 
 	// private constructor. This is an abstract class so the contructor should never be called from an outside class
@@ -69,5 +71,6 @@ protected:
 	float collisionRadius = 1;
 	
 	class Collider* collider = nullptr;
+
 };
 
