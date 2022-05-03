@@ -19,7 +19,7 @@ void EnemySpawner::Update(float _deltatime)
 			spawnTimer = spawnInterval;
 		}
 	}
-	else
+	else if (currentEnemyCount < maximumEnemies)
 	{
 		spawnTimer -= _deltatime;
 	}
@@ -39,12 +39,13 @@ void EnemySpawner::AddPlayer(Player* _player)
 	players.push_back(_player);
 }
 
-void EnemySpawner::SpawnEnemy()
+void EnemySpawner::SpawnEnemy(sf::Vector2f _position)
 {
 	Enemy* enemy = new Enemy(window, scene, this);
 	enemy->SetRadius(25.0f);
 	enemy->SetCollisionRadius(25.0f);
 	enemy->GetCollider()->SetCollisionType(ECollisionType::Block);
+	enemy->SetPosition(_position);
 
 	for (int i = 0; i < (int)players.size(); i++)
 	{

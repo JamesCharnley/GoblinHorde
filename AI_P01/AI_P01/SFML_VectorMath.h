@@ -16,28 +16,28 @@ public:
 		return std::sqrt((_vec.x * _vec.x) + (_vec.y * _vec.y));
 	}
 
-
+	//normalize regardless of inital magnitude
 	static sf::Vector2f Normalize(sf::Vector2f _vec)
 	{
-		// get magnitude/length of vector
-		float magnitude = GetMagnitude(_vec);
+		return _vec / GetMagnitude(_vec);
+	}
 
-		// normalize if length is greater than 1
-		if (magnitude > 1)
+	static sf::Vector2f Clamp(sf::Vector2f _vec, float _maxMag = 1.0f)
+	{
+		// normalize if length is greater than _maxMag and multiply by _maxMag, clamping the length to _maxMag
+		if (GetMagnitude(_vec) > _maxMag)
 		{
-			// normalize
-			_vec.x = _vec.x / magnitude;
-			_vec.y = _vec.y / magnitude;
+			return Normalize(_vec) * _maxMag;
 		}
-
-		// return vector
-		return _vec;
+		else
+		{
+			return _vec;
+		}
 	}
 
 	static sf::Vector2f MultiplyVector(sf::Vector2f _vecA, float _num)
 	{
 		sf::Vector2f result(_vecA.x * _num, _vecA.y * _num);
-
 		return result;
 	}
 
@@ -55,5 +55,28 @@ public:
 		
 		return sf::Vector2f(x, y);
 	}
+	
+	static sf::Vector2f Lerp(sf::Vector2f _vecA, sf::Vector2f _vecB, float _t)
+	{
+		sf::Vector2f result;
+		result.x = _vecA.x + _t * (_vecB.x - _vecA.x);
+		result.y = _vecA.y + _t * (_vecB.y - _vecA.y);
+		return result;
+	}
+
+	static float Dot(sf::Vector2f _vecA, sf::Vector2f _vecB)
+	{
+		return _vecA.x * _vecB.x + _vecA.y * _vecB.y;
+	}
 };
+
+namespace sf
+{
+	//printing
+	inline std::ostream& operator << (std::ostream& os, const Vector2f& _vec)
+	{
+		os << _vec.x << ", " << _vec.y;
+		return os;
+	}
+}
 

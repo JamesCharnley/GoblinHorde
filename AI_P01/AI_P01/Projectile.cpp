@@ -13,7 +13,7 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 	scene = _scene;
 	SetRotation(_rotation);
 	direction = SFML_VectorMath::AngleToDirection(GetRotation());
-	direction = SFML_VectorMath::Normalize(direction);
+	direction = SFML_VectorMath::Clamp(direction);
 	SetRadius(5.0f);
 	SetCollisionRadius(GetRadius());
 	GetCollider()->SetCollisionType(ECollisionType::Overlap);
@@ -38,7 +38,7 @@ void Projectile::Update(float _deltatime)
 
 void Projectile::OnCollision(GameObject* _other)
 {
-	std::cout << "Projectile Collided" << std::endl;
+	//std::cout << "Projectile Collided" << std::endl;
 
 	if (dontDamageEnemies)
 	{

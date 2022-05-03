@@ -39,7 +39,7 @@ void Enemy::Update(float _deltatime)
 	if (closestPlayer)
 	{
 		velocity = closestPlayer->GetPosition() - GetPosition();
-		velocity = SFML_VectorMath::Normalize(velocity);
+		velocity = SFML_VectorMath::Clamp(velocity);
 
 		Move(velocity * (moveSpeed * _deltatime));
 	}

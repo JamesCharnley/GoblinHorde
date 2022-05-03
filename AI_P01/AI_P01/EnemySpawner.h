@@ -18,12 +18,13 @@ public:
 
 protected:
 
-    int maximumEnemies = 6;
+    int maximumEnemies = 2;
     int currentEnemyCount = 0;
     float spawnInterval = 3.0f;
     float spawnTimer = 0;
 
-    void SpawnEnemy();
+    void SpawnEnemy(sf::Vector2f _position);
+    inline virtual void SpawnEnemy() { SpawnEnemy(sf::Vector2f(0.0f, 0.0f)); }
 
     std::vector<class Player*> players;
 };

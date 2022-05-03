@@ -3,7 +3,9 @@
 #include "Player.h"
 #include "Collider.h"
 #include "EnemySpawner.h"
+#include "WaveManager.h"
 #include "Utility.h"
+#include "SpawnPoint.h"
 
 Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window) 
 {
@@ -38,17 +40,13 @@ void Level_One::Start()
 	player2->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 + player1->GetRadius() * 3, Utils::WindowHeight / 2));
 	AddSceneObject(player2);
 
-	EnemySpawner* spawner = new EnemySpawner(window, this);
+	WaveManager* spawner = new WaveManager(window, this);
 	spawner->SetPosition(sf::Vector2f(-100, -100));
 	spawner->AddPlayer(player1);
 	spawner->AddPlayer(player2);
+	spawner->AddSpawn(new SpawnBorder(sf::Vector2f(), sf::Vector2f(window->getSize().x, 0.0f), sf::Vector2f(0.0f, window->getSize().y), sf::Vector2f(window->getSize().x, window->getSize().y)));
 	AddSceneObject(spawner);
 	
-	spawner = new EnemySpawner(window, this);
-	spawner->SetPosition(sf::Vector2f(-100, -100));
-	spawner->AddPlayer(player1);
-	spawner->AddPlayer(player2);
-	AddSceneObject(spawner);
 	//Start scene
 	Scene::Start();
 }
