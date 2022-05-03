@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "Collider.h"
 
 class GameObject
 {
@@ -54,6 +55,8 @@ public:
 	virtual void AddSprite(const char* _filePath);
 
 	void SetColor(sf::Color _color);
+
+	void AddCollider(ECollisionType _collisionType);
 
 protected:
 

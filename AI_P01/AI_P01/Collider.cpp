@@ -56,8 +56,10 @@ bool Collider::CheckForCollision(GameObject* _other)
 	{
 		if (collisionType == ECollisionType::Block && _other->GetCollider()->GetCollisionType() == ECollisionType::Block)
 		{
-			gameObject->SetPosition(gameObject->GetPosition() + -directionToOther * intersectionSize);
-			
+			if (!isStatic)
+			{
+				gameObject->SetPosition(gameObject->GetPosition() + -directionToOther * intersectionSize);
+			}
 		}
 		gameObject->OnCollision(_other);
 		return true;
@@ -94,8 +96,10 @@ bool Collider::CheckForCollisionCircleToCircle(GameObject_Circle* _thisCircle, G
 	{
 		if (collisionType == ECollisionType::Block && _otherCircle->GetCollider()->GetCollisionType() == ECollisionType::Block)
 		{
-			_thisCircle->SetPosition(gameObject->GetPosition() + -directionToOther * intersectionSize);
-
+			if (!isStatic)
+			{
+				_thisCircle->SetPosition(gameObject->GetPosition() + -directionToOther * intersectionSize);
+			}
 		}
 		_thisCircle->OnCollision(_otherCircle);
 		return true;
@@ -133,12 +137,17 @@ bool Collider::CheckForCollisionCircleToRectangle(GameObject_Circle* _circle, Ga
 		sf::Vector2f directionToOther = _other->GetPosition() - gameObject->GetPosition();
 		directionToOther = SFML_VectorMath::Normalize(directionToOther);
 
-		float intersectionSize = (_circle->GetRadius() * _circle->GetRadius()) - cornerDistance_sq;
+		float intersectionSize = cornerDistance_sq - (_circle->GetRadius() * _circle->GetRadius());
 
 		if (collisionType == ECollisionType::Block && _other->GetCollider()->GetCollisionType() == ECollisionType::Block)
 		{
-			gameObject->SetPosition(gameObject->GetPosition() + -directionToOther * intersectionSize);
+			if (!isStatic)
+			{
+				gameObject->SetPosition(gameObject->GetPosition() + -directionToOther * intersectionSize);
+			}
+			
 		}
+		std::cout << "Colliding" << std::endl;
 		return true;
 	}
 	

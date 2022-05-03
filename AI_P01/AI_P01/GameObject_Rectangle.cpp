@@ -1,5 +1,7 @@
-#include "GameObject_Rectangle.h"
 #include <iostream>
+#include "Sprite_Component.h"
+#include "GameObject_Rectangle.h"
+
 GameObject_Rectangle::GameObject_Rectangle()
 {
 	// initialize and set defaults
@@ -24,6 +26,8 @@ void GameObject_Rectangle::Render()
 {
 	// render SFML shape
 	window->draw(rectangle);
+
+	GameObject::Render();
 }
 
 sf::Vector2f GameObject_Rectangle::GetSize()
@@ -35,5 +39,11 @@ void GameObject_Rectangle::SetSize(sf::Vector2f _size)
 {
 	rectangle.setSize(_size);
 	rectangle.setOrigin(sf::Vector2f(_size.x / 2, _size.y / 2));
+
+	// update scale of sprite to match shape
+	if (sprite != nullptr)
+	{
+		sprite->UpdateSize(_size);
+	}
 }
 

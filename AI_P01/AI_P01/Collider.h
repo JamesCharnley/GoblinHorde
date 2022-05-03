@@ -28,6 +28,8 @@ public:
 	float GetMass();
 	void SetMass(float _mass);
 
+	bool isStatic = false;
+
 protected:
 
 	class GameObject* gameObject;
