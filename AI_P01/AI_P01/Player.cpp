@@ -42,6 +42,16 @@ void Player::SetPlayersNumber(int _number)
 	}
 }
 
+void Player::AddGold(int _amount)
+{
+	currentGold += _amount;
+}
+
+void Player::RemoveGold(int _amount)
+{
+	currentGold -= _amount;
+}
+
 void Player::CheckForInput()
 {
 	velocity.x = 0;

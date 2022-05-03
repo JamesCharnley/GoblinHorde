@@ -18,6 +18,7 @@ public:
     virtual void Move(sf::Vector2f _movement);
 
     virtual void TakeDamage(int _amount) override;
+    virtual void TakeDamage(int _amount, Character* _player) override;
 
     virtual void Destroy() override;
 

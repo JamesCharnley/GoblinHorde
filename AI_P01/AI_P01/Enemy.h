@@ -12,6 +12,8 @@ public:
 
     void AddPlayer(class Player* _player);
 
+    virtual void TakeDamage(int _amount, Character* _player) override;
+
     virtual void Destroy() override;
 
 protected:
@@ -19,5 +21,7 @@ protected:
     std::vector<class Player*> players;
     class Player* closestPlayer = nullptr;
     class EnemySpawner* spawner = nullptr;
+
+    int goldReward = 100;
 };
 

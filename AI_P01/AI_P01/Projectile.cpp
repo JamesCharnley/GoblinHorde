@@ -26,6 +26,7 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 		if (weaponOwner)
 		{
 			GetCollider()->AddIgnoreObject(weaponOwner);
+			owningCharacter = dynamic_cast<Character*>(weaponOwner);
 		}
 		
 	}
@@ -61,7 +62,15 @@ void Projectile::OnCollision(GameObject* _other)
 	ITakeDamage* takesDamage = dynamic_cast<ITakeDamage*>(_other);
 	if (takesDamage)
 	{
-		takesDamage->TakeDamage(damage);
+		Player* ownerIsPlayer = dynamic_cast<Player*>(owningCharacter);
+		if (ownerIsPlayer)
+		{
+			takesDamage->TakeDamage(damage, owningCharacter);
+		}
+		else
+		{
+			takesDamage->TakeDamage(damage);
+		}
 	}
 	Destroy();
 }

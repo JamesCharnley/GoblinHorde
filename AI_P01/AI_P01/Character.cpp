@@ -41,6 +41,10 @@ void Character::TakeDamage(int _amount)
 	}
 }
 
+void Character::TakeDamage(int _amount, Character* _player)
+{
+}
+
 void Character::Destroy()
 {
 	// destory weapon if exists

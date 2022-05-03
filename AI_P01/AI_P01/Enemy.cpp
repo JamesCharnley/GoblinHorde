@@ -52,6 +52,21 @@ void Enemy::AddPlayer(Player* _player)
 	players.push_back(_player);
 }
 
+void Enemy::TakeDamage(int _amount, Character* _player)
+{
+	currentHealth -= _amount;
+
+	if (currentHealth <= 0)
+	{
+		Player* player = dynamic_cast<Player*>(_player);
+		if (player)
+		{
+			player->AddGold(goldReward);
+		}
+		Destroy();
+	}
+}
+
 void Enemy::Destroy()
 {
 	if (spawner != nullptr)

@@ -51,3 +51,7 @@ void Base::TakeDamage(int _amount)
 	
 	healthBar->SetScale(sf::Vector2f(currentHealth / maxHealth, 1));
 }
+
+void Base::TakeDamage(int _amount, Character* _player)
+{
+}

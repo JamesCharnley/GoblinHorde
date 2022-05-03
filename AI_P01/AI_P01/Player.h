@@ -23,6 +23,10 @@ public:
 
     void SetPlayersNumber(int _number);
 
+    void AddGold(int _amount);
+    void RemoveGold(int _amount);
+    int GetGold() { return currentGold; };
+
 protected:
 
     FInputs selectedInputPreset;
@@ -33,6 +37,8 @@ protected:
     float rotationDelayTimer = 0;
 
     bool lockRotation = false;
+
+    int currentGold = 0;
 
 private:
 

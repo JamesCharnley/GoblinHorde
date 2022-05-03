@@ -14,6 +14,7 @@ public:
     virtual void Render() override;
 
     virtual void TakeDamage(int _amount) override;
+    virtual void TakeDamage(int _amount, Character* _player) override;
 
 protected:
 

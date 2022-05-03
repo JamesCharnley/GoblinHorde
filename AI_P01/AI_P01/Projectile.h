@@ -21,5 +21,7 @@ protected:
     sf::Vector2f direction;
     bool dontDamagePlayers = false;
     bool dontDamageEnemies = false;
+
+    class Character* owningCharacter = nullptr;
 };
 
