@@ -42,8 +42,8 @@ void Scene::Update(float _deltaTime)
 			sceneObjects[i]->Render();
 		}
 
-		if (window != nullptr)
-			UserInterface->Render(window);
+		UserInterface->Render(window);
+			
 		
 	}
 	window->display();
