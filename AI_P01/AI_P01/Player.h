@@ -26,6 +26,9 @@ public:
     void AddGold(int _amount);
     void RemoveGold(int _amount);
     int GetGold() { return currentGold; };
+    void PollController(int _controllerIndex); //temp
+    std::string GetButtonMapping(int _button); //temp
+
 
 protected:
 
