@@ -109,14 +109,13 @@ std::string Player::GetButtonMapping(int _button)
 	return "";
 }
 
-
 void Player::CheckForInput(int _player)
 {
 	velocity.x = 0;
 	velocity.y = 0;
 
 	PollController(0);
-	float deadZone = 0.01f;
+	float deadZone = 15.0f;
 
 	float lStickX = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::X);	//left sick
 	float lStickY = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::Y);
@@ -163,8 +162,47 @@ void Player::CheckForInput(int _player)
 
 	targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
 	
-	
-	if (sf::Joystick::isButtonPressed(_player - 1, 5))
+	bool isKeyboard = false;
+
+	//keyboard
+	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ForwardKey))
+	{
+		velocity.y += -1;
+		isKeyboard = true;
+	}
+	if (sf::Keyboard::isKeyPressed(selectedInputPreset.BackwardKey))
+	{
+		velocity.y += 1;
+		isKeyboard = true;
+	}
+	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LeftKey))
+	{
+		velocity.x += -1;
+		isKeyboard = true;
+	}
+	if (sf::Keyboard::isKeyPressed(selectedInputPreset.RightKey))
+	{
+		velocity.x += 1;
+		isKeyboard = true;
+	}
+
+	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LockRotationKey))
+	{
+		lockRotation = true;
+	}
+	else
+	{
+		lockRotation = false;
+	}
+
+	if (isKeyboard && SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity) != targetRotation && (velocity.x != 0 || velocity.y != 0))
+	{
+		targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity);
+		rotationDelayTimer = rotationDelay;
+	}
+
+
+	if (sf::Joystick::isButtonPressed(_player - 1, 5) || sf::Keyboard::isKeyPressed(selectedInputPreset.ShootKey))
 	{
 		// shoot
 		if (equippedWeapon != nullptr)
@@ -172,7 +210,6 @@ void Player::CheckForInput(int _player)
 			equippedWeapon->PerformAction();
 		}
 	}
-
 
 	velocity = SFML_VectorMath::Clamp(velocity);
 }

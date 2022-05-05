@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "ITakeDamage.h"
 #include "Enemy.h"
+#include "Base.h"
 #include "Player.h"
 #include "Projectile.h"
 
@@ -56,6 +57,11 @@ void Projectile::OnCollision(GameObject* _other)
 		{
 			return;
 		}
+	}
+	Base* base = dynamic_cast<Base*>(_other);
+	if (base)
+	{
+		return;
 	}
 	// take damage code
 	ITakeDamage* takesDamage = dynamic_cast<ITakeDamage*>(_other);
