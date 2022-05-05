@@ -148,22 +148,28 @@ void Player::CheckForInput(int _player)
 
 	targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
 	
+	bool isKeyboard = false;
+
 	//keyboard
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ForwardKey))
 	{
 		velocity.y += -1;
+		isKeyboard = true;
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.BackwardKey))
 	{
 		velocity.y += 1;
+		isKeyboard = true;
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LeftKey))
 	{
 		velocity.x += -1;
+		isKeyboard = true;
 	}
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.RightKey))
 	{
 		velocity.x += 1;
+		isKeyboard = true;
 	}
 
 	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LockRotationKey))
@@ -175,7 +181,7 @@ void Player::CheckForInput(int _player)
 		lockRotation = false;
 	}
 
-	if (SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity) != targetRotation && (velocity.x != 0 || velocity.y != 0))
+	if (isKeyboard && SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity) != targetRotation && (velocity.x != 0 || velocity.y != 0))
 	{
 		targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity);
 		rotationDelayTimer = rotationDelay;
