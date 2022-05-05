@@ -34,7 +34,7 @@ protected:
 
     FInputs selectedInputPreset;
 
-    virtual void CheckForInput();
+    virtual void CheckForInput(int _player);
 
     float rotationDelay = 0.0f;
     float rotationDelayTimer = 0;
@@ -42,6 +42,8 @@ protected:
     bool lockRotation = false;
 
     int currentGold = 0;
+
+    int playerNumber = 0;
 
 private:
 

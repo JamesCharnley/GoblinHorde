@@ -20,7 +20,7 @@ void Player::Update(float _deltatime)
 {
 	Character::Update(_deltatime);
 
-	CheckForInput();
+	CheckForInput(playerNumber);
 	if (rotationDelayTimer <= 0 && !lockRotation)
 	{
 		SetRotation(targetRotation);
@@ -33,6 +33,7 @@ void Player::Update(float _deltatime)
 
 void Player::SetPlayersNumber(int _number)
 {
+	playerNumber = _number;
 	if (_number == 1)
 	{
 		selectedInputPreset = playerOnePreset;
@@ -58,19 +59,19 @@ void Player::RemoveGold(int _amount)
 
 void Player::PollController(int _controllerIndex)
 {
-	std::cout << "Left Stick:";
-	std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::X) << ", ";	//left sick
-	std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::Y) << "\n";
+	//std::cout << "Left Stick:";
+	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::X) << ", ";	//left sick
+	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::Y) << "\n";
 
-	std::cout << "Right Stick: ";
-	std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::U) << ", ";	//right sick
-	std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::V) << "\n";
+	//std::cout << "Right Stick: ";
+	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::U) << ", ";	//right sick
+	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::V) << "\n";
 
-	std::cout << "Triggers: ";
-	std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::Z) << "\n";	//triggers
+	//std::cout << "Triggers: ";
+	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::Z) << "\n";	//triggers
 
-	std::cout << "DPad: ";
-	std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::PovX) << ", " << sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY) << " \n";
+	//std::cout << "DPad: ";
+	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::PovX) << ", " << sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY) << " \n";
 
 	std::vector<std::string> pressedButtonNames;
 
@@ -84,82 +85,72 @@ void Player::PollController(int _controllerIndex)
 
 	for (std::string buttonName : pressedButtonNames)
 	{
-		std::cout << buttonName << ", ";
+		//std::cout << buttonName << ", ";
 	}
-	system("cls");
+	
 }
 
 std::string Player::GetButtonMapping(int _button)
 {
-	switch (_button)
-	{
-	case 0:
-		return "A";
-	case 1:
-		return "B";
-	case 2:
-		return "X";
-	case 3:
-		return "Y";
-	case 4:
-		return "LB";
-	case 5:
-		return "RB";
-	case 6:
-		return "Back";
-	case 7:
-		return "Menu";
-	case 8:
-		return "LS";
-	case 9:
-		return "RS";
-	default:
-		return "Invalid button index";
-	}
+	return "";
 }
 
 
-void Player::CheckForInput()
+void Player::CheckForInput(int _player)
 {
 	velocity.x = 0;
 	velocity.y = 0;
 
 	PollController(0);
+	float deadZone = 0.01f;
 
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ForwardKey))
+	float lStickX = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::X);	//left sick
+	float lStickY = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::Y);
+
+	if (lStickX > -deadZone && lStickX < deadZone)
 	{
-		velocity.y += -1;
+		lStickX = 0;
 	}
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.BackwardKey))
+	if (lStickY > -deadZone && lStickY < deadZone)
 	{
-		velocity.y += 1;
-	}
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LeftKey))
-	{
-		velocity.x += -1;
-	}
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.RightKey))
-	{
-		velocity.x += 1;
+		lStickY = 0;
 	}
 
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.LockRotationKey))
+	float rStickX = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::U);
+	float rStickY = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::V);
+
+	if (rStickX > -deadZone && rStickX < deadZone)
 	{
-		lockRotation = true;
+		rStickX = 0;
 	}
-	else
+	if (rStickY > -deadZone && rStickY < deadZone)
 	{
-		lockRotation = false;
+		rStickY = 0;
 	}
 
-	if (SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity) != targetRotation && (velocity.x != 0 || velocity.y != 0))
+	if (lStickX > 0)
 	{
-		targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity);
-		rotationDelayTimer = rotationDelay;
+		//lStickX /= 100;
 	}
+	if (lStickY > 0)
+	{
+		//lStickY /= 100;
+	}
+
+	velocity.x = lStickX;
+	velocity.y = lStickY;
+
+	sf::Vector2f rotVelocity;
+
+	rotVelocity.x = rStickX;
+	rotVelocity.y = rStickY;
+
+	rotVelocity = SFML_VectorMath::Clamp(rotVelocity);
+
+	targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
 	
-
-	if (sf::Keyboard::isKeyPressed(selectedInputPreset.ShootKey))
+	
+	if (sf::Joystick::isButtonPressed(_player - 1, 5))
 	{
 		// shoot
 		if (equippedWeapon != nullptr)
@@ -167,6 +158,7 @@ void Player::CheckForInput()
 			equippedWeapon->PerformAction();
 		}
 	}
+
 
 	velocity = SFML_VectorMath::Clamp(velocity);
 }
