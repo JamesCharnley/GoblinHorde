@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Weapon.h"
 #include "Player.h"
+#include "GoblinHordeUI.h"
 #include <vector>
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
@@ -10,6 +11,7 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 	scene->AddSceneObject(equippedWeapon);
 
 	selectedInputPreset = playerOnePreset;
+	playerNum = 1;
 
 	moveSpeed = 200.0f;
 
@@ -19,6 +21,16 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 void Player::Update(float _deltatime)
 {
 	Character::Update(_deltatime);
+
+	if (playerNum == 1)
+	{
+		scene->getUI()->setPlayer1Stats(currentGold);
+	}
+
+	else if (playerNum == 2)
+	{
+		scene->getUI()->setPlayer2Stats(currentGold);
+	}
 
 	CheckForInput(playerNumber);
 	if (rotationDelayTimer <= 0 && !lockRotation)
@@ -37,10 +49,12 @@ void Player::SetPlayersNumber(int _number)
 	if (_number == 1)
 	{
 		selectedInputPreset = playerOnePreset;
+		playerNum = 1;
 	}
 	else if (_number == 2)
 	{
 		selectedInputPreset = playerTwoPreset;
+		playerNum = 2;
 	}
 }
 

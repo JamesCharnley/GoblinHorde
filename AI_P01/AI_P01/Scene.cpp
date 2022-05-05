@@ -2,12 +2,13 @@
 #include "GameObject.h"
 #include "Collider.h"
 #include "Scene.h"
+#include "GoblinHordeUI.h"
 
 Scene::Scene() 
 {
 	game = nullptr;
 	window = nullptr;
-
+	UserInterface = new GoblinHordeUI(window);
 }
 
 Scene::Scene(Game* _gameClass, sf::RenderWindow* _window)
@@ -41,6 +42,8 @@ void Scene::Update(float _deltaTime)
 			sceneObjects[i]->Render();
 		}
 
+		if (window != nullptr)
+			UserInterface->Render(window);
 		
 	}
 	window->display();
@@ -79,6 +82,11 @@ void Scene::ChangeScene(std::string _sceneName)
 	SceneActive = false;
 	//Pass scene name to CGame() class
 	game->ChangeScene(_sceneName);
+}
+
+GoblinHordeUI* Scene::getUI()
+{
+	return UserInterface;
 }
 
 void Scene::ClearDestroySceneObjectQueue()

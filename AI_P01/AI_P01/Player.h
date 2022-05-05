@@ -33,6 +33,7 @@ public:
 protected:
 
     FInputs selectedInputPreset;
+    int playerNum;
 
     virtual void CheckForInput(int _player);
 

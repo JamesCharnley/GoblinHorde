@@ -26,6 +26,8 @@ public:
 	//Calls ChangeScene() in CGame(), CGameObject() classes do not have access to CGame() class so they will call this funcion
 	void ChangeScene(std::string _sceneName);
 
+	class GoblinHordeUI* getUI();
+
 protected:
 
 	Scene();
@@ -35,6 +37,8 @@ protected:
 
 	//Called at the end of the Update() to add/instantiate all CGameObject classes in the queue
 	virtual void ClearAddSceneObjectQueue();
+
+	class GoblinHordeUI* UserInterface;
 
 	class Game* game;
 

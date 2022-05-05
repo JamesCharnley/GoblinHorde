@@ -1,5 +1,7 @@
 #include "WaveManager.h"
 #include "SpawnPoint.h"
+#include "Scene.h"
+#include "GoblinHordeUI.h"
 #include <stdio.h>
 #include <iostream>
 
@@ -20,6 +22,9 @@ void WaveManager::AddSpawn(Spawn* _spawn)
 
 void WaveManager::Update(float _deltatime)
 {
+	scene->getUI()->setCurrentWave(currentWave);
+	scene->getUI()->setNumberOfEnemies(currentEnemyCount);
+
 	if (waveSpawnedEnemies >= totalWaveEnemies)
 	{
 		//stop spawning enemies, wait until all enemies are dead then call NextWave()
