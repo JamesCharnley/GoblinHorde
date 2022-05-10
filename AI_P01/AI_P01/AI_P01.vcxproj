@@ -156,15 +156,18 @@
     <ClCompile Include="GameObject_Circle.cpp" />
     <ClCompile Include="GameObject_Rectangle.cpp" />
     <ClCompile Include="GoblinHorde.cpp" />
+    <ClCompile Include="Interactable.cpp" />
     <ClCompile Include="ITakeDamage.cpp" />
     <ClCompile Include="Level_One.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PickUp.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SFML_VectorMath.cpp" />
     <ClCompile Include="SpawnPoint.cpp" />
     <ClCompile Include="Sprite_Component.cpp" />
+    <ClCompile Include="StatEffect_PickUp.cpp" />
     <ClCompile Include="WaveManager.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
@@ -180,14 +183,18 @@
     <ClInclude Include="GameObject_Circle.h" />
     <ClInclude Include="GameObject_Rectangle.h" />
     <ClInclude Include="GoblinHorde.h" />
+    <ClInclude Include="IDisplayInfo.h" />
+    <ClInclude Include="Interactable.h" />
     <ClInclude Include="ITakeDamage.h" />
     <ClInclude Include="Level_One.h" />
+    <ClInclude Include="PickUp.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SFML_VectorMath.h" />
     <ClInclude Include="SpawnPoint.h" />
     <ClInclude Include="Sprite_Component.h" />
+    <ClInclude Include="StatEffect_PickUp.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="WaveManager.h" />
     <ClInclude Include="Weapon.h" />

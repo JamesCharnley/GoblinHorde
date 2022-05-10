@@ -75,6 +75,21 @@
     <ClCompile Include="SpawnPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interactable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PickUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatEffect_PickUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GoblinHorde.h">
@@ -135,6 +150,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpawnPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseCreator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interactable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDisplayInfo.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PickUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatEffect_PickUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
