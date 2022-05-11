@@ -14,6 +14,7 @@ GoblinHordeUI::GoblinHordeUI(sf::RenderWindow* window)
 	m_player1Stats = new GameText(window, "Resources/Font/WarPriest.ttf", sf::Vector2f(300.0f, 90.0f));
 	m_player2Text = new GameText(window, "Resources/Font/WarPriest.ttf", sf::Vector2f(100.0f, 200.0f));
 	m_player2Stats = new GameText(window, "Resources/Font/WarPriest.ttf", sf::Vector2f(300.0f, 200.0f));
+	m_waveTimer = new GameText(window, "Resources/Font/WarPriest.ttf", sf::Vector2f(500.0f, 500.0f));
 
 	m_WaveText->SetString("Wave: ");
 	m_EnemyText->SetString("Number of Enemies Left: ");
@@ -48,6 +49,11 @@ void GoblinHordeUI::setNumberOfEnemies(int numEnemies)
 	m_EnemyNum->SetString(std::to_string(numEnemies));
 }
 
+void GoblinHordeUI::setWaveTimer(int timer)
+{
+	m_waveTimer->SetString(std::to_string(timer));
+}
+
 void GoblinHordeUI::setPlayer1Stats(int gold)
 {
 	m_player1Stats->SetString(std::to_string(gold));
@@ -70,4 +76,6 @@ void GoblinHordeUI::Render(sf::RenderWindow* window)
 	m_player1Stats->Render(window);
 	m_player2Text->Render(window);
 	m_player2Stats->Render(window);
+
+	m_waveTimer->Render(window);
 }

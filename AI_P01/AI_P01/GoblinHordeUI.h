@@ -12,6 +12,7 @@ public:
 
 	void setCurrentWave(int currWave);
 	void setNumberOfEnemies(int numEnemies);
+	void setWaveTimer(int timer);
 
 	void setPlayer1Stats(int gold);
 	void setPlayer2Stats(int gold);
@@ -28,6 +29,8 @@ private:
 	class GameText* m_player1Stats = nullptr;
 	class GameText* m_player2Text = nullptr;
 	class GameText* m_player2Stats = nullptr;
+
+	class GameText* m_waveTimer = nullptr;
 
 	//std::vector<class GameText*> m_Texts;
 };
