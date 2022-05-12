@@ -10,7 +10,11 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 	weapons.push_back(new Weapon(window, scene, this, "pistol"));
 	weapons.push_back(new Weapon(window, scene, this, "rifle"));
 	equippedWeapon = weapons.at(equippedWeaponIndex);
-	scene->AddSceneObject(equippedWeapon);
+
+	for(Weapon* weapon : weapons)
+	{
+		scene->AddSceneObject(weapon);
+	}
 
 	selectedInputPreset = playerOnePreset;
 	playerNum = 1;
@@ -251,7 +255,7 @@ void Player::NextWeapon()
 	}
 	equippedWeapon = weapons.at(equippedWeaponIndex);
 
-	std::cout << "Player " << playerNum << "equipped " << equippedWeapon->name << "\n";
+	std::cout << "Player " << playerNum << " equipped " << equippedWeapon->name << "\n";
 }
 
 void Player::PreviousWeapon()
@@ -263,5 +267,5 @@ void Player::PreviousWeapon()
 	}
 	equippedWeapon = weapons.at(equippedWeaponIndex);
 
-	std::cout << "Player " << playerNum << "equipped "<< equippedWeapon->name << "\n";
+	std::cout << "Player " << playerNum << " equipped "<< equippedWeapon->name << "\n";
 }
