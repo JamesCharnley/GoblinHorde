@@ -13,9 +13,15 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 {
 	window = _window;
 	scene = _scene;
+
+	// set rotation of projectile
 	SetRotation(_rotation);
+
+	// calculate direction it will travel
 	direction = SFML_VectorMath::AngleToDirection(GetRotation());
 	direction = SFML_VectorMath::Normalize(direction);
+
+	// set radius and setup collider
 	SetRadius(5.0f);
 	AddCollider(ECollisionType::Block);
 	SetCollisionRadius(GetRadius());
