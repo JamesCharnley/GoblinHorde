@@ -4,9 +4,11 @@
 #include "GoblinHordeUI.h"
 #include <stdio.h>
 #include <iostream>
+#include <random>
 
 WaveManager::~WaveManager()
 {
+	srand(time(NULL));
 	for (Spawn* & pointer : spawnPoints)
 	{
 		delete pointer;
@@ -36,6 +38,7 @@ void WaveManager::Update(float _deltatime)
 		return;
 	}
 
+	//update the enemy spawner if wave break timer is less than 0
 	if (waveBreakTimer > 0.0f)
 	{
 		scene->getUI()->setWaveTimer(waveBreakTimer);
@@ -47,12 +50,14 @@ void WaveManager::Update(float _deltatime)
 	}
 }
 
+//spawn an enemy at a random spawn point
 void WaveManager::SpawnEnemy()
 {
 	waveSpawnedEnemies++;
-	EnemySpawner::SpawnEnemy(spawnPoints.front()->GetSpawnPosition());	//HACK: should pick a random spawn point to use
+	EnemySpawner::SpawnEnemy(spawnPoints.at(rand() % spawnPoints.size())->GetSpawnPosition());	//TODO: test this with larger vector
 }
 
+//advance to next wave
 void WaveManager::NextWave()
 {
 	currentWave++;

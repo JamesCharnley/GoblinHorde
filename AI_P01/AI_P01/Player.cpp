@@ -7,7 +7,9 @@
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
-	equippedWeapon = new Weapon(window, scene, this);
+	weapons.push_back(new Weapon(window, scene, this, "pistol"));
+	weapons.push_back(new Weapon(window, scene, this, "rifle"));
+	equippedWeapon = weapons.at(equippedWeaponIndex);
 	scene->AddSceneObject(equippedWeapon);
 
 	selectedInputPreset = playerOnePreset;
@@ -161,6 +163,20 @@ void Player::CheckForInput(int _player)
 	{
 		//lStickY /= 100;
 	}
+	if (!lastFrameSwitchWeapon && sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::PovX) > 0.0f)
+	{
+		NextWeapon();
+		lastFrameSwitchWeapon = true;
+	}
+	else if (!lastFrameSwitchWeapon && sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::PovX) < 0.0f)
+	{
+		PreviousWeapon();
+		lastFrameSwitchWeapon = true;
+	}
+	else if (sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::PovX) == 0.0f)
+	{
+		lastFrameSwitchWeapon = false;
+	}
 
 	velocity.x = lStickX;
 	velocity.y = lStickY;
@@ -224,4 +240,28 @@ void Player::CheckForInput(int _player)
 	}
 
 	velocity = SFML_VectorMath::Clamp(velocity);
+}
+
+void Player::NextWeapon()
+{
+	equippedWeaponIndex++;
+	if (equippedWeaponIndex >= weapons.size())
+	{
+		equippedWeaponIndex = 0;
+	}
+	equippedWeapon = weapons.at(equippedWeaponIndex);
+
+	std::cout << "Player " << playerNum << "equipped " << equippedWeapon->name << "\n";
+}
+
+void Player::PreviousWeapon()
+{
+	equippedWeaponIndex--;
+	if (equippedWeaponIndex < 0)
+	{
+		equippedWeaponIndex = weapons.size() - 1;
+	}
+	equippedWeapon = weapons.at(equippedWeaponIndex);
+
+	std::cout << "Player " << playerNum << "equipped "<< equippedWeapon->name << "\n";
 }
