@@ -8,6 +8,7 @@
 #include "Utility.h"
 #include "SpawnPoint.h"
 #include "Health_PickUp.h"
+#include "WeaponUpgrade.h"
 
 Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window) 
 {
@@ -24,6 +25,16 @@ void Level_One::Start()
 	Base* base = new Base(window, this);
 	AddSceneObject(base);
 
+	
+
+	Health_PickUp* healthTest = new Health_PickUp(window, this);
+	healthTest->SetPosition(sf::Vector2f((float)Utils::WindowWidth / 3.0f, (float)Utils::WindowHeight / 2.0f));
+	AddSceneObject(healthTest);
+
+	WeaponUpgrade* weaponUpgrade = new WeaponUpgrade(window, this);
+	weaponUpgrade->SetPosition(sf::Vector2f((float)Utils::WindowWidth - ((float)Utils::WindowWidth / 3.0f), (float)Utils::WindowHeight / 2.0f));
+	AddSceneObject(weaponUpgrade);
+
 	// create all GameObjects
 	Player* player1 = new Player(window, this);
 	player1->AddSprite("Resources/Textures/PlayerPH.png");
@@ -34,7 +45,7 @@ void Level_One::Start()
 	player1->GetCollider()->SetCollisionType(ECollisionType::Block);
 	player1->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 - player1->GetRadius() * 3, Utils::WindowHeight / 2));
 	AddSceneObject(player1);
-	
+
 	Player* player2 = new Player(window, this);
 	player2->AddSprite("Resources/Textures/PlayerPH.png");
 	player2->SetColor(sf::Color::Transparent);
@@ -51,10 +62,6 @@ void Level_One::Start()
 	spawner->AddPlayer(player2);
 	spawner->AddSpawn(new SpawnBorder(sf::Vector2f(), sf::Vector2f(window->getSize().x, 0.0f), sf::Vector2f(0.0f, window->getSize().y), sf::Vector2f(window->getSize().x, window->getSize().y)));
 	AddSceneObject(spawner);
-
-	Health_PickUp* healthTest = new Health_PickUp(window, this);
-	healthTest->SetPosition(sf::Vector2f((float)Utils::WindowWidth / 3.0f, (float)Utils::WindowHeight / 2.0f));
-	AddSceneObject(healthTest);
 	
 	//Start scene
 	Scene::Start();

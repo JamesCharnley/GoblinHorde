@@ -10,6 +10,7 @@ public:
 
     PickUp(sf::RenderWindow* _window, Scene* _scene);
 
+    virtual bool InRange(class Player* _player) override;
     virtual bool HasActionText() override;
     virtual std::string GetActionText() override;
     virtual bool AutoInteract() override;

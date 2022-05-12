@@ -8,7 +8,10 @@ class WaveManager : public EnemySpawner
 public:
 	WaveManager(sf::RenderWindow* _window, Scene* _scene) : EnemySpawner(_window, _scene) {};
 	~WaveManager();
+
+	// Adds a Spawn pointer to spawnPoints vector
 	void AddSpawn(Spawn* _spawn);
+
 	virtual void Update(float _deltatime) override;
 
 protected:
@@ -16,8 +19,10 @@ protected:
 
 private:
 
-	std::vector<Spawn*> spawnPoints;
+	// Updating variables for the next wave of enemies
 	void NextWave();
+
+	std::vector<Spawn*> spawnPoints;
 	float waveBreakDuration = 3.0f;
 	float waveBreakTimer = 0.0f;
 

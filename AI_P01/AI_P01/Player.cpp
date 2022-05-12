@@ -22,6 +22,13 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 	moveSpeed = 200.0f;
 
 	AddCollider(ECollisionType::Block);
+
+	font.loadFromFile("Resources/Font/WarPriest.ttf");
+	actionText.setFont(font);
+	actionText.setString(actionTextString);
+	actionText.setCharacterSize(20);
+	actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
+	actionText.setFillColor(sf::Color::Red);
 }
 
 void Player::Update(float _deltatime)
@@ -47,6 +54,53 @@ void Player::Update(float _deltatime)
 	{
 		rotationDelayTimer -= _deltatime;
 	}
+
+	// check current interactable
+	if (currentInteractable)
+	{
+		if (currentInteractable->InRange(this))
+		{
+			// display action text
+			if (currentInteractable->HasActionText())
+			{
+				actionTextString = "";
+				actionTextString += currentInteractable->GetActionText();
+
+				actionText.setString(actionTextString);
+				actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
+			}
+			// check if can interact
+			if (currentInteractable->CanInteract(this))
+			{
+				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+				{
+					currentInteractable->Interact(this);
+					currentInteractable = nullptr;
+					actionTextString = "";
+					actionText.setString(actionTextString);
+					actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
+				}
+			}
+		}
+		else
+		{
+			// remove current interactable
+			currentInteractable = nullptr;
+			actionTextString = "";
+			actionText.setString(actionTextString);
+		}
+	}
+	if (actionTextString != "")
+	{
+		actionText.setPosition(GetPosition() - sf::Vector2f(0, GetRadius() + GetRadius() * 0.75f));
+		
+	}
+}
+
+void Player::Render()
+{
+	GameObject_Circle::Render();
+	window->draw(actionText);
 }
 
 void Player::SetPlayersNumber(int _number)
@@ -100,6 +154,7 @@ void Player::PollController(int _controllerIndex)
 		if (sf::Joystick::isButtonPressed(_controllerIndex, i))
 		{
 			pressedButtonNames.push_back(GetButtonMapping(i));
+			std::cout << "Pressed: " << i << std::endl;
 		}
 	}
 
@@ -123,6 +178,10 @@ void Player::OnCollision(GameObject* _other)
 		if (interactable->AutoInteract())
 		{
 			interactable->Interact(this);
+		}
+		else
+		{
+			currentInteractable = interactable;
 		}
 	}
 }

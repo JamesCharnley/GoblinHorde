@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject_Circle.h"
+
 class EnemySpawner :
     public GameObject_Circle
 {
@@ -10,10 +11,10 @@ public:
 
     virtual void Update(float _deltatime) override;
 
-    virtual void Render() override;
-
+    // Decreases currentEnemyCount variable. Called when Enemy is Destroyed/Killed
     void EnemyDestroyed(class Enemy* _enemy);
 
+    // Add Player pointer ro players vector
     void AddPlayer(class Player* _player);
 
 protected:

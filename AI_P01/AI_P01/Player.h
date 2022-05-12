@@ -21,6 +21,7 @@ public:
     Player(sf::RenderWindow* _window, Scene* _scene);
 
     virtual void Update(float _deltatime) override;
+    virtual void Render() override;
 
     void SetPlayersNumber(int _number);
 
@@ -33,6 +34,13 @@ public:
 
     virtual void OnCollision(GameObject* _other) override;
     
+    // UI for displaying prompts above player object
+    sf::Font font;
+    sf::Text actionText;
+    std::string actionTextString = "";
+
+    // pointer to Interactable object currently in range of
+    Interactable* currentInteractable = nullptr;
 
 protected:
 

@@ -8,6 +8,11 @@ PickUp::PickUp(sf::RenderWindow* _window, Scene* _scene)
     
 }
 
+bool PickUp::InRange(Player* _player)
+{
+    return false;
+}
+
 bool PickUp::HasActionText()
 {
     return false;

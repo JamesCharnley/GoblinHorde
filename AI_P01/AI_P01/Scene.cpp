@@ -8,7 +8,7 @@ Scene::Scene()
 {
 	game = nullptr;
 	window = nullptr;
-	userInterface = nullptr;
+	userInterface = new GoblinHordeUI(window);
 }
 
 Scene::Scene(Game* _gameClass, sf::RenderWindow* _window)
