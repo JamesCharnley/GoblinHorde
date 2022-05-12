@@ -3,7 +3,7 @@
 
 namespace std
 {
-	//mt19937
+	//mt19937 forward declaration
 	template <class _Ty, size_t _Wx, size_t _Nx, size_t _Mx, size_t _Rx, _Ty _Px, size_t _Ux, _Ty _Dx, size_t _Sx, _Ty _Bx,
 		size_t _Tx, _Ty _Cx, size_t _Lx, _Ty _Fx>
 	class mersenne_twister_engine;
@@ -24,7 +24,7 @@ class SpawnPoint : public Spawn
 {
 public:
 	inline SpawnPoint(float _x, float _y) : point(_x, _y) {}
-	virtual sf::Vector2f GetSpawnPosition() const;
+	virtual sf::Vector2f GetSpawnPosition() const override;
 
 protected:
 	sf::Vector2f point;
@@ -50,7 +50,7 @@ class SpawnBorder : public Spawn
 {
 public:
 	SpawnBorder(sf::Vector2f _topLeft, sf::Vector2f _topRight, sf::Vector2f _bottomLeft, sf::Vector2f _bottomRight);
-	~SpawnBorder();
+	virtual ~SpawnBorder();
 	virtual sf::Vector2f GetSpawnPosition() const override;
 
 protected:
