@@ -1,4 +1,5 @@
 #pragma once
+#include "Interactable.h"
 #include "Character.h"
 
 struct FInputs
@@ -29,6 +30,8 @@ public:
     void PollController(int _controllerIndex); //temp
     std::string GetButtonMapping(int _button); //temp
 
+
+    virtual void OnCollision(GameObject* _other) override;
     
 
 protected:

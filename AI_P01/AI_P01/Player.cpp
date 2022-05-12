@@ -109,6 +109,18 @@ std::string Player::GetButtonMapping(int _button)
 	return "";
 }
 
+void Player::OnCollision(GameObject* _other)
+{
+	Interactable* interactable = dynamic_cast<Interactable*>(_other);
+	if (interactable)
+	{
+		if (interactable->AutoInteract())
+		{
+			interactable->Interact(this);
+		}
+	}
+}
+
 void Player::CheckForInput(int _player)
 {
 	velocity.x = 0;
