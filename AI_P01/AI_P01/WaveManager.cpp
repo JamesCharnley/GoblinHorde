@@ -25,8 +25,8 @@ void WaveManager::AddSpawn(Spawn* _spawn)
 void WaveManager::Update(float _deltatime)
 {
 	//Updates the wave display
-	scene->getUI()->setCurrentWave(currentWave);
-	scene->getUI()->setNumberOfEnemies(currentEnemyCount);
+	scene->GetUI()->setCurrentWave(currentWave);
+	scene->GetUI()->setNumberOfEnemies(currentEnemyCount);
 
 	if (waveSpawnedEnemies >= totalWaveEnemies)
 	{
@@ -41,7 +41,7 @@ void WaveManager::Update(float _deltatime)
 	//update the enemy spawner if wave break timer is less than 0
 	if (waveBreakTimer > 0.0f)
 	{
-		scene->getUI()->setWaveTimer(waveBreakTimer);
+		scene->GetUI()->setWaveTimer(waveBreakTimer);
 		waveBreakTimer -= _deltatime;
 	}
 	else

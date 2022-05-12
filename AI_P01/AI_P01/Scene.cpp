@@ -8,13 +8,14 @@ Scene::Scene()
 {
 	game = nullptr;
 	window = nullptr;
-	UserInterface = new GoblinHordeUI(window);
+	userInterface = nullptr;
 }
 
 Scene::Scene(Game* _gameClass, sf::RenderWindow* _window)
 {
 	game = _gameClass;
 	window = _window;
+	userInterface = new GoblinHordeUI(window);
 }
 
 Scene::~Scene()
@@ -24,25 +25,25 @@ Scene::~Scene()
 
 void Scene::Start()
 {
-	SceneActive = true;
+	sceneActive = true;
 }
 
 void Scene::Update(float _deltaTime)
 {
-	if (SceneActive)
+	if (sceneActive)
 	{
 		window->clear();
 
-		int Length = (int)sceneObjects.size();
+		int length = (int)sceneObjects.size();
 		//Loop through all SceneObjects
-		for (int i = 0; i < Length; i++)
+		for (int i = 0; i < length; i++)
 		{
 			//Call the Update on CGameObject and pass through deltaTime
 			sceneObjects[i]->Update(_deltaTime);
 			sceneObjects[i]->Render();
 		}
 
-		UserInterface->Render(window);
+		userInterface->Render(window);
 			
 		
 	}
@@ -79,39 +80,40 @@ void Scene::AddSceneObject(GameObject* _object)
 void Scene::ChangeScene(std::string _sceneName)
 {
 	//Set true to stop Update
-	SceneActive = false;
+	sceneActive = false;
 	//Pass scene name to CGame() class
 	game->ChangeScene(_sceneName);
 }
 
-GoblinHordeUI* Scene::getUI()
+GoblinHordeUI* Scene::GetUI() // coding convention issue
 {
-	return UserInterface;
+	return userInterface;
 }
 
 void Scene::ClearDestroySceneObjectQueue()
 {
+	//TODO: Re-Write these functions to use iteration better
 	//Check if there is anything to delete
 	if ((int)destroySceneObjectQueue.size() > 0)
 	{
-		int Length = (int)sceneObjects.size();
+		int length = (int)sceneObjects.size();
 		//create iterator that points to start of queue
-    		std::vector<GameObject*>::iterator iter = destroySceneObjectQueue.begin();
+    	std::vector<GameObject*>::iterator iter = destroySceneObjectQueue.begin();
 		//Loop through all CGameObjects stored in SceneObjects to find the one to delete
-		for (int i = 0; i < Length; i++)
+		for (int i = 0; i < length; i++)
 		{
 			if (*iter == sceneObjects[i])
 			{
 				std::vector<GameObject*>::iterator sceneObj_iter = sceneObjects.begin() + i;
 
 				//Create ptr to CGameObject that needs to be deleted
-				GameObject* SceneObjectToDelete = *sceneObj_iter;
+				GameObject* sceneObjectToDelete = *sceneObj_iter;
 				//Remove from SceneObjects
 				sceneObjects.erase(sceneObj_iter);
 				//Remove from queue
 				destroySceneObjectQueue.erase(iter);
 				//delete CGameObject class
-				delete SceneObjectToDelete;
+				delete sceneObjectToDelete;
 
 				//The length of both SceneOjects and DestroySceneObjectQueue has changed so break and call function again
 				break;
@@ -139,8 +141,10 @@ void Scene::ClearAddSceneObjectQueue()
 
 void Scene::DeleteAllSceneObjects()
 {
-	int SceneObjectsLength = (int)sceneObjects.size();
-	for (int i = 0; i < SceneObjectsLength; i++)
+
+	//TODO: Re-Write these functions to use iteration better
+	int sceneObjectsLength = (int)sceneObjects.size();
+	for (int i = 0; i < sceneObjectsLength; i++)
 	{
 		std::vector<GameObject*>::iterator iter = sceneObjects.begin();
 		//CGameObject* ObjectToDelete = *iter;
@@ -152,8 +156,8 @@ void Scene::DeleteAllSceneObjects()
 		sceneObjects.erase(iter);
 	}
 
-	int AddObjectQueueLength = (int)addSceneObjectQueue.size();
-	for (int i = 0; i < AddObjectQueueLength; i++)
+	int addObjectQueueLength = (int)addSceneObjectQueue.size();
+	for (int i = 0; i < addObjectQueueLength; i++)
 	{
 		std::vector<GameObject*>::iterator iter = addSceneObjectQueue.begin();
 		if (*iter != nullptr)
@@ -167,6 +171,7 @@ void Scene::DeleteAllSceneObjects()
 
 void Scene::CollisionCheck()
 {
+	//TODO: Re-Write these functions to use iteration better
 	std::vector<GameObject*>::iterator otherObjectIterator;
 	for (int i = 0; i < (int)sceneObjects.size(); i++)
 	{

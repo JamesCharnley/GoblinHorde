@@ -30,12 +30,12 @@ void Player::Update(float _deltatime)
 
 	if (playerNum == 1)
 	{
-		scene->getUI()->setPlayer1Stats(currentGold);
+		scene->GetUI()->setPlayer1Stats(currentGold);
 	}
 
 	else if (playerNum == 2)
 	{
-		scene->getUI()->setPlayer2Stats(currentGold);
+		scene->GetUI()->setPlayer2Stats(currentGold);
 	}
 
 	CheckForInput(playerNumber);

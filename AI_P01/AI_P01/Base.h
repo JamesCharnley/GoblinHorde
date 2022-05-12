@@ -9,15 +9,18 @@ class Base :
 
 public:
 
+    // custom constructor. Parameters: sf::RenderWindow*, Scene*
     Base(sf::RenderWindow* _window, Scene* _scene);
     virtual ~Base() override;
     virtual void Render() override;
 
+    // TakeDamage interface overrides
     virtual void TakeDamage(int _amount) override;
     virtual void TakeDamage(int _amount, Character* _player) override;
 
 protected:
 
+    
     float maxHealth = 1000.0f;
     float currentHealth = 0;
 

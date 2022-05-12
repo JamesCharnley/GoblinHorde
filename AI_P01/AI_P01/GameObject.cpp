@@ -74,16 +74,6 @@ void GameObject::SetScale(sf::Vector2f _scale)
 	objectShape->setScale(_scale);;
 }
 
-void GameObject::StartContact(GameObject* _other)
-{
-	
-}
-
-void GameObject::EndContact(GameObject* _other)
-{
-	
-}
-
 void GameObject::Destroy()
 {
 	// call Scene class to queue this class to be deleted at end of current loop
