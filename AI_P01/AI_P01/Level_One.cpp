@@ -7,6 +7,7 @@
 #include "WaveManager.h"
 #include "Utility.h"
 #include "SpawnPoint.h"
+#include "Health_PickUp.h"
 
 Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window) 
 {
@@ -50,6 +51,10 @@ void Level_One::Start()
 	spawner->AddPlayer(player2);
 	spawner->AddSpawn(new SpawnBorder(sf::Vector2f(), sf::Vector2f(window->getSize().x, 0.0f), sf::Vector2f(0.0f, window->getSize().y), sf::Vector2f(window->getSize().x, window->getSize().y)));
 	AddSceneObject(spawner);
+
+	Health_PickUp* healthTest = new Health_PickUp(window, this);
+	healthTest->SetPosition(sf::Vector2f((float)Utils::WindowWidth / 3.0f, (float)Utils::WindowHeight / 2.0f));
+	AddSceneObject(healthTest);
 	
 	//Start scene
 	Scene::Start();

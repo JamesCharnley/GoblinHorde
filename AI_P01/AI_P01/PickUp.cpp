@@ -4,6 +4,8 @@ PickUp::PickUp(sf::RenderWindow* _window, Scene* _scene)
 {
     window = _window;
     scene = _scene;
+
+    
 }
 
 bool PickUp::HasActionText()

@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Base.h"
 #include "Player.h"
+#include "Utility.h"
 #include "Projectile.h"
 
 Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner)
@@ -37,6 +38,12 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 void Projectile::Update(float _deltatime)
 {
 	SetPosition(GetPosition() + direction * (speed * _deltatime));
+
+	// destroy projectile if it leaves window
+	if (GetPosition().x > (float)Utils::WindowWidth || GetPosition().x < 0 || GetPosition().y > (float)Utils::WindowHeight || GetPosition().y < 0)
+	{
+		Destroy();
+	}
 }
 
 void Projectile::OnCollision(GameObject* _other)

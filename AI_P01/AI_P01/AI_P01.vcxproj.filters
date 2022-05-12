@@ -96,6 +96,9 @@
     <ClCompile Include="GoblinHordeUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Health_PickUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GoblinHorde.h">
@@ -180,6 +183,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GoblinHordeUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Health_PickUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

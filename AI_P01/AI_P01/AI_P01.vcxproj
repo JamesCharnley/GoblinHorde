@@ -158,6 +158,7 @@
     <ClCompile Include="GameText.cpp" />
     <ClCompile Include="GoblinHorde.cpp" />
     <ClCompile Include="GoblinHordeUI.cpp" />
+    <ClCompile Include="Health_PickUp.cpp" />
     <ClCompile Include="Interactable.cpp" />
     <ClCompile Include="ITakeDamage.cpp" />
     <ClCompile Include="Level_One.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="GameText.h" />
     <ClInclude Include="GoblinHorde.h" />
     <ClInclude Include="GoblinHordeUI.h" />
+    <ClInclude Include="Health_PickUp.h" />
     <ClInclude Include="IDisplayInfo.h" />
     <ClInclude Include="Interactable.h" />
     <ClInclude Include="ITakeDamage.h" />
