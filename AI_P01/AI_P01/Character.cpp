@@ -45,6 +45,18 @@ void Character::TakeDamage(int _amount, Character* _player)
 {
 }
 
+void Character::AddHealth(int _amount)
+{
+	if (currentHealth + _amount > maxHealth)
+	{
+		currentHealth = maxHealth;
+	}
+	else
+	{
+		currentHealth += _amount;
+	}
+}
+
 void Character::Destroy()
 {
 	// destory weapon if exists

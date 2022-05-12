@@ -32,4 +32,5 @@ void PickUp::Interact(Player* _player)
 
 PickUp::PickUp()
 {
+
 }

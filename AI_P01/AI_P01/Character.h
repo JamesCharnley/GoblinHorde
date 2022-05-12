@@ -20,6 +20,8 @@ public:
     virtual void TakeDamage(int _amount) override;
     virtual void TakeDamage(int _amount, Character* _player) override;
 
+    void AddHealth(int _amount);
+
     virtual void Destroy() override;
 
 protected:
