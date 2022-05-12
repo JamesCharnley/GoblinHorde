@@ -4,13 +4,14 @@
 #include "Enemy.h"
 #include "Weapon.h"
 
-Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner)
+Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, std::string _name)
 {
 	window = _window;
 	scene = _scene;
 	owner = _owner;
 	weaponData = FWeaponData();
 	weaponData.ActionsPerSecond = 8;
+	name = _name;
 }
 
 void Weapon::Update(float _deltatime)

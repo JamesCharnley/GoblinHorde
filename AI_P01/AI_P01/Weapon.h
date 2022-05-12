@@ -26,7 +26,7 @@ class Weapon :
 public:
 
     // Custom constructor: takes ref to sf::RenderWindow and Scene() class
-    Weapon(sf::RenderWindow* _window, class Scene* _scene, GameObject* _owner);
+    Weapon(sf::RenderWindow* _window, class Scene* _scene, GameObject* _owner, std::string _name = "weapon");
 
     virtual void Update(float _deltatime) override;
 
@@ -34,6 +34,8 @@ public:
     void PerformAction();
 
     GameObject* GetOwner() { return owner; };
+
+    std::string name; // debug
 
 protected:
 
