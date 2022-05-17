@@ -4,15 +4,18 @@
 class GameText
 {
 public:
-	GameText(sf::RenderWindow* window, std::string filePath, sf::Vector2f position);
 
+	//Takes in a filepath string and vector 2F position. File path string used to create a font for the text
+	GameText(std::string _filePath, sf::Vector2f _position);
+
+	//Sets a string for the sf::Text
 	void SetString(std::string newText);
+
+	//Render the sf::Text to window
 	void Render(sf::RenderWindow* window);
 
 private:
-	sf::Font m_Font;
-	sf::Text m_Text;
-
-	sf::RenderWindow* m_window;
+	sf::Font gameFont;
+	sf::Text gameText;
 };
 

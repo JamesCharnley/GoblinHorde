@@ -8,14 +8,13 @@ Scene::Scene()
 {
 	game = nullptr;
 	window = nullptr;
-	userInterface = new GoblinHordeUI(window);
+	userInterface = new GoblinHordeUI();
 }
 
 Scene::Scene(Game* _gameClass, sf::RenderWindow* _window)
 {
 	game = _gameClass;
 	window = _window;
-	userInterface = new GoblinHordeUI(window);
 }
 
 Scene::~Scene()
@@ -43,6 +42,7 @@ void Scene::Update(float _deltaTime)
 			sceneObjects[i]->Render();
 		}
 
+		if(window != nullptr)
 		userInterface->Render(window);
 			
 		

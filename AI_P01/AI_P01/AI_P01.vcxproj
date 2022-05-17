@@ -165,12 +165,14 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PickUp.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SFML_VectorMath.cpp" />
     <ClCompile Include="SpawnPoint.cpp" />
     <ClCompile Include="Sprite_Component.cpp" />
     <ClCompile Include="StatEffect_PickUp.cpp" />
+    <ClCompile Include="WaveDisplay.cpp" />
     <ClCompile Include="WaveManager.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponUpgrade.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="Level_One.h" />
     <ClInclude Include="PickUp.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SFML_VectorMath.h" />
@@ -203,6 +206,7 @@
     <ClInclude Include="Sprite_Component.h" />
     <ClInclude Include="StatEffect_PickUp.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="WaveDisplay.h" />
     <ClInclude Include="WaveManager.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponUpgrade.h" />

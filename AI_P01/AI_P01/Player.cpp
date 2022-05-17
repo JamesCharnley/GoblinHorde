@@ -3,6 +3,7 @@
 #include "Weapon.h"
 #include "Player.h"
 #include "GoblinHordeUI.h"
+#include "PlayerStats.h"
 #include <vector>
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
@@ -37,12 +38,16 @@ void Player::Update(float _deltatime)
 
 	if (playerNum == 1)
 	{
-		scene->GetUI()->setPlayer1Stats(currentGold);
+		scene->GetUI()->getPlayer1Stats()->UpdateHealth(0);
+		scene->GetUI()->getPlayer1Stats()->UpdateGold(currentGold);
+		scene->GetUI()->getPlayer1Stats()->UpdateAmmo(0);
 	}
 
 	else if (playerNum == 2)
 	{
-		scene->GetUI()->setPlayer2Stats(currentGold);
+		scene->GetUI()->getPlayer2Stats()->UpdateHealth(0);
+		scene->GetUI()->getPlayer2Stats()->UpdateGold(currentGold);
+		scene->GetUI()->getPlayer2Stats()->UpdateAmmo(0);
 	}
 
 	CheckForInput(playerNumber);
