@@ -180,12 +180,19 @@ std::string Player::GetButtonMapping(int _button)
 
 int Player::GetWeaponLevel()
 {
-	return weapons[equippedWeaponIndex]->GetLevel();
+	return weapons[equippedWeaponIndex].GetLevel();
 }
 
 void Player::UpgradeWeapon()
 {
-	weapons[equippedWeaponIndex]->Upgrade();
+	weapons[equippedWeaponIndex].Upgrade();
+}
+
+void Player::AddWeapon(Weapon* _weapon)
+{
+	Weapon newWeapon = *_weapon;
+	newWeapon.SetOwner(this);
+	weapons.push_back(newWeapon);
 }
 
 void Player::OnCollision(GameObject* _other)
