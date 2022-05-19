@@ -18,13 +18,14 @@ struct FWeapon
     {
         Data()
             : weapon(EWeapon::Glock), weaponType(EWeaponType::Gun), damage(20), actionsPerSecond(8.0f), hasAmmo(true), ammo(100), level(1) {}
-        Data(EWeapon _weapon, EWeaponType _weaponType, int _damage, float _actionsPerSecond, int _ammo)
-            : weapon(_weapon), weaponType(_weaponType), damage(_damage), actionsPerSecond(_actionsPerSecond), hasAmmo(true), ammo(_ammo), level(1) {}
+        Data(EWeapon _weapon, EWeaponType _weaponType, int _damage, float _actionsPerSecond, int _ammo, float _bulletSpeed)
+            : weapon(_weapon), weaponType(_weaponType), damage(_damage), actionsPerSecond(_actionsPerSecond), hasAmmo(true), ammo(_ammo), speed(_bulletSpeed), level(1) {}
 
         EWeapon weapon;
         EWeaponType weaponType;
         int damage;
         float actionsPerSecond;
+        float speed;
         bool hasAmmo;
         int ammo;
         int level;
@@ -64,7 +65,6 @@ protected:
 private:
     FWeapon::Data GetBaseWeaponData();
 };
-
 
 
 static struct WeaponData

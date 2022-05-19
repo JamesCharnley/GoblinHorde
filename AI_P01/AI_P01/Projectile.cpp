@@ -9,11 +9,12 @@
 #include "Utility.h"
 #include "Projectile.h"
 
-Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner, float _damage)
+Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner, float _damage, float _speed)
 {
 	window = _window;
 	scene = _scene;
 	damage = _damage;
+	speed = _speed;
 
 	// set rotation of projectile
 	SetRotation(_rotation);
@@ -37,9 +38,7 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 			GetCollider()->AddIgnoreObject(weaponOwner);
 			owningCharacter = dynamic_cast<Character*>(weaponOwner);
 		}
-		
 	}
-	
 }
 
 void Projectile::Update(float _deltatime)
