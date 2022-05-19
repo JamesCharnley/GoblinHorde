@@ -58,6 +58,8 @@ protected:
 
     int playerNumber = 0;
 
+    bool actionButtonPressed = false;
+
 private:
     std::vector<Weapon*> weapons;
     int equippedWeaponIndex = 0;

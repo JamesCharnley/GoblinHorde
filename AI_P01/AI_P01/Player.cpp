@@ -71,14 +71,20 @@ void Player::Update(float _deltatime)
 				actionTextString = "";
 				actionTextString += currentInteractable->GetActionText();
 
+				if (currentInteractable->CostsGold())
+				{
+					actionTextString += ": " + std::to_string(currentInteractable->GetPrice(this));
+				}
+
 				actionText.setString(actionTextString);
 				actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
 			}
 			// check if can interact
 			if (currentInteractable->CanInteract(this))
 			{
-				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0) && actionButtonPressed == false)
 				{
+					actionButtonPressed = true;
 					currentInteractable->Interact(this);
 					currentInteractable = nullptr;
 					actionTextString = "";
@@ -94,6 +100,10 @@ void Player::Update(float _deltatime)
 			actionTextString = "";
 			actionText.setString(actionTextString);
 		}
+	}
+	if (!sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+	{
+		actionButtonPressed = false;
 	}
 	if (actionTextString != "")
 	{
