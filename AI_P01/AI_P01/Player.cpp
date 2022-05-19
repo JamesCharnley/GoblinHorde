@@ -5,6 +5,7 @@
 #include "GoblinHordeUI.h"
 #include "PlayerStats.h"
 #include <vector>
+#include "Base.h"
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
@@ -30,6 +31,8 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 	actionText.setCharacterSize(20);
 	actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
 	actionText.setFillColor(sf::Color::Red);
+
+	base = nullptr;
 }
 
 void Player::Update(float _deltatime)
@@ -63,53 +66,24 @@ void Player::Update(float _deltatime)
 	// check current interactable
 	if (currentInteractable)
 	{
-		if (currentInteractable->InRange(this))
+		PollInteractable();
+	}
+
+	if (base != nullptr && currentInteractable == nullptr)
+	{
+		if (base->InRange(this))
 		{
-			// display action text
-			if (currentInteractable->HasActionText())
+			if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
 			{
-				actionTextString = "";
-				actionTextString += currentInteractable->GetActionText();
-
-				if (currentInteractable->CostsGold())
-				{
-					actionTextString += ": " + std::to_string(currentInteractable->GetPrice(this));
-				}
-
-				actionText.setString(actionTextString);
-				actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
-			}
-			// check if can interact
-			if (currentInteractable->CanInteract(this))
-			{
-				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0) && actionButtonPressed == false)
-				{
-					actionButtonPressed = true;
-					currentInteractable->Interact(this);
-					currentInteractable = nullptr;
-					actionTextString = "";
-					actionText.setString(actionTextString);
-					actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
-				}
+				base->Repair(25.0f * _deltatime);
 			}
 		}
 		else
 		{
-			// remove current interactable
-			currentInteractable = nullptr;
-			actionTextString = "";
-			actionText.setString(actionTextString);
+			base = nullptr;
 		}
 	}
-	if (!sf::Joystick::isButtonPressed(playerNumber - 1, 0))
-	{
-		actionButtonPressed = false;
-	}
-	if (actionTextString != "")
-	{
-		actionText.setPosition(GetPosition() - sf::Vector2f(0, GetRadius() + GetRadius() * 0.75f));
-		
-	}
+
 }
 
 void Player::Render()
@@ -198,6 +172,11 @@ void Player::OnCollision(GameObject* _other)
 		{
 			currentInteractable = interactable;
 		}
+	}
+	Base* isBase = dynamic_cast<Base*>(_other);
+	if (isBase)
+	{
+		base = isBase;
 	}
 }
 
@@ -319,6 +298,58 @@ void Player::CheckForInput(int _player)
 
 	velocity = SFML_VectorMath::Clamp(velocity);
 }
+
+void Player::PollInteractable()
+{
+	if (currentInteractable->InRange(this))
+	{
+		// display action text
+		if (currentInteractable->HasActionText())
+		{
+			actionTextString = "";
+			actionTextString += currentInteractable->GetActionText();
+
+			if (currentInteractable->CostsGold())
+			{
+				actionTextString += ": " + std::to_string(currentInteractable->GetPrice(this));
+			}
+
+			actionText.setString(actionTextString);
+			actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
+		}
+		// check if can interact
+		if (currentInteractable->CanInteract(this))
+		{
+			if (sf::Joystick::isButtonPressed(playerNumber - 1, 0) && actionButtonPressed == false)
+			{
+				actionButtonPressed = true;
+				currentInteractable->Interact(this);
+				currentInteractable = nullptr;
+				actionTextString = "";
+				actionText.setString(actionTextString);
+				actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
+			}
+		}
+	}
+	else
+	{
+		// remove current interactable
+		currentInteractable = nullptr;
+		actionTextString = "";
+		actionText.setString(actionTextString);
+	}
+
+	if (!sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+	{
+		actionButtonPressed = false;
+	}
+	if (actionTextString != "")
+	{
+		actionText.setPosition(GetPosition() - sf::Vector2f(0, GetRadius() + GetRadius() * 0.75f));
+	}
+}
+
+
 
 void Player::NextWeapon()
 {

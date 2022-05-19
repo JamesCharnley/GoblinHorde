@@ -60,6 +60,10 @@ protected:
 
     bool actionButtonPressed = false;
 
+    void PollInteractable();
+
+    class Base* base;
+
 private:
     std::vector<Weapon*> weapons;
     int equippedWeaponIndex = 0;

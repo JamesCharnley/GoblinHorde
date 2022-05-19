@@ -18,9 +18,14 @@ public:
     virtual void TakeDamage(int _amount) override;
     virtual void TakeDamage(int _amount, Character* _player) override;
 
+    bool InRange(class Player* _player);
+
+    void Repair(float _repairAmount);
+
 protected:
 
     
+
     float maxHealth = 1000.0f;
     float currentHealth = 0;
 
