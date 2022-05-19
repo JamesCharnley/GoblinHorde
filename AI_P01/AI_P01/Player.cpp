@@ -73,15 +73,34 @@ void Player::Update(float _deltatime)
 	{
 		if (base->InRange(this))
 		{
-			if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+			if (base->GetCurrentHealth() < base->GetMaxHealth())
 			{
-				base->Repair(25.0f * _deltatime);
+				actionTextString = "Repair Base";
+				actionText.setString(actionTextString);
+				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+				{
+					base->Repair(25.0f * _deltatime);
+				}
 			}
+			else
+			{
+				actionTextString = "";
+				actionText.setString(actionTextString);
+				base = nullptr;
+			}
+			
 		}
 		else
 		{
+			actionTextString = "";
+			actionText.setString(actionTextString);
 			base = nullptr;
 		}
+	}
+
+	if (currentInteractable || base)
+	{
+		UpdateActionText();
 	}
 
 }
@@ -313,9 +332,6 @@ void Player::PollInteractable()
 			{
 				actionTextString += ": " + std::to_string(currentInteractable->GetPrice(this));
 			}
-
-			actionText.setString(actionTextString);
-			actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
 		}
 		// check if can interact
 		if (currentInteractable->CanInteract(this))
@@ -326,8 +342,7 @@ void Player::PollInteractable()
 				currentInteractable->Interact(this);
 				currentInteractable = nullptr;
 				actionTextString = "";
-				actionText.setString(actionTextString);
-				actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
+				UpdateActionText();
 			}
 		}
 	}
@@ -336,13 +351,20 @@ void Player::PollInteractable()
 		// remove current interactable
 		currentInteractable = nullptr;
 		actionTextString = "";
-		actionText.setString(actionTextString);
+		UpdateActionText();
 	}
 
 	if (!sf::Joystick::isButtonPressed(playerNumber - 1, 0))
 	{
 		actionButtonPressed = false;
 	}
+	
+}
+
+void Player::UpdateActionText()
+{
+	actionText.setString(actionTextString);
+	actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
 	if (actionTextString != "")
 	{
 		actionText.setPosition(GetPosition() - sf::Vector2f(0, GetRadius() + GetRadius() * 0.75f));

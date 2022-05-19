@@ -15,7 +15,7 @@ Base::Base(sf::RenderWindow* _window, Scene* _scene)
 	AddCollider(ECollisionType::Overlap);
 	collisionRadius = 125.0f;
 	
-	currentHealth = maxHealth / 2;
+	currentHealth = maxHealth * 0.9f;
 
 	healthBar = new GameObject_Rectangle(_window, _scene);
 	healthBar->SetColor(sf::Color::Red);
@@ -80,6 +80,10 @@ void Base::Repair(float _repairAmount)
 	if (currentHealth + _repairAmount <= maxHealth)
 	{
 		currentHealth += _repairAmount;
+	}
+	else
+	{
+		currentHealth = maxHealth;
 	}
 	healthBar->SetScale(sf::Vector2f(currentHealth / maxHealth, 1));
 }

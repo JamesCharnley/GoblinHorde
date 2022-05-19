@@ -22,6 +22,9 @@ public:
 
     void Repair(float _repairAmount);
 
+    float GetCurrentHealth() { return currentHealth; };
+    float GetMaxHealth() { return maxHealth; };
+
 protected:
 
     

@@ -64,6 +64,8 @@ protected:
 
     class Base* base;
 
+    void UpdateActionText();
+
 private:
     std::vector<Weapon*> weapons;
     int equippedWeaponIndex = 0;
