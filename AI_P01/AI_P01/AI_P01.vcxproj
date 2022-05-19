@@ -175,6 +175,7 @@
     <ClCompile Include="WaveDisplay.cpp" />
     <ClCompile Include="WaveManager.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponPurchase.cpp" />
     <ClCompile Include="WeaponUpgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +210,7 @@
     <ClInclude Include="WaveDisplay.h" />
     <ClInclude Include="WaveManager.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponPurchase.h" />
     <ClInclude Include="WeaponUpgrade.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

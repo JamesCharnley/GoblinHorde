@@ -9,6 +9,7 @@
 #include "SpawnPoint.h"
 #include "Health_PickUp.h"
 #include "WeaponUpgrade.h"
+#include "WeaponPurchase.h"
 
 Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window) 
 {
@@ -25,7 +26,9 @@ void Level_One::Start()
 	Base* base = new Base(window, this);
 	AddSceneObject(base);
 
-	
+	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this);
+	weaponPurchase->SetPosition(base->GetPosition());
+	AddSceneObject(weaponPurchase);
 
 	Health_PickUp* healthTest = new Health_PickUp(window, this);
 	healthTest->SetPosition(sf::Vector2f((float)Utils::WindowWidth / 3.0f, (float)Utils::WindowHeight / 2.0f));
