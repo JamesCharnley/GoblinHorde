@@ -8,6 +8,16 @@ PickUp::PickUp(sf::RenderWindow* _window, Scene* _scene)
     
 }
 
+bool PickUp::CostsGold()
+{
+    return false;
+}
+
+int PickUp::GetPrice(Player* _player)
+{
+    return 0;
+}
+
 bool PickUp::InRange(Player* _player)
 {
     return false;

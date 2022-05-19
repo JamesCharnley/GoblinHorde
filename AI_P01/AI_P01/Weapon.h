@@ -18,6 +18,7 @@ struct FWeaponData
     float ActionsPerSecond;
     bool HasAmmo;
     int Ammo;
+    int Level;
 };
 class Weapon :
     public GameObject_Circle
@@ -36,6 +37,8 @@ public:
     GameObject* GetOwner() { return owner; };
 
     std::string name; // debug
+
+    FWeaponData GetWeaponData();
 
 protected:
 

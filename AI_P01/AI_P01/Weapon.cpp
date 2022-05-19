@@ -49,6 +49,11 @@ void Weapon::PerformAction()
 	}
 }
 
+FWeaponData Weapon::GetWeaponData()
+{
+	return weaponData;
+}
+
 void Weapon::Cooldown(float _deltatime)
 {
 
