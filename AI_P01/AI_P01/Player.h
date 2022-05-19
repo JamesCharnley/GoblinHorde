@@ -29,7 +29,19 @@ public:
     void PollController(int _controllerIndex); //temp
     std::string GetButtonMapping(int _button); //temp
 
+    int GetWeaponLevel();
+    void UpgradeWeapon();
+    void AddWeapon(Weapon* _weapon);
+
+    virtual void OnCollision(GameObject* _other) override;
     
+    // UI for displaying prompts above player object
+    sf::Font font;
+    sf::Text actionText;
+    std::string actionTextString = "";
+
+    // pointer to Interactable object currently in range of
+    Interactable* currentInteractable = nullptr;
 
 protected:
 
@@ -48,7 +60,7 @@ protected:
     int playerNumber = 0;
 
 private:
-    std::vector<Weapon*> weapons;
+    std::vector<Weapon> weapons;
     int equippedWeaponIndex = 0;
 
     bool lastFrameSwitchWeapon = false;

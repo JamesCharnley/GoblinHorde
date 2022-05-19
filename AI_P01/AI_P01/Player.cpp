@@ -7,10 +7,14 @@
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
-	weapons.push_back(new Weapon(window, scene, this, "pistol"));
-	weapons.push_back(new Weapon(window, scene, this, "rifle"));
-	equippedWeapon = weapons.at(equippedWeaponIndex);
-	scene->AddSceneObject(equippedWeapon);
+	weapons.push_back(Weapon(window, scene, this, EWeapon::Glock, "pistol"));
+	weapons.push_back(Weapon(window, scene, this, EWeapon::Rifle, "rifle"));
+	equippedWeapon = &weapons.at(equippedWeaponIndex);
+
+	for(Weapon weapon : weapons)
+	{
+		scene->AddSceneObject(&weapon);
+	}
 
 	selectedInputPreset = playerOnePreset;
 	playerNum = 1;
@@ -109,6 +113,44 @@ void Player::PollController(int _controllerIndex)
 std::string Player::GetButtonMapping(int _button)
 {
 	return "";
+}
+
+int Player::GetWeaponLevel()
+{
+	return weapons.at(equippedWeaponIndex).GetLevel();
+}
+
+void Player::UpgradeWeapon()
+{
+	weapons.at(equippedWeaponIndex).Upgrade();
+}
+
+void Player::AddWeapon(Weapon* _weapon)
+{
+	Weapon newWeapon = *_weapon;
+	newWeapon.SetOwner(this);
+	weapons.push_back(newWeapon);
+}
+
+void Player::OnCollision(GameObject* _other)
+{
+	Interactable* interactable = dynamic_cast<Interactable*>(_other);
+	if (interactable)
+	{
+		if (interactable->AutoInteract())
+		{
+			interactable->Interact(this);
+		}
+		else
+		{
+			currentInteractable = interactable;
+		}
+	}
+	Base* isBase = dynamic_cast<Base*>(_other);
+	if (isBase)
+	{
+		base = isBase;
+	}
 }
 
 void Player::CheckForInput(int _player)
@@ -230,6 +272,60 @@ void Player::CheckForInput(int _player)
 	velocity = SFML_VectorMath::Clamp(velocity);
 }
 
+void Player::PollInteractable()
+{
+	if (currentInteractable->InRange(this))
+	{
+		// display action text
+		if (currentInteractable->HasActionText())
+		{
+			actionTextString = "";
+			actionTextString += currentInteractable->GetActionText();
+
+			if (currentInteractable->CostsGold())
+			{
+				actionTextString += ": " + std::to_string(currentInteractable->GetPrice(this));
+			}
+		}
+		// check if can interact
+		if (currentInteractable->CanInteract(this))
+		{
+			if (sf::Joystick::isButtonPressed(playerNumber - 1, 0) && actionButtonPressed == false)
+			{
+				actionButtonPressed = true;
+				currentInteractable->Interact(this);
+				currentInteractable = nullptr;
+				actionTextString = "";
+				UpdateActionText();
+			}
+		}
+	}
+	else
+	{
+		// remove current interactable
+		currentInteractable = nullptr;
+		actionTextString = "";
+		UpdateActionText();
+	}
+
+	if (!sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+	{
+		actionButtonPressed = false;
+	}
+	
+}
+
+void Player::UpdateActionText()
+{
+	actionText.setString(actionTextString);
+	actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
+	if (actionTextString != "")
+	{
+		actionText.setPosition(GetPosition() - sf::Vector2f(0, GetRadius() + GetRadius() * 0.75f));
+	}
+}
+
+
 void Player::NextWeapon()
 {
 	equippedWeaponIndex++;
@@ -237,7 +333,7 @@ void Player::NextWeapon()
 	{
 		equippedWeaponIndex = 0;
 	}
-	equippedWeapon = weapons.at(equippedWeaponIndex);
+	equippedWeapon = &weapons.at(equippedWeaponIndex);
 
 	std::cout << "Player " << playerNum << "equipped " << equippedWeapon->name << "\n";
 }
@@ -249,7 +345,7 @@ void Player::PreviousWeapon()
 	{
 		equippedWeaponIndex = weapons.size() - 1;
 	}
-	equippedWeapon = weapons.at(equippedWeaponIndex);
+	equippedWeapon = &weapons.at(equippedWeaponIndex);
 
 	std::cout << "Player " << playerNum << "equipped "<< equippedWeapon->name << "\n";
 }

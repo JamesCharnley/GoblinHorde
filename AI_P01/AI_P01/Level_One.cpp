@@ -23,6 +23,18 @@ void Level_One::Start()
 	Base* base = new Base(window, this);
 	AddSceneObject(base);
 
+	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this, EWeapon::Glock);
+	weaponPurchase->SetPosition(base->GetPosition());
+	AddSceneObject(weaponPurchase);
+
+	Health_PickUp* healthTest = new Health_PickUp(window, this);
+	healthTest->SetPosition(sf::Vector2f((float)Utils::WindowWidth / 3.0f, (float)Utils::WindowHeight / 2.0f));
+	AddSceneObject(healthTest);
+
+	WeaponUpgrade* weaponUpgrade = new WeaponUpgrade(window, this);
+	weaponUpgrade->SetPosition(sf::Vector2f((float)Utils::WindowWidth - ((float)Utils::WindowWidth / 3.0f), (float)Utils::WindowHeight / 2.0f));
+	AddSceneObject(weaponUpgrade);
+
 	// create all GameObjects
 	Player* player1 = new Player(window, this);
 	player1->AddSprite("Resources/Textures/PlayerPH.png");

@@ -32,8 +32,13 @@ public:
 
     // implement attack action
     void PerformAction();
+    inline GameObject* GetOwner() { return owner; };
+    inline void SetOwner(GameObject* _owner) { owner = _owner; }
+    FWeapon::Data GetWeaponData();
 
-    GameObject* GetOwner() { return owner; };
+    inline int GetLevel() { return weaponData.level; }
+    //increment this weapon's level
+    void Upgrade();
 
     std::string name; // debug
 
