@@ -26,6 +26,7 @@ int WeaponUpgrade::GetPrice(Player* _player)
 
 bool WeaponUpgrade::InRange(Player* _player)
 {
+    //return false if player already has this weapon so text isn't shown
     if (SFML_VectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
     {
         return true;
@@ -38,7 +39,7 @@ bool WeaponUpgrade::AutoInteract()
     return false;
 }
 
-bool WeaponUpgrade::HasActionText()
+bool WeaponUpgrade::HasActionText(class Player* _player)
 {
     return true;
 }

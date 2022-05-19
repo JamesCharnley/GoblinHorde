@@ -7,18 +7,18 @@
 //assign weapon stats here
 std::map<EWeapon, FWeapon::Data> FWeapon::dataMap =
 {															      //dmg | firerate | ammo | bullet speed
-	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			20,		4.0f,	 100,	600.0f)},
-	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			50,		2.0f,	 100,	1000.0f)},
-	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200,	80.0f,	 100,	600.0f)},
+	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			20,		4.0f,	 100,	600.0f,		"Glock")},
+	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			50,		2.0f,	 100,	1000.0f,	"Rifle")},
+	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200,	80.0f,	 100,	600.0f,		"Debug gun")},
 };
 
-Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWeapon _weaponBase, std::string _name)
+Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWeapon _weaponBase)
 {
 	window = _window;
 	scene = _scene;
 	owner = _owner;
 	weaponData = FWeapon::GetData(_weaponBase);
-	name = _name;
+	name = weaponData.name;
 }
 
 void Weapon::Update(float _deltatime)

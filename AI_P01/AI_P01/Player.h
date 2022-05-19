@@ -1,6 +1,7 @@
 #pragma once
 #include "Interactable.h"
 #include "Character.h"
+#include "Weapon.h"
 
 struct FInputs
 {
@@ -19,7 +20,7 @@ class Player :
 public:
 
     Player(sf::RenderWindow* _window, Scene* _scene);
-
+    ~Player();
     virtual void Update(float _deltatime) override;
     virtual void Render() override;
 
@@ -34,6 +35,8 @@ public:
     int GetWeaponLevel();
     void UpgradeWeapon();
     void AddWeapon(Weapon* _weapon);
+    //check if a player has a weapon type in their inventory
+    bool HasWeapon(EWeapon _weapon);
 
     virtual void OnCollision(GameObject* _other) override;
     
@@ -70,7 +73,7 @@ protected:
     void UpdateActionText();
 
 private:
-    std::vector<Weapon> weapons;
+    std::vector<Weapon*> weapons;
     int equippedWeaponIndex = 0;
 
     bool lastFrameSwitchWeapon = false;

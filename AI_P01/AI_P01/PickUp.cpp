@@ -27,7 +27,7 @@ bool PickUp::InRange(Player* _player)
     return false;
 }
 
-bool PickUp::HasActionText()
+bool PickUp::HasActionText(class Player* _player)
 {
     return false;
 }

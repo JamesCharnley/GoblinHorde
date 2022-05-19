@@ -21,14 +21,14 @@ int WeaponPurchase::GetPrice(Player* _player)
     return 100;
 }
 
-bool WeaponPurchase::HasActionText()
+bool WeaponPurchase::HasActionText(class Player* _player)
 {
-    return true;
+    return !_player->HasWeapon(weapon->GetWeaponData().weapon);
 }
 
 std::string WeaponPurchase::GetActionText()
 {
-    return "Purchase Weapon";
+    return "Purchase " + weapon->name;
 }
 
 bool WeaponPurchase::AutoInteract()
@@ -38,7 +38,7 @@ bool WeaponPurchase::AutoInteract()
 
 bool WeaponPurchase::CanInteract(Player* _player)
 {
-    if (_player->GetGold() >= GetPrice(_player))
+    if (_player->GetGold() >= GetPrice(_player) && !_player->HasWeapon(weapon->GetWeaponData().weapon))
     {
         return true;
     }

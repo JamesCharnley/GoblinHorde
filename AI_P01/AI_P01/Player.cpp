@@ -1,6 +1,5 @@
 #include "SFML_VectorMath.h"
 #include "Scene.h"
-#include "Weapon.h"
 #include "Player.h"
 #include "GoblinHordeUI.h"
 #include "PlayerStats.h"
@@ -9,14 +8,14 @@
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
-	weapons.push_back(Weapon(window, scene, this, EWeapon::Glock, "pistol"));
-	weapons.push_back(Weapon(window, scene, this, EWeapon::Rifle, "rifle"));
-	equippedWeapon = &weapons.at(equippedWeaponIndex);
+	weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Glock));
+	weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Rifle));
+	equippedWeapon = weapons.at(equippedWeaponIndex);
 
-	for(Weapon weapon : weapons)
-	{
-		scene->AddSceneObject(&weapon);
-	}
+	//for(Weapon weapon : weapons)
+	//{
+	//	scene->AddSceneObject(&weapon);
+	//}
 
 	selectedInputPreset = playerOnePreset;
 	playerNum = 1;
@@ -35,9 +34,21 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 	base = nullptr;
 }
 
+Player::~Player()
+{
+	for (Weapon* weapon : weapons)
+	{
+		delete weapon;
+	}
+}
+
 void Player::Update(float _deltatime)
 {
 	Character::Update(_deltatime);
+	if (equippedWeapon != nullptr)
+	{
+		equippedWeapon->Update(_deltatime);
+	}
 
 	if (playerNum == 1)
 	{
@@ -109,6 +120,10 @@ void Player::Render()
 {
 	GameObject_Circle::Render();
 	window->draw(actionText);
+	if (equippedWeapon != nullptr)
+	{
+		equippedWeapon->Render();
+	}
 }
 
 void Player::SetPlayersNumber(int _number)
@@ -180,19 +195,31 @@ std::string Player::GetButtonMapping(int _button)
 
 int Player::GetWeaponLevel()
 {
-	return weapons[equippedWeaponIndex].GetLevel();
+	return weapons[equippedWeaponIndex]->GetLevel();
 }
 
 void Player::UpgradeWeapon()
 {
-	weapons[equippedWeaponIndex].Upgrade();
+	weapons[equippedWeaponIndex]->Upgrade();
 }
 
 void Player::AddWeapon(Weapon* _weapon)
 {
-	Weapon newWeapon = *_weapon;
-	newWeapon.SetOwner(this);
+	Weapon* newWeapon = new Weapon(*_weapon);
+	newWeapon->SetOwner(this);
 	weapons.push_back(newWeapon);
+}
+
+bool Player::HasWeapon(EWeapon _weapon)
+{
+	for (Weapon* weapon : weapons)
+	{
+		if (weapon->GetWeaponData().weapon == _weapon)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Player::OnCollision(GameObject* _other)
@@ -340,7 +367,7 @@ void Player::PollInteractable()
 	if (currentInteractable->InRange(this))
 	{
 		// display action text
-		if (currentInteractable->HasActionText())
+		if (currentInteractable->HasActionText(this))
 		{
 			actionTextString = "";
 			actionTextString += currentInteractable->GetActionText();
@@ -397,7 +424,7 @@ void Player::NextWeapon()
 	{
 		equippedWeaponIndex = 0;
 	}
-	equippedWeapon = &weapons.at(equippedWeaponIndex);
+	equippedWeapon = weapons.at(equippedWeaponIndex);
 
 	std::cout << "Player " << playerNum << " equipped " << equippedWeapon->name << "\n";
 }
@@ -409,7 +436,7 @@ void Player::PreviousWeapon()
 	{
 		equippedWeaponIndex = weapons.size() - 1;
 	}
-	equippedWeapon = &weapons.at(equippedWeaponIndex);
+	equippedWeapon = weapons.at(equippedWeaponIndex);
 
 	std::cout << "Player " << playerNum << " equipped "<< equippedWeapon->name << "\n";
 }

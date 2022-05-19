@@ -20,7 +20,6 @@ Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window)
 
 void Level_One::Start()
 {
-
 	// set fps limit
 	window->setFramerateLimit(60);
 
@@ -33,7 +32,7 @@ void Level_One::Start()
 	Base* base = new Base(window, this);
 	AddSceneObject(base);
 
-	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this, EWeapon::Glock);
+	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this, EWeapon::DebugGun);
 	weaponPurchase->SetPosition(base->GetPosition());
 	AddSceneObject(weaponPurchase);
 
