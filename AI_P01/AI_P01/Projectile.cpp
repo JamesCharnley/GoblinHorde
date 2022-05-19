@@ -9,10 +9,11 @@
 #include "Utility.h"
 #include "Projectile.h"
 
-Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner)
+Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner, float _damage)
 {
 	window = _window;
 	scene = _scene;
+	damage = _damage;
 
 	// set rotation of projectile
 	SetRotation(_rotation);

@@ -21,7 +21,7 @@ bool WeaponUpgrade::CostsGold()
 
 int WeaponUpgrade::GetPrice(Player* _player)
 {
-    return 100;
+    return _player->GetWeaponLevel() * 50;
 }
 
 bool WeaponUpgrade::InRange(Player* _player)
@@ -62,5 +62,6 @@ void WeaponUpgrade::Interact(Player* _player)
     if (CanInteract(_player))
     {
         _player->RemoveGold(GetPrice(_player));
+        _player->UpgradeWeapon();
     }
 }

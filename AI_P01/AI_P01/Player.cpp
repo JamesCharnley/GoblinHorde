@@ -9,8 +9,8 @@
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
-	weapons.push_back(new Weapon(window, scene, this, "pistol"));
-	weapons.push_back(new Weapon(window, scene, this, "rifle"));
+	weapons.push_back(new Weapon(window, scene, this, EWeapon::Glock, "pistol"));
+	weapons.push_back(new Weapon(window, scene, this, EWeapon::Rifle, "rifle"));
 	equippedWeapon = weapons.at(equippedWeaponIndex);
 
 	for(Weapon* weapon : weapons)
@@ -176,6 +176,16 @@ void Player::PollController(int _controllerIndex)
 std::string Player::GetButtonMapping(int _button)
 {
 	return "";
+}
+
+int Player::GetWeaponLevel()
+{
+	return weapons[equippedWeaponIndex]->GetLevel();
+}
+
+void Player::UpgradeWeapon()
+{
+	weapons[equippedWeaponIndex]->Upgrade();
 }
 
 void Player::OnCollision(GameObject* _other)

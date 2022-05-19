@@ -31,6 +31,8 @@ public:
     void PollController(int _controllerIndex); //temp
     std::string GetButtonMapping(int _button); //temp
 
+    int GetWeaponLevel();
+    void UpgradeWeapon();
 
     virtual void OnCollision(GameObject* _other) override;
     
