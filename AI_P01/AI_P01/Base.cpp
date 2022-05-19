@@ -1,5 +1,7 @@
 #include "Utility.h"
 #include "Base.h"
+#include "SFML_VectorMath.h"
+#include "Player.h"
 
 Base::Base(sf::RenderWindow* _window, Scene* _scene)
 {
@@ -13,13 +15,13 @@ Base::Base(sf::RenderWindow* _window, Scene* _scene)
 	AddCollider(ECollisionType::Overlap);
 	collisionRadius = 125.0f;
 	
-	currentHealth = maxHealth;
+	currentHealth = maxHealth * 0.9f;
 
 	healthBar = new GameObject_Rectangle(_window, _scene);
 	healthBar->SetColor(sf::Color::Red);
 	healthBar->SetSize(sf::Vector2f(GetRadius(), 20.0f));
 	healthBar->SetPosition(GetPosition());
-
+	healthBar->SetScale(sf::Vector2f(currentHealth / maxHealth, 1));
 }
 
 Base::~Base()
@@ -63,3 +65,26 @@ void Base::TakeDamage(int _amount, Character* _player)
 	}
 	healthBar->SetScale(sf::Vector2f(currentHealth / maxHealth, 1));
 }
+
+bool Base::InRange(Player* _player)
+{
+	if (SFML_VectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
+	{
+		return true;
+	}
+	return false;
+}
+
+void Base::Repair(float _repairAmount)
+{
+	if (currentHealth + _repairAmount <= maxHealth)
+	{
+		currentHealth += _repairAmount;
+	}
+	else
+	{
+		currentHealth = maxHealth;
+	}
+	healthBar->SetScale(sf::Vector2f(currentHealth / maxHealth, 1));
+}
+

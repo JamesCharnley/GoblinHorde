@@ -6,15 +6,24 @@
 #include "Enemy.h"
 #include "Base.h"
 #include "Player.h"
+#include "Utility.h"
 #include "Projectile.h"
 
-Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner)
+Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner, float _damage, float _speed)
 {
 	window = _window;
 	scene = _scene;
+	damage = _damage;
+	speed = _speed;
+
+	// set rotation of projectile
 	SetRotation(_rotation);
+
+	// calculate direction it will travel
 	direction = SFML_VectorMath::AngleToDirection(GetRotation());
 	direction = SFML_VectorMath::Normalize(direction);
+
+	// set radius and setup collider
 	SetRadius(5.0f);
 	AddCollider(ECollisionType::Block);
 	SetCollisionRadius(GetRadius());
@@ -29,14 +38,18 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 			GetCollider()->AddIgnoreObject(weaponOwner);
 			owningCharacter = dynamic_cast<Character*>(weaponOwner);
 		}
-		
 	}
-	
 }
 
 void Projectile::Update(float _deltatime)
 {
 	SetPosition(GetPosition() + direction * (speed * _deltatime));
+
+	// destroy projectile if it leaves window
+	if (GetPosition().x > (float)Utils::WindowWidth || GetPosition().x < 0 || GetPosition().y > (float)Utils::WindowHeight || GetPosition().y < 0)
+	{
+		Destroy();
+	}
 }
 
 void Projectile::OnCollision(GameObject* _other)

@@ -3,34 +3,27 @@
 #include "SFML\Graphics.hpp"
 #include <iostream>
 
-//UI takes in data from current scene and display it through a text
 class GoblinHordeUI
 {
 public:
-	GoblinHordeUI(sf::RenderWindow* window);
+	GoblinHordeUI();
 	~GoblinHordeUI();
 
-	void setCurrentWave(int currWave);
-	void setNumberOfEnemies(int numEnemies);
-	void setWaveTimer(int timer);
-
-	void setPlayer1Stats(int gold);
-	void setPlayer2Stats(int gold);
-
+	//Renders both player1, player2 stats and the wave display
 	void Render(sf::RenderWindow* window);
 
+	//Player.cpp will be able to display the health, ammo and gold onto the UI
+	class PlayerStats* getPlayer1Stats();
+	class PlayerStats* getPlayer2Stats();
+
+	//WaveManger.cpp will be able to display the breakTimer, current num of enemies and current wave onto the UI
+	class WaveDisplay* getWaveDisplay();
+
 private:
-	class GameText* m_WaveText = nullptr;
-	class GameText* m_WaveNum = nullptr;
-	class GameText* m_EnemyText = nullptr;
-	class GameText* m_EnemyNum = nullptr;
+	
+	// pointer to playerStats and WaveDisplay
+	class PlayerStats* player1Stats;
+	class PlayerStats* player2Stats;
+	class WaveDisplay* waveDisplay;
 
-	class GameText* m_player1Text = nullptr;
-	class GameText* m_player1Stats = nullptr;
-	class GameText* m_player2Text = nullptr;
-	class GameText* m_player2Stats = nullptr;
-
-	class GameText* m_waveTimer = nullptr;
-
-	//std::vector<class GameText*> m_Texts;
 };

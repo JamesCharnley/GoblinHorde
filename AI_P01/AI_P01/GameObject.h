@@ -34,11 +34,6 @@ public:
 	// Sets SFML shape's scale
 	void SetScale(sf::Vector2f _scale);
 
-	// called on start of collision if Rigidbody class is being used
-	virtual void StartContact(GameObject* _other);
-	// called on end of collision if Rigidbody class is being used
-	virtual void EndContact(GameObject* _other);
-
 	// Destroy this GameObject. NOTE: Will not be destroyed until all GameObjects in current scene have been updated
 	virtual void Destroy();
 

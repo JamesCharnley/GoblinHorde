@@ -7,6 +7,8 @@ Health_PickUp::Health_PickUp(sf::RenderWindow* _window, Scene* _scene)
 	scene = _scene;
 
 	SetRadius(30);
+	AddCollider(ECollisionType::Overlap);
+	SetCollisionRadius(GetRadius());
 }
 
 void Health_PickUp::Interact(Player* _player)

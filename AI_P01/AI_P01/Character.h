@@ -20,7 +20,7 @@ public:
     virtual void TakeDamage(int _amount) override;
     virtual void TakeDamage(int _amount, Character* _player) override;
 
-    void AddHealth(int _amount);
+    void AddHealth(int _amount); //TODO: Move to Player class
 
     virtual void Destroy() override;
 

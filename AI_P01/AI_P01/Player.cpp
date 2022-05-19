@@ -3,7 +3,9 @@
 #include "Weapon.h"
 #include "Player.h"
 #include "GoblinHordeUI.h"
+#include "PlayerStats.h"
 #include <vector>
+#include "Base.h"
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
@@ -22,6 +24,15 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 	moveSpeed = 200.0f;
 
 	AddCollider(ECollisionType::Block);
+
+	font.loadFromFile("Resources/Font/WarPriest.ttf");
+	actionText.setFont(font);
+	actionText.setString(actionTextString);
+	actionText.setCharacterSize(20);
+	actionText.setOrigin(sf::Vector2f(actionText.getGlobalBounds().width / 2, actionText.getGlobalBounds().height / 2));
+	actionText.setFillColor(sf::Color::Red);
+
+	base = nullptr;
 }
 
 void Player::Update(float _deltatime)
@@ -30,12 +41,16 @@ void Player::Update(float _deltatime)
 
 	if (playerNum == 1)
 	{
-		scene->getUI()->setPlayer1Stats(currentGold);
+		scene->GetUI()->getPlayer1Stats()->UpdateHealth(0);
+		scene->GetUI()->getPlayer1Stats()->UpdateGold(currentGold);
+		scene->GetUI()->getPlayer1Stats()->UpdateAmmo(0);
 	}
 
 	else if (playerNum == 2)
 	{
-		scene->getUI()->setPlayer2Stats(currentGold);
+		scene->GetUI()->getPlayer2Stats()->UpdateHealth(0);
+		scene->GetUI()->getPlayer2Stats()->UpdateGold(currentGold);
+		scene->GetUI()->getPlayer2Stats()->UpdateAmmo(0);
 	}
 
 	CheckForInput(playerNumber);
@@ -47,6 +62,53 @@ void Player::Update(float _deltatime)
 	{
 		rotationDelayTimer -= _deltatime;
 	}
+
+	// check current interactable
+	if (currentInteractable)
+	{
+		PollInteractable();
+	}
+
+	if (base != nullptr && currentInteractable == nullptr)
+	{
+		if (base->InRange(this))
+		{
+			if (base->GetCurrentHealth() < base->GetMaxHealth())
+			{
+				actionTextString = "Repair Base";
+				actionText.setString(actionTextString);
+				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+				{
+					base->Repair(25.0f * _deltatime);
+				}
+			}
+			else
+			{
+				actionTextString = "";
+				actionText.setString(actionTextString);
+				base = nullptr;
+			}
+			
+		}
+		else
+		{
+			actionTextString = "";
+			actionText.setString(actionTextString);
+			base = nullptr;
+		}
+	}
+
+	if (currentInteractable || base)
+	{
+		UpdateActionText();
+	}
+
+}
+
+void Player::Render()
+{
+	GameObject_Circle::Render();
+	window->draw(actionText);
 }
 
 void Player::SetPlayersNumber(int _number)
@@ -100,6 +162,7 @@ void Player::PollController(int _controllerIndex)
 		if (sf::Joystick::isButtonPressed(_controllerIndex, i))
 		{
 			pressedButtonNames.push_back(GetButtonMapping(i));
+			std::cout << "Pressed: " << i << std::endl;
 		}
 	}
 
@@ -117,19 +180,12 @@ std::string Player::GetButtonMapping(int _button)
 
 int Player::GetWeaponLevel()
 {
-	return weapons.at(equippedWeaponIndex).GetLevel();
+	return weapons[equippedWeaponIndex]->GetLevel();
 }
 
 void Player::UpgradeWeapon()
 {
-	weapons.at(equippedWeaponIndex).Upgrade();
-}
-
-void Player::AddWeapon(Weapon* _weapon)
-{
-	Weapon newWeapon = *_weapon;
-	newWeapon.SetOwner(this);
-	weapons.push_back(newWeapon);
+	weapons[equippedWeaponIndex]->Upgrade();
 }
 
 void Player::OnCollision(GameObject* _other)
@@ -326,6 +382,7 @@ void Player::UpdateActionText()
 }
 
 
+
 void Player::NextWeapon()
 {
 	equippedWeaponIndex++;
@@ -335,7 +392,7 @@ void Player::NextWeapon()
 	}
 	equippedWeapon = &weapons.at(equippedWeaponIndex);
 
-	std::cout << "Player " << playerNum << "equipped " << equippedWeapon->name << "\n";
+	std::cout << "Player " << playerNum << " equipped " << equippedWeapon->name << "\n";
 }
 
 void Player::PreviousWeapon()
@@ -347,5 +404,5 @@ void Player::PreviousWeapon()
 	}
 	equippedWeapon = &weapons.at(equippedWeaponIndex);
 
-	std::cout << "Player " << playerNum << "equipped "<< equippedWeapon->name << "\n";
+	std::cout << "Player " << playerNum << " equipped "<< equippedWeapon->name << "\n";
 }

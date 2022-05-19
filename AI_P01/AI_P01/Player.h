@@ -1,4 +1,5 @@
 #pragma once
+#include "Interactable.h"
 #include "Character.h"
 
 struct FInputs
@@ -20,6 +21,7 @@ public:
     Player(sf::RenderWindow* _window, Scene* _scene);
 
     virtual void Update(float _deltatime) override;
+    virtual void Render() override;
 
     void SetPlayersNumber(int _number);
 
@@ -58,6 +60,14 @@ protected:
     int currentGold = 0;
 
     int playerNumber = 0;
+
+    bool actionButtonPressed = false;
+
+    void PollInteractable();
+
+    class Base* base;
+
+    void UpdateActionText();
 
 private:
     std::vector<Weapon> weapons;

@@ -25,10 +25,6 @@ void EnemySpawner::Update(float _deltatime)
 	}
 }
 
-void EnemySpawner::Render()
-{
-}
-
 void EnemySpawner::EnemyDestroyed(Enemy* _enemy)
 {
 	currentEnemyCount--;

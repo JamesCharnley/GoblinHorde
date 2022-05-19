@@ -12,21 +12,21 @@ public:
 	//Spawn all objects for the scene
 	virtual void Start();
 
-	//Called from the main while loop in CGame() class
+	//Called from the main while loop in Game() class
 	virtual void Update(float _deltaTime);
 
-	//Adds CGameObject() classes that need to be deleted to the DestroySceneObjectQueue vector
+	//Adds GameObject() classes that need to be deleted to the DestroySceneObjectQueue vector
 	//Objects will not be deleted until ClearDestroySceneObjectQueue() is called at the end of Update()
 	virtual void DestroySceneObject(class GameObject* _object);
 
-	//Adds CGameObject() classes that need to be spawned to the AddSceneObjectsQueue vector
+	//Adds GameObject() classes that need to be spawned to the AddSceneObjectsQueue vector
 	//Objects will not be added until ClearAddSceneObjectQueue() is called at the end of Update()
 	virtual void AddSceneObject(class GameObject* _object);
 
 	//Calls ChangeScene() in CGame(), CGameObject() classes do not have access to CGame() class so they will call this funcion
 	void ChangeScene(std::string _sceneName);
 
-	class GoblinHordeUI* getUI();
+	class GoblinHordeUI* GetUI();
 
 protected:
 
@@ -38,7 +38,7 @@ protected:
 	//Called at the end of the Update() to add/instantiate all CGameObject classes in the queue
 	virtual void ClearAddSceneObjectQueue();
 
-	class GoblinHordeUI* UserInterface;
+	class GoblinHordeUI* userInterface;
 
 	class Game* game;
 
@@ -53,7 +53,7 @@ protected:
 	//All CGameObjects that need to be added are stored here
 	std::vector<class GameObject*> addSceneObjectQueue;
 
-	bool SceneActive = true;
+	bool sceneActive = true;
 
 	void DeleteAllSceneObjects();
 

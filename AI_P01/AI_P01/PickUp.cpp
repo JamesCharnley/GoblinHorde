@@ -1,9 +1,30 @@
+#include "Player.h"
+#include "SFML_VectorMath.h"
 #include "PickUp.h"
 
 PickUp::PickUp(sf::RenderWindow* _window, Scene* _scene)
 {
     window = _window;
-    scene = _scene;
+    scene = _scene;  
+}
+
+bool PickUp::CostsGold()
+{
+    return false;
+}
+
+int PickUp::GetPrice(Player* _player)
+{
+    return 0;
+}
+
+bool PickUp::InRange(Player* _player)
+{
+    if (SFML_VectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
+    {
+        return true;
+    }
+    return false;
 }
 
 bool PickUp::HasActionText()

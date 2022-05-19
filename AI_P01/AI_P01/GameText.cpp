@@ -1,22 +1,20 @@
 #include "GameText.h"
 
-GameText::GameText(sf::RenderWindow* window, std::string filePath, sf::Vector2f position)
+GameText::GameText(std::string filePath, sf::Vector2f position)
 {
-	m_window = window;
-
-	m_Font.loadFromFile(filePath);
-	m_Text.setFont(m_Font);
-	m_Text.setFillColor(sf::Color::White);
-	m_Text.setPosition(position);
+	gameFont.loadFromFile(filePath);
+	gameText.setFont(gameFont);
+	gameText.setFillColor(sf::Color::White);
+	gameText.setPosition(position);
 }
 
 void GameText::SetString(std::string newText)
 {
-	m_Text.setString(newText);
+	gameText.setString(newText);
 }
 
 
 void GameText::Render(sf::RenderWindow* window)
 {
-	window->draw(m_Text);
+	window->draw(gameText);
 }
