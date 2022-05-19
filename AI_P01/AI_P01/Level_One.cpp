@@ -15,6 +15,7 @@ Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window)
 {
 	window = _window;
 	game = _gameClass;
+
 }
 
 void Level_One::Start()
@@ -22,6 +23,12 @@ void Level_One::Start()
 
 	// set fps limit
 	window->setFramerateLimit(60);
+
+	GameObject_Rectangle* bg = new GameObject_Rectangle(window, this);
+	bg->SetPosition(sf::Vector2f(Utils::WindowWidth / 2, Utils::WindowHeight / 2));
+	bg->AddSprite("Resources/Textures/Grass.png");
+	bg->SetSize(sf::Vector2f(Utils::WindowWidth, Utils::WindowHeight));
+	AddSceneObject(bg);
 
 	Base* base = new Base(window, this);
 	AddSceneObject(base);
