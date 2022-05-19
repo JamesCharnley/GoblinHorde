@@ -14,6 +14,16 @@ WeaponUpgrade::WeaponUpgrade(sf::RenderWindow* _window, Scene* _scene)
     SetCollisionRadius(GetRadius());
 }
 
+bool WeaponUpgrade::CostsGold()
+{
+    return true;
+}
+
+int WeaponUpgrade::GetPrice(Player* _player)
+{
+    return 100;
+}
+
 bool WeaponUpgrade::InRange(Player* _player)
 {
     if (SFML_VectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
@@ -36,4 +46,21 @@ bool WeaponUpgrade::HasActionText()
 std::string WeaponUpgrade::GetActionText()
 {
     return actionText;
+}
+
+bool WeaponUpgrade::CanInteract(Player* _player)
+{
+    if (_player->GetGold() >= GetPrice(_player))
+    {
+        return true;
+    }
+    return false;
+}
+
+void WeaponUpgrade::Interact(Player* _player)
+{
+    if (CanInteract(_player))
+    {
+        _player->RemoveGold(GetPrice(_player));
+    }
 }
