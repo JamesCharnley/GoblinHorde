@@ -20,6 +20,7 @@ Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner) :
 
 void Enemy::Update(float _deltatime)
 {
+	damageTimer -= _deltatime;
 	int length = (int)players.size();
 
 	float shortestDist = 0;
@@ -44,6 +45,15 @@ void Enemy::Update(float _deltatime)
 		velocity = SFML_VectorMath::Clamp(velocity);
 
 		Move(velocity * (moveSpeed * _deltatime));
+
+		//check if player is in range
+		if (damageTimer <= 0.0f && closestPlayer->GetCollisionRadius() + GetCollisionRadius() >= shortestDist - attackRange)
+		{
+			//damage the player and reset timer
+			closestPlayer->TakeDamage(damage);
+			damageTimer = damageIntervial;
+			
+		}
 	}
 }
 
@@ -54,7 +64,6 @@ void Enemy::AddPlayer(Player* _player)
 
 void Enemy::TakeDamage(int _amount, Character* _player)
 {
-	
 	currentHealth -= _amount;
 
 	if (currentHealth <= 0)

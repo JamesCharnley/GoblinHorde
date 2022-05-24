@@ -52,14 +52,14 @@ void Player::Update(float _deltatime)
 
 	if (playerNum == 1)
 	{
-		scene->GetUI()->getPlayer1Stats()->UpdateHealth(0);
+		scene->GetUI()->getPlayer1Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer1Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer1Stats()->UpdateAmmo(0);
 	}
 
 	else if (playerNum == 2)
 	{
-		scene->GetUI()->getPlayer2Stats()->UpdateHealth(0);
+		scene->GetUI()->getPlayer2Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer2Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer2Stats()->UpdateAmmo(0);
 	}

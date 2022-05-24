@@ -23,5 +23,12 @@ protected:
     class EnemySpawner* spawner = nullptr;
 
     int goldReward = 100;
+
+private:
+    float damageTimer = 0.0f;
+    float damageIntervial = 1.0f;
+
+    int damage = 5;
+    float attackRange = 3.0f;
 };
 
