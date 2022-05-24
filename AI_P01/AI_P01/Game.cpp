@@ -62,6 +62,11 @@ void Game::ChangeScene(std::string _name)
 	newScene = true;
 }
 
+void Game::Exit()
+{
+	window->close();
+}
+
 void Game::CreateGameWindow()
 {
 	//Store RenderWindow in GameWindow ptr

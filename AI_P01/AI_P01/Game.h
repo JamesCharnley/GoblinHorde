@@ -16,6 +16,8 @@ public:
 	// call to change to a new scene. Code must be added to the function to tell it what Scene.h class should be loaded with the string
 	void ChangeScene(std::string _name);
 
+	void Exit();
+
 protected:
 
 	// Create SFML RenderWindow. Size of window should not be set directly in the function. Set size in Utility.h

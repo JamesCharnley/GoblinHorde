@@ -85,6 +85,11 @@ void Scene::ChangeScene(std::string _sceneName)
 	game->ChangeScene(_sceneName);
 }
 
+void Scene::Exit()
+{
+	game->Exit();
+}
+
 GoblinHordeUI* Scene::GetUI() // coding convention issue
 {
 	return userInterface;

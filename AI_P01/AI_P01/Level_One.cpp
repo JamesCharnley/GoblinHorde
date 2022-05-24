@@ -10,6 +10,7 @@
 #include "Health_PickUp.h"
 #include "WeaponUpgrade.h"
 #include "WeaponPurchase.h"
+#include "Button.h"
 
 Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window) 
 {

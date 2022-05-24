@@ -1,10 +1,14 @@
 #include "Level_One.h"
+#include "MainMenu.h"
 #include "GoblinHorde.h"
 
 GoblinHorde::GoblinHorde()
 {
 	// set start scene name
-	defaultStartScene = "Level_One";
+	// Original one So close to finishing this
+	//defaultStartScene = "Level_One";
+
+	defaultStartScene = "Main_Menu";
 
 	// initialize defaults
 	currentScene = nullptr;
@@ -22,4 +26,13 @@ void GoblinHorde::LoadScene(std::string _sceneName)
 		currentScene = new Level_One(this, window);
 		currentScene->Start();
 	}
+
+	
+	if (_sceneName == "Main_Menu")
+	{
+		currentScene = new MainMenu(this, window);
+		currentScene->Start();
+	}
+
+	
 }

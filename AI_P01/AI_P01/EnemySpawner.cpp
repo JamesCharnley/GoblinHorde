@@ -2,6 +2,10 @@
 #include "Collider.h"
 #include "Scene.h"
 #include "EnemySpawner.h"
+#include "GoblinWeak.h"
+#include "GoblinNormal.h"
+#include <stdlib.h>
+#include <time.h>
 
 EnemySpawner::EnemySpawner(sf::RenderWindow* _window, Scene* _scene)
 {
@@ -37,7 +41,23 @@ void EnemySpawner::AddPlayer(Player* _player)
 
 void EnemySpawner::SpawnEnemy(sf::Vector2f _position)
 {
-	Enemy* enemy = new Enemy(window, scene, this);
+
+	//Spawns an enemy based on the random generated number
+	srand(time(NULL));
+
+	float randomNum = rand() % 10 + 1;
+	Enemy* enemy = nullptr;
+
+	if (randomNum < 5)
+	{
+		enemy = new GoblinWeak(window, scene, this);
+	}
+
+	else
+	{
+		enemy = new GoblinNormal(window, scene, this);
+	}
+	
 	enemy->SetRadius(25.0f);
 	enemy->SetCollisionRadius(25.0f);
 	enemy->GetCollider()->SetCollisionType(ECollisionType::Block);

@@ -26,8 +26,6 @@ void WaveManager::AddSpawn(Spawn* _spawn)
 void WaveManager::Update(float _deltatime)
 {
 	//Updates the wave display
-	//scene->GetUI()->setCurrentWave(currentWave);
-	//scene->GetUI()->setNumberOfEnemies(currentEnemyCount);
 	scene->GetUI()->getWaveDisplay()->UpdateWaveNum(currentWave);
 	scene->GetUI()->getWaveDisplay()->UpdateEnemiesNum(currentEnemyCount);
 

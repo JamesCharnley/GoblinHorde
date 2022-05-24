@@ -6,7 +6,7 @@
 Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
 	moveSpeed = 100.0f;
-	circle.setFillColor(sf::Color::Red);
+	//circle.setFillColor(sf::Color::Red);
 	AddCollider(ECollisionType::Block);
 }
 
@@ -14,7 +14,7 @@ Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner) :
 {
 	moveSpeed = 150.0f;
 	spawner = _spawner;
-	circle.setFillColor(sf::Color::Red);
+	//circle.setFillColor(sf::Color::Red);
 	AddCollider(ECollisionType::Block);
 }
 
