@@ -3,7 +3,6 @@
 #include "Collider.h"
 #include "Scene.h"
 #include "GoblinHordeUI.h"
-#include "Player.h"
 
 Scene::Scene() 
 {
@@ -43,8 +42,11 @@ void Scene::Update(float _deltaTime)
 			sceneObjects[i]->Render();
 		}
 
-		if(window != nullptr)
-		userInterface->Render(window);
+		if (window != nullptr)
+		{
+			userInterface->Render(window);
+		}
+		
 		CollisionCheck();
 		
 	}
@@ -87,16 +89,12 @@ void Scene::ChangeScene(std::string _sceneName)
 	game->ChangeScene(_sceneName);
 }
 
-void Scene::Exit()
-{
-	game->Exit();
-}
+
 
 GoblinHordeUI* Scene::GetUI() // coding convention issue
 {
 	return userInterface;
 }
-
 
 
 

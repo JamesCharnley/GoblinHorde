@@ -26,10 +26,9 @@ public:
 	//Calls ChangeScene() in CGame(), CGameObject() classes do not have access to CGame() class so they will call this funcion
 	void ChangeScene(std::string _sceneName);
 
-	//Calls Exit() in CGame()
-	void Exit();
 
 	class GoblinHordeUI* GetUI();
+	
 
 
 protected:

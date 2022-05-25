@@ -7,20 +7,23 @@ class Level_One :
 public:
 
 	// custom constructor: Takes ref to Game() class and sf::RenderWindow
-    Level_One(class Game* _gameClass, sf::RenderWindow* _window);
+    Level_One(class Game* _gameClass, sf::RenderWindow* _window, int _numberOfPlayers);
 
 	// Start override: Create all objects for this scene before starting the update
 	virtual void Start() override;
 
 	virtual void Update(float _dtime) override;
 
+	
 
 private:
 
+	
+	
 	// triggered when player runs out of birds or all pigs are dead
 	bool isGameOver = false;
 
-
+	int numberOfPlayers = 1;
 
 	
 };

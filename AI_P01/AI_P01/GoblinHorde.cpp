@@ -23,7 +23,7 @@ void GoblinHorde::LoadScene(std::string _sceneName)
 
 	if (_sceneName == "Level_One")
 	{
-		currentScene = new Level_One(this, window);
+		currentScene = new Level_One(this, window, numberOfPlayers);
 		currentScene->Start();
 	}
 

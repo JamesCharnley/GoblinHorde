@@ -14,7 +14,7 @@ void Quit_Button::Update(float _deltatime)
 
 		if (rectangle.getGlobalBounds().contains(mousePos))
 		{
-			scene->Exit();
+			
 		}
 	}
 }

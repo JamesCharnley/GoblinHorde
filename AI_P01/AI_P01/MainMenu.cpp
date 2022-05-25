@@ -88,10 +88,10 @@ void MainMenu::ButtonAction(DisplayMode _mode)
 		ActivateModeSelectionDisplay();
 		break;
 	case DisplayMode::SinglePlayer:
-		ClearMenu();
+		AddBackButton();
 		break;
 	case DisplayMode::MultiPlayer:
-		ClearMenu();
+		AddBackButton();
 		break;
 	case DisplayMode::PlayReady:
 		ActivatePlayReadyDisplay();
@@ -104,10 +104,15 @@ void MainMenu::ButtonAction(DisplayMode _mode)
 void MainMenu::ClearMenu()
 {
 	DestroySceneObject(quitButton);
+	quitButton = nullptr;
 	DestroySceneObject(backButton);
+	backButton = nullptr;
 	DestroySceneObject(singleplayerButton);
+	singleplayerButton = nullptr;
 	DestroySceneObject(multiplayerButton);
+	multiplayerButton = nullptr;
 	DestroySceneObject(startButton);
+	startButton = nullptr;
 	messageText->SetText(" ");
 }
 
@@ -116,8 +121,8 @@ void MainMenu::ActivateDefaultDisplay()
 	ClearMenu();
 	quitButton = new Quit_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.75f));
 	AddSceneObject(quitButton);
-	Title_Button* title = new Title_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.25f));
-	AddSceneObject(title);
+	//Title_Button* title = new Title_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.25f));
+	//AddSceneObject(title);
 	singleplayerButton = new SinglePlayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.3f, Utils::WindowHeight * 0.5f));
 	AddSceneObject(singleplayerButton);
 	multiplayerButton = new MultiplayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.6f, Utils::WindowHeight * 0.5f));
@@ -133,20 +138,21 @@ void MainMenu::ActivateSinglePlayerDisplay()
 {
 	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
 	AddSceneObject(startButton);
-
-	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.75f, Utils::WindowHeight * 0.25f));
-	AddSceneObject(backButton);
 }
 
 void MainMenu::ActivateMultiplayerDisplay()
 {
 	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
 	AddSceneObject(startButton);
-
-	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.75f, Utils::WindowHeight * 0.25f));
-	AddSceneObject(backButton);
 }
 
 void MainMenu::ActivatePlayReadyDisplay()
 {
+}
+
+void MainMenu::AddBackButton()
+{
+	ClearMenu();
+	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.75f, Utils::WindowHeight * 0.25f));
+	AddSceneObject(backButton);
 }

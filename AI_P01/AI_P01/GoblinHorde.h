@@ -8,6 +8,8 @@ public:
 
     GoblinHorde();
 
+	int numberOfPlayers = 1;
+
 protected:
 
 	//If NewScene is set to true, this function will be called at the end of the current whie loop
