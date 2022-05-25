@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "Scene.h"
 #include "GoblinHordeUI.h"
+#include "Player.h"
 
 Scene::Scene() 
 {
@@ -44,11 +45,11 @@ void Scene::Update(float _deltaTime)
 
 		if(window != nullptr)
 		userInterface->Render(window);
-			
+		CollisionCheck();
 		
 	}
 	window->display();
-	CollisionCheck();
+	
 	//Add/Destroy any CGameObjects in queues
 	ClearAddSceneObjectQueue();
 	ClearDestroySceneObjectQueue();
@@ -56,6 +57,7 @@ void Scene::Update(float _deltaTime)
 
 void Scene::DestroySceneObject(GameObject* _object)
 {
+	if (_object == nullptr) return;
 	// check if object already exists in queue
 	int length = (int)destroySceneObjectQueue.size();
 	for (int i = 0; i < length; i++)
@@ -94,6 +96,10 @@ GoblinHordeUI* Scene::GetUI() // coding convention issue
 {
 	return userInterface;
 }
+
+
+
+
 
 void Scene::ClearDestroySceneObjectQueue()
 {

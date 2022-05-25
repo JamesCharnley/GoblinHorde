@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackButton.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="BaseCreator.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObject_Circle.cpp" />
     <ClCompile Include="GameObject_Rectangle.cpp" />
+    <ClCompile Include="GameObject_Text.cpp" />
     <ClCompile Include="GameText.cpp" />
     <ClCompile Include="GoblinHorde.cpp" />
     <ClCompile Include="GoblinHordeUI.cpp" />
@@ -167,6 +169,7 @@
     <ClCompile Include="Level_One.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MultiplayerModeButton.cpp" />
     <ClCompile Include="PickUp.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerStats.cpp" />
@@ -174,6 +177,7 @@
     <ClCompile Include="Quit_Button.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SFML_VectorMath.cpp" />
+    <ClCompile Include="SinglePlayerModeButton.cpp" />
     <ClCompile Include="SpawnPoint.cpp" />
     <ClCompile Include="Sprite_Component.cpp" />
     <ClCompile Include="Start_Button.cpp" />
@@ -186,6 +190,7 @@
     <ClCompile Include="WeaponUpgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackButton.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="BaseCreator.h" />
     <ClInclude Include="Button.h" />
@@ -197,6 +202,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObject_Circle.h" />
     <ClInclude Include="GameObject_Rectangle.h" />
+    <ClInclude Include="GameObject_Text.h" />
     <ClInclude Include="GameText.h" />
     <ClInclude Include="GoblinHorde.h" />
     <ClInclude Include="GoblinHordeUI.h" />
@@ -208,6 +214,7 @@
     <ClInclude Include="ITakeDamage.h" />
     <ClInclude Include="Level_One.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MultiplayerModeButton.h" />
     <ClInclude Include="PickUp.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerStats.h" />
@@ -215,6 +222,7 @@
     <ClInclude Include="Quit_Button.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SFML_VectorMath.h" />
+    <ClInclude Include="SinglePlayerModeButton.h" />
     <ClInclude Include="SpawnPoint.h" />
     <ClInclude Include="Sprite_Component.h" />
     <ClInclude Include="Start_Button.h" />

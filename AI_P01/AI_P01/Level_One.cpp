@@ -54,6 +54,7 @@ void Level_One::Start()
 	player1->SetCollisionRadius(25.0f);
 	player1->GetCollider()->SetCollisionType(ECollisionType::Block);
 	player1->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 - player1->GetRadius() * 3, Utils::WindowHeight / 2));
+	player1->SetSpawnPoint(player1->GetPosition());
 	AddSceneObject(player1);
 
 	Player* player2 = new Player(window, this);
@@ -64,6 +65,7 @@ void Level_One::Start()
 	player2->SetCollisionRadius(25.0f);
 	player2->GetCollider()->SetCollisionType(ECollisionType::Block);
 	player2->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 + player1->GetRadius() * 3, Utils::WindowHeight / 2));
+	player2->SetSpawnPoint(player2->GetPosition());
 	AddSceneObject(player2);
 
 	WaveManager* spawner = new WaveManager(window, this);
@@ -75,5 +77,11 @@ void Level_One::Start()
 	
 	//Start scene
 	Scene::Start();
+}
+
+void Level_One::Update(float _dtime)
+{
+	Scene::Update(_dtime);
+	
 }
 

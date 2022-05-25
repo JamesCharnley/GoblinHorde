@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <random>
+#include "Player.h"
 
 WaveManager::~WaveManager()
 {
@@ -71,4 +72,15 @@ void WaveManager::NextWave()
 	std::cout << "Wave enemies " << totalWaveEnemies << "\n";
 	std::cout << "Max on screen enemies " << maximumEnemies << "\n";
 	std::cout << "Spawn interval " << spawnInterval << "\n\n";
-}
+
+	
+	
+	for (std::vector<Player*>::iterator it = players.begin(); it < players.end(); it++)
+	{
+		Player* player = *it;
+		if (player->isDead)
+		{
+			player->Respawn();
+		}
+	}
+}  

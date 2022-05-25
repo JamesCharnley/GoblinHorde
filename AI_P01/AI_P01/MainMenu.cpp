@@ -3,7 +3,11 @@
 #include "Start_Button.h"
 #include "Quit_Button.h"
 #include "Title_Button.h"
-
+#include "SinglePlayerModeButton.h"
+#include "MultiplayerModeButton.h"
+#include "BackButton.h"
+#include "Utility.h"
+#include "GameObject_Text.h"
 MainMenu::MainMenu(Game* _gameClass, sf::RenderWindow* _window)
 {
 	window = _window;
@@ -15,15 +19,134 @@ void MainMenu::Start()
 
 	window->setFramerateLimit(60);
 
-	//This is where all the buttons are going to appear for the menu
-	Start_Button* start = new Start_Button(window, this, sf::Vector2f(850, 500));
-	AddSceneObject(start);
+	displayMode = DisplayMode::DefaultMode;
 
-	Quit_Button* quit = new Quit_Button(window, this, sf::Vector2f(850, 700));
-	AddSceneObject(quit);
+	messageText = new GameObject_Text(window, this, "");
+	AddSceneObject(messageText);
 
-	Title_Button* title = new Title_Button(window, this, sf::Vector2f(800, 300));
-	AddSceneObject(title);
+	ActivateDefaultDisplay();
+
+	
 
 	Scene::Start();
+}
+
+void MainMenu::Update(float _dtime)
+{
+	Scene::Update(_dtime);
+
+
+	if (displayMode == DisplayMode::SinglePlayer)
+	{
+		if (sf::Joystick::isConnected(0))
+		{
+			messageText->SetText("Controller Connected. Ready to start game.");
+			if (canStartGame == false)
+			{
+				canStartGame = true;
+				ActivateSinglePlayerDisplay();
+			}
+			
+		}
+		else
+		{
+			messageText->SetText("No Controller Detected. Controls default to keyboard.");
+			canStartGame = false;
+		}
+	}
+	if (displayMode == DisplayMode::MultiPlayer)
+	{
+		if (sf::Joystick::isConnected(0) && sf::Joystick::isConnected(1))
+		{
+			messageText->SetText("Two Controllers Connected. Ready to start game.");
+			if (canStartGame == false)
+			{
+				canStartGame = true;
+				ActivateMultiplayerDisplay();
+			}
+
+		}
+		else
+		{
+			messageText->SetText("Not Enough Controllers Detected.");
+			canStartGame = false;
+		}
+	}
+}
+
+
+void MainMenu::ButtonAction(DisplayMode _mode)
+{
+	displayMode = _mode;
+
+	switch (displayMode)
+	{
+	case DisplayMode::DefaultMode:
+		ActivateDefaultDisplay();
+		break;
+	case DisplayMode::ModeSelection:
+		ActivateModeSelectionDisplay();
+		break;
+	case DisplayMode::SinglePlayer:
+		ClearMenu();
+		break;
+	case DisplayMode::MultiPlayer:
+		ClearMenu();
+		break;
+	case DisplayMode::PlayReady:
+		ActivatePlayReadyDisplay();
+		break;
+	default:
+		break;
+	}
+}
+
+void MainMenu::ClearMenu()
+{
+	DestroySceneObject(quitButton);
+	DestroySceneObject(backButton);
+	DestroySceneObject(singleplayerButton);
+	DestroySceneObject(multiplayerButton);
+	DestroySceneObject(startButton);
+	messageText->SetText(" ");
+}
+
+void MainMenu::ActivateDefaultDisplay()
+{
+	ClearMenu();
+	quitButton = new Quit_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.75f));
+	AddSceneObject(quitButton);
+	Title_Button* title = new Title_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.25f));
+	AddSceneObject(title);
+	singleplayerButton = new SinglePlayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.3f, Utils::WindowHeight * 0.5f));
+	AddSceneObject(singleplayerButton);
+	multiplayerButton = new MultiplayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.6f, Utils::WindowHeight * 0.5f));
+	AddSceneObject(multiplayerButton);
+	
+}
+
+void MainMenu::ActivateModeSelectionDisplay()
+{
+}
+
+void MainMenu::ActivateSinglePlayerDisplay()
+{
+	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
+	AddSceneObject(startButton);
+
+	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.75f, Utils::WindowHeight * 0.25f));
+	AddSceneObject(backButton);
+}
+
+void MainMenu::ActivateMultiplayerDisplay()
+{
+	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
+	AddSceneObject(startButton);
+
+	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.75f, Utils::WindowHeight * 0.25f));
+	AddSceneObject(backButton);
+}
+
+void MainMenu::ActivatePlayReadyDisplay()
+{
 }

@@ -23,20 +23,19 @@ void Enemy::Update(float _deltatime)
 	damageTimer -= _deltatime;
 	int length = (int)players.size();
 
-	float shortestDist = 0;
+	float shortestDist = 9999;
 	for (int i = 0; i < length; i++)
 	{
 		float dist = SFML_VectorMath::GetDistance(GetPosition(), players[i]->GetPosition());
-		if (i == 0)
+		if (!players[i]->isDead)
 		{
-			shortestDist = dist;
-			closestPlayer = players[i];
+			if (dist < shortestDist)
+			{
+				shortestDist = dist;
+				closestPlayer = players[i];
+			}
 		}
-		else if (dist < shortestDist)
-		{
-			shortestDist = dist;
-			closestPlayer = players[i];
-		}
+		
 	}
 
 	if (closestPlayer)

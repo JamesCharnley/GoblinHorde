@@ -6,6 +6,7 @@
 #include "GoblinNormal.h"
 #include <stdlib.h>
 #include <time.h>
+#include "Player.h"
 
 EnemySpawner::EnemySpawner(sf::RenderWindow* _window, Scene* _scene)
 {
@@ -15,6 +16,21 @@ EnemySpawner::EnemySpawner(sf::RenderWindow* _window, Scene* _scene)
 
 void EnemySpawner::Update(float _deltatime)
 {
+	bool gameover = true;
+	for (std::vector<Player*>::iterator it = players.begin(); it < players.end(); it++)
+	{
+		Player* player = *it;
+		if (!player->isDead)
+		{
+			gameover = false;
+		}
+	}
+	if (gameover)
+	{
+		// trigger gameover
+		scene->ChangeScene("Main_Menu");
+		return;
+	}
 	if (spawnTimer <= 0)
 	{
 		if (currentEnemyCount < maximumEnemies)

@@ -31,6 +31,7 @@ public:
 
 	class GoblinHordeUI* GetUI();
 
+
 protected:
 
 	Scene();

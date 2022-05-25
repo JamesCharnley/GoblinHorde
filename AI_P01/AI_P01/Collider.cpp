@@ -14,6 +14,7 @@ Collider::Collider(GameObject* _gameObject)
 
 bool Collider::CheckForCollision(GameObject* _other)
 {
+	if (_other == nullptr) return false;
 	int ignoreLength = ignoreObjects.size();
 	for (int i = 0; i < ignoreLength; i++)
 	{
@@ -84,6 +85,7 @@ bool Collider::GetCheckForCollision()
 
 bool Collider::CheckForCollisionCircleToCircle(GameObject_Circle* _thisCircle, GameObject_Circle* _otherCircle)
 {
+	if (_thisCircle == nullptr || _otherCircle == nullptr) return false;
 	float dist = SFML_VectorMath::GetDistance(_otherCircle->GetPosition(), _thisCircle->GetPosition());
 	float combinedRadius = _otherCircle->GetCollisionRadius() + _thisCircle->GetCollisionRadius();
 

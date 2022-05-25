@@ -21,3 +21,7 @@ void Button::Render()
 
 	buttonText->Render(window);
 }
+
+Button::Button()
+{
+}

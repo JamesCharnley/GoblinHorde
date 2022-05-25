@@ -7,7 +7,9 @@ public:
 	Button(sf::Vector2f position, std::string text, sf::RenderWindow* _window, Scene* _scene);
 	virtual void Render() override;
 
-private:
+protected:
+
+	Button();
 	class GameText* buttonText;
 };
 

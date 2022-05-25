@@ -6,6 +6,7 @@
 #include <vector>
 #include "Base.h"
 
+
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
 	weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Glock));
@@ -44,6 +45,7 @@ Player::~Player()
 
 void Player::Update(float _deltatime)
 {
+	if (isDead) return;
 	Character::Update(_deltatime);
 	if (equippedWeapon != nullptr)
 	{
@@ -118,6 +120,7 @@ void Player::Update(float _deltatime)
 
 void Player::Render()
 {
+	
 	GameObject_Circle::Render();
 	window->draw(actionText);
 	if (equippedWeapon != nullptr)
@@ -241,6 +244,29 @@ void Player::OnCollision(GameObject* _other)
 	{
 		base = isBase;
 	}
+}
+
+void Player::TakeDamage(int _amount)
+{
+	currentHealth -= _amount;
+
+	if (currentHealth <= 0)
+	{
+		isDead = true;
+
+	}
+}
+
+void Player::Respawn()
+{
+	currentHealth = maxHealth;
+	SetPosition(spawnpoint);
+	isDead = false;
+}
+
+void Player::SetSpawnPoint(sf::Vector2f _pos)
+{
+	spawnpoint = _pos;
 }
 
 void Player::CheckForInput(int _player)
