@@ -254,6 +254,13 @@ void Player::TakeDamage(int _amount)
 
 	if (currentHealth <= 0)
 	{
+		// Player Death SFX.
+		if (!buffer.loadFromFile("Resources/SFX/PlayerDie.wav"))
+		{
+
+		}
+		PlayerDieSFX.setBuffer(buffer);
+		PlayerDieSFX.play();
 		isDead = true;
 
 	}
