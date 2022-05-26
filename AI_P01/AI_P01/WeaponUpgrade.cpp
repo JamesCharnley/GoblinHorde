@@ -1,4 +1,4 @@
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 #include "Player.h"
 #include "WeaponUpgrade.h"
 
@@ -27,7 +27,7 @@ int WeaponUpgrade::GetPrice(Player* _player)
 bool WeaponUpgrade::InRange(Player* _player)
 {
     //return false if player already has this weapon so text isn't shown
-    if (SFML_VectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
+    if (SFMLVectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
     {
         return true;
     }

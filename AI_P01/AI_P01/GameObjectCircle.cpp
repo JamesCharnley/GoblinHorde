@@ -1,4 +1,4 @@
-#include "Sprite_Component.h"
+#include "SpriteComponent.h"
 #include <iostream>
 #include "GameObjectCircle.h"
 

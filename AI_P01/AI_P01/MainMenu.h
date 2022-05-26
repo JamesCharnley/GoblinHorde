@@ -28,9 +28,9 @@ private:
 
 	DisplayMode displayMode;
 
-	class Start_Button* startButton;
+	class StartButton* startButton;
 	class SinglePlayerModeButton* singleplayerButton;
-	class Quit_Button* quitButton;
+	class QuitButton* quitButton;
 	class MultiplayerModeButton* multiplayerButton;
 	class BackButton* backButton;
 

@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "GameObjectCircle.h"
 #include "GameObjectRectangle.h"
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 #include "Collider.h"
 
 Collider::Collider(GameObject* _gameObject)
@@ -45,13 +45,13 @@ bool Collider::CheckForCollision(GameObject* _other)
 		return CheckForCollisionCircleToRectangle(thisCircle, otherRectangle);
 	}
 
-	float dist = SFML_VectorMath::GetDistance(_other->GetPosition(), gameObject->GetPosition());
+	float dist = SFMLVectorMath::GetDistance(_other->GetPosition(), gameObject->GetPosition());
 	float combinedRadius = _other->GetCollisionRadius() + gameObject->GetCollisionRadius();
 	
 	float intersectionSize = combinedRadius - dist;
 
 	sf::Vector2f directionToOther = _other->GetPosition() - gameObject->GetPosition();
-	directionToOther = SFML_VectorMath::Clamp(directionToOther);
+	directionToOther = SFMLVectorMath::Clamp(directionToOther);
 
 	if (dist < combinedRadius)
 	{
@@ -86,13 +86,13 @@ bool Collider::GetCheckForCollision()
 bool Collider::CheckForCollisionCircleToCircle(GameObjectCircle* _thisCircle, GameObjectCircle* _otherCircle)
 {
 	if (_thisCircle == nullptr || _otherCircle == nullptr) return false;
-	float dist = SFML_VectorMath::GetDistance(_otherCircle->GetPosition(), _thisCircle->GetPosition());
+	float dist = SFMLVectorMath::GetDistance(_otherCircle->GetPosition(), _thisCircle->GetPosition());
 	float combinedRadius = _otherCircle->GetCollisionRadius() + _thisCircle->GetCollisionRadius();
 
 	float intersectionSize = combinedRadius - dist;
 
 	sf::Vector2f directionToOther = _otherCircle->GetPosition() - _thisCircle->GetPosition();
-	directionToOther = SFML_VectorMath::Clamp(directionToOther);
+	directionToOther = SFMLVectorMath::Clamp(directionToOther);
 
 	if (dist < combinedRadius)
 	{
@@ -137,7 +137,7 @@ bool Collider::CheckForCollisionCircleToRectangle(GameObjectCircle* _circle, Gam
 	if (cornerDistance_sq <= (_circle->GetRadius() * _circle->GetRadius()))
 	{
 		sf::Vector2f directionToOther = _other->GetPosition() - gameObject->GetPosition();
-		directionToOther = SFML_VectorMath::Clamp(directionToOther);
+		directionToOther = SFMLVectorMath::Clamp(directionToOther);
 
 		float intersectionSize = cornerDistance_sq - (_circle->GetRadius() * _circle->GetRadius());
 

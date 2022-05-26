@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Sprite_Component.h"
+#include "SpriteComponent.h"
 #include "GameObjectRectangle.h"
 
 GameObjectRectangle::GameObjectRectangle()

@@ -1,8 +1,8 @@
 #include "MainMenu.h"
 #include "Button.h"
-#include "Start_Button.h"
-#include "Quit_Button.h"
-#include "Title_Button.h"
+#include "StartButton.h"
+#include "QuitButton.h"
+#include "TitleButton.h"
 #include "SinglePlayerModeButton.h"
 #include "MultiplayerModeButton.h"
 #include "BackButton.h"
@@ -154,7 +154,7 @@ void MainMenu::ClearMenu()
 void MainMenu::ActivateDefaultDisplay()
 {
 	ClearMenu();
-	quitButton = new Quit_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.75f));
+	quitButton = new QuitButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.75f));
 	AddSceneObject(quitButton);
 	//Title_Button* title = new Title_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.25f));
 	//AddSceneObject(title);
@@ -171,13 +171,13 @@ void MainMenu::ActivateModeSelectionDisplay()
 
 void MainMenu::ActivateSinglePlayerDisplay()
 {
-	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
+	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
 	AddSceneObject(startButton);
 }
 
 void MainMenu::ActivateMultiplayerDisplay()
 {
-	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
+	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
 	AddSceneObject(startButton);
 }
 

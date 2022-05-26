@@ -1,4 +1,4 @@
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 #include "Player.h"
 #include "EnemySpawner.h"
 #include "Enemy.h"
@@ -29,7 +29,7 @@ void Enemy::Update(float _deltatime)
 	float shortestDist = 9999;
 	for (int i = 0; i < length; i++)
 	{
-		float dist = SFML_VectorMath::GetDistance(GetPosition(), players[i]->GetPosition());
+		float dist = SFMLVectorMath::GetDistance(GetPosition(), players[i]->GetPosition());
 		if (!players[i]->isDead)
 		{
 			if (dist < shortestDist)
@@ -41,12 +41,12 @@ void Enemy::Update(float _deltatime)
 		
 	}
 
-	baseDistance = SFML_VectorMath::GetDistance(GetPosition(), base->GetPosition());
+	baseDistance = SFMLVectorMath::GetDistance(GetPosition(), base->GetPosition());
 
 	if (closestPlayer && baseDistance >= shortestDist)
 	{
 		velocity = closestPlayer->GetPosition() - GetPosition();
-		velocity = SFML_VectorMath::Clamp(velocity);
+		velocity = SFMLVectorMath::Clamp(velocity);
 
 		Move(velocity * (moveSpeed * _deltatime));
 
@@ -62,7 +62,7 @@ void Enemy::Update(float _deltatime)
 	else
 	{
 		velocity = base->GetPosition() - GetPosition();
-		velocity = SFML_VectorMath::Clamp(velocity);
+		velocity = SFMLVectorMath::Clamp(velocity);
 		if (baseDistance > base->GetCollisionRadius())
 		{
 			Move(velocity * (moveSpeed * _deltatime));

@@ -1,4 +1,4 @@
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 #include "Scene.h"
 #include "Player.h"
 #include "GoblinHordeUI.h"
@@ -341,9 +341,9 @@ void Player::CheckForInput(int _player)
 	rotVelocity.x = rStickX;
 	rotVelocity.y = rStickY;
 
-	rotVelocity = SFML_VectorMath::Clamp(rotVelocity);
+	rotVelocity = SFMLVectorMath::Clamp(rotVelocity);
 
-	targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
+	targetRotation = SFMLVectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
 	
 	bool isKeyboard = false;
 
@@ -378,9 +378,9 @@ void Player::CheckForInput(int _player)
 		lockRotation = false;
 	}
 
-	if (isKeyboard && SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity) != targetRotation && (velocity.x != 0 || velocity.y != 0))
+	if (isKeyboard && SFMLVectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity) != targetRotation && (velocity.x != 0 || velocity.y != 0))
 	{
-		targetRotation = SFML_VectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity);
+		targetRotation = SFMLVectorMath::DirectionToAngle(GetPosition(), GetPosition() + velocity);
 		rotationDelayTimer = rotationDelay;
 	}
 
@@ -394,7 +394,7 @@ void Player::CheckForInput(int _player)
 		}
 	}
 
-	velocity = SFML_VectorMath::Clamp(velocity);
+	velocity = SFMLVectorMath::Clamp(velocity);
 }
 
 void Player::PollInteractable()

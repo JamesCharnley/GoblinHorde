@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 #include "PickUp.h"
 
 PickUp::PickUp(sf::RenderWindow* _window, Scene* _scene)
@@ -20,7 +20,7 @@ int PickUp::GetPrice(Player* _player)
 
 bool PickUp::InRange(Player* _player)
 {
-    if (SFML_VectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
+    if (SFMLVectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
     {
         return true;
     }

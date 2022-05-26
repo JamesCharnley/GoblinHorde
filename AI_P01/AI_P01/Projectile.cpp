@@ -1,4 +1,4 @@
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 #include "Collider.h"
 #include "Weapon.h"
 #include "Scene.h"
@@ -20,8 +20,8 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 	SetRotation(_rotation);
 
 	// calculate direction it will travel
-	direction = SFML_VectorMath::AngleToDirection(GetRotation());
-	direction = SFML_VectorMath::Normalize(direction);
+	direction = SFMLVectorMath::AngleToDirection(GetRotation());
+	direction = SFMLVectorMath::Normalize(direction);
 
 	// set radius and setup collider
 	SetRadius(5.0f);

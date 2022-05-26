@@ -24,13 +24,7 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Level_One.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SFML_VectorMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GoblinHorde.cpp">
@@ -60,9 +54,6 @@
     <ClCompile Include="EnemySpawner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite_Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WaveManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -81,16 +72,10 @@
     <ClCompile Include="PickUp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StatEffect_PickUp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GoblinHordeUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Health_PickUp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WeaponUpgrade.cpp">
@@ -117,15 +102,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Start_Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Quit_Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Title_Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SinglePlayerModeButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -142,6 +118,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectRectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatEffectPickUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelOne.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPickUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QuitButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,19 +167,10 @@
     <ClInclude Include="EnemySpawner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite_Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SFML_VectorMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level_One.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
@@ -215,16 +203,10 @@
     <ClInclude Include="PickUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StatEffect_PickUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GoblinHordeUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Health_PickUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WeaponUpgrade.h">
@@ -251,15 +233,6 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Start_Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Quit_Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Title_Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SinglePlayerModeButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -276,6 +249,30 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatEffectPickUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLVectorMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelOne.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPickUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuitButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

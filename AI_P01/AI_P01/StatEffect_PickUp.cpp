@@ -1,11 +1,11 @@
-#include "StatEffect_PickUp.h"
+#include "StatEffectPickUp.h"
 
-StatEffect_PickUp::StatEffect_PickUp(sf::RenderWindow* _window, Scene* _scene)
+StatEffectPickUp::StatEffectPickUp(sf::RenderWindow* _window, Scene* _scene)
 {
 	window = _window;
 	scene = _scene;
 }
 
-StatEffect_PickUp::StatEffect_PickUp()
+StatEffectPickUp::StatEffectPickUp()
 {
 }

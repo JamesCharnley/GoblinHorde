@@ -1,6 +1,6 @@
 #include "Utility.h"
 #include "Base.h"
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 #include "Player.h"
 #include "Scene.h"
 
@@ -71,7 +71,7 @@ void Base::TakeDamage(int _amount, Character* _player)
 
 bool Base::InRange(Player* _player)
 {
-	if (SFML_VectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
+	if (SFMLVectorMath::GetDistance(_player->GetPosition(), GetPosition()) <= GetCollisionRadius() + _player->GetCollisionRadius())
 	{
 		return true;
 	}

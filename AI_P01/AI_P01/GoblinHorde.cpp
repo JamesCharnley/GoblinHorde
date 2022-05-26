@@ -1,4 +1,4 @@
-#include "Level_One.h"
+#include "LevelOne.h"
 #include "MainMenu.h"
 #include "GoblinHorde.h"
 
@@ -23,7 +23,7 @@ void GoblinHorde::LoadScene(std::string _sceneName)
 
 	if (_sceneName == "Level_One")
 	{
-		currentScene = new Level_One(this, window, numberOfPlayers);
+		currentScene = new LevelOne(this, window, numberOfPlayers);
 		currentScene->Start();
 	}
 

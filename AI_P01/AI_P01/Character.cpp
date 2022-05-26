@@ -1,4 +1,4 @@
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 #include "Weapon.h"
 #include "Scene.h"
 #include "Character.h"

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Scene.h"
 #include "Collider.h"
-#include "Sprite_Component.h"
+#include "SpriteComponent.h"
 #include "GameObject.h"
 
 GameObject::GameObject()
@@ -104,7 +104,7 @@ void GameObject::AddSprite(const char* _filePath)
 	// load texture file
 	texture.loadFromFile(_filePath);
 	// create sprite class and give it the loaded texture
-	sprite = new Sprite_Component(this, texture);
+	sprite = new SpriteComponent(this, texture);
 }
 
 void GameObject::SetColor(sf::Color _color)

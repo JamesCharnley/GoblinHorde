@@ -1,6 +1,6 @@
 #include "SpawnPoint.h"
 #include <random>
-#include "SFML_VectorMath.h"
+#include "SFMLVectorMath.h"
 
 //constructors
 SpawnLine::SpawnLine(float _startX, float _startY, float _endX, float _endY) : startPoint(_startX, _startY), endPoint(_endX, _endY), dist(new std::uniform_real_distribution<float>(0.0f, 1.0f))
@@ -45,7 +45,7 @@ sf::Vector2f SpawnPoint::GetSpawnPosition() const
 sf::Vector2f SpawnLine::GetSpawnPosition() const
 {
 	float t = (*dist)(*rng);
-	return SFML_VectorMath::Lerp(startPoint, endPoint, t);
+	return SFMLVectorMath::Lerp(startPoint, endPoint, t);
 }
 
 //returns a random point on a random line

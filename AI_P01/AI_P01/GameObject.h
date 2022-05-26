@@ -86,6 +86,6 @@ protected:
 	// sprite overlay
 	sf::Texture texture;
 
-	class Sprite_Component* sprite;
+	class SpriteComponent* sprite;
 };
 
