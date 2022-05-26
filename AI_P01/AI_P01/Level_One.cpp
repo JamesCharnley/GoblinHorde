@@ -12,6 +12,7 @@
 #include "WeaponPurchase.h"
 #include "Button.h"
 #include "GoblinHordeUI.h"
+#include <SFML/Audio.hpp>
 
 Level_One::Level_One(class Game* _gameClass, sf::RenderWindow* _window, int _numberOfPlayers = 1)
 {
@@ -80,6 +81,15 @@ void Level_One::Start()
 	
 	spawner->AddSpawn(new SpawnBorder(sf::Vector2f(), sf::Vector2f(window->getSize().x, 0.0f), sf::Vector2f(0.0f, window->getSize().y), sf::Vector2f(window->getSize().x, window->getSize().y)));
 	AddSceneObject(spawner);
+
+	// Set Level Music to loop.
+	if (!music.openFromFile("Resources/SFX/Boss.ogg"))
+	{
+
+	}
+	music.setVolume(10.0f);
+	music.play();
+	music.setLoop(true);
 	
 	//Start scene
 	Scene::Start();

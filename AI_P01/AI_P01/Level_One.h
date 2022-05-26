@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include <SFML/Audio.hpp>
 
 class Level_One :
     public Scene
@@ -22,7 +23,7 @@ private:
 	
 	// triggered when player runs out of birds or all pigs are dead
 	bool isGameOver = false;
-
+	sf::Music music;
 	int numberOfPlayers = 1;
 
 	
