@@ -14,6 +14,6 @@ GoblinNormal::GoblinNormal(sf::RenderWindow* _window, Scene* _scene, EnemySpawne
 
 	sf::Texture* text;
 	text = new sf::Texture();
-	text->loadFromFile("Resources/Textures/EnemyPH.png");
+	text->loadFromFile("Resources/Textures/Orc.png");
 	circle.setTexture(text);
 }

@@ -83,6 +83,7 @@ void Level_One::Start()
 	AddSceneObject(spawner);
 
 	// Set Level Music to loop.
+
 	if (!music.openFromFile("Resources/SFX/Boss.ogg"))
 	{
 

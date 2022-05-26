@@ -14,6 +14,6 @@ GoblinWeak::GoblinWeak(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _
 	
 	sf::Texture* text;
 	text = new sf::Texture();
-	text->loadFromFile("Resources/Textures/EnemyPHWeak.png");
+	text->loadFromFile("Resources/Textures/Orc.png");
 	circle.setTexture(text);
 }
