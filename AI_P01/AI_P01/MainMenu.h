@@ -47,5 +47,10 @@ private:
 	void ActivatePlayReadyDisplay();
 	void AddBackButton();
 
+	#ifdef _DEBUG
+		bool isDebug = true;
+	#else
+		bool isDebug = false;
+	#endif
 };
 

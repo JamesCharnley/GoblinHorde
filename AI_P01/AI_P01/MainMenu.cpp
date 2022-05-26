@@ -10,6 +10,10 @@
 #include "GameObject_Text.h"
 MainMenu::MainMenu(Game* _gameClass, sf::RenderWindow* _window)
 {
+	if (isDebug)
+	{
+		std::cout << "**Debug build**\n";
+	}
 	window = _window;
 	game = _gameClass;
 }
@@ -64,6 +68,17 @@ void MainMenu::Update(float _dtime)
 			{
 				canStartGame = true;
 				numberOfPlayers = 2;
+				ActivateMultiplayerDisplay();
+			}
+
+		}
+		else if (isDebug)
+		{
+			messageText->SetText("Debug build: skipping controller requirement");
+			if (canStartGame == false)
+			{
+				canStartGame = true;
+				numberOfPlayers = 2; 
 				ActivateMultiplayerDisplay();
 			}
 

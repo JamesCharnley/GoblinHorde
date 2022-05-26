@@ -6,11 +6,11 @@ class Spawn;
 class WaveManager : public EnemySpawner
 {
 public:
-	WaveManager(sf::RenderWindow* _window, Scene* _scene, class Base* _base) : EnemySpawner(_window, _scene, _base) {};
+	WaveManager(sf::RenderWindow* _window, Scene* _scene, class Base* _base, int _playerCount = 1);
 	~WaveManager();
 
-	// Adds a Spawn pointer to spawnPoints vector
-	void AddSpawn(Spawn* _spawn);
+	//ads a spawn pointer to spawnPoints vector
+	void AddSpawn(Spawn* _pSpawn);
 
 	virtual void Update(float _deltatime) override;
 
@@ -19,7 +19,7 @@ protected:
 
 private:
 
-	// Updating variables for the next wave of enemies
+	//updating variables for the next wave of enemies
 	void NextWave();
 
 	std::vector<Spawn*> spawnPoints;
@@ -33,5 +33,7 @@ private:
 	int totalWaveEnemies = 4;
 	int totalWaveEnemiesIncrement = 3;
 	int maximumEnemiesIncrement = 2;
+
+	const float DIFFICULTY_MODIFIER;
 };
 

@@ -8,6 +8,15 @@
 #include <random>
 #include "Player.h"
 
+WaveManager::WaveManager(sf::RenderWindow* _window, Scene* _scene, Base* _base, int _playerCount) 
+	: EnemySpawner(_window, _scene, _base), DIFFICULTY_MODIFIER((float)_playerCount)
+{
+	//scale difficulty by player count
+	totalWaveEnemies *= DIFFICULTY_MODIFIER;
+	totalWaveEnemiesIncrement *= DIFFICULTY_MODIFIER;
+	maximumEnemiesIncrement *= DIFFICULTY_MODIFIER;
+}
+
 WaveManager::~WaveManager()
 {
 	srand(time(NULL));
@@ -26,7 +35,7 @@ void WaveManager::AddSpawn(Spawn* _spawn)
 
 void WaveManager::Update(float _deltatime)
 {
-	//Updates the wave display
+	//updates the wave display
 	scene->GetUI()->getWaveDisplay()->UpdateWaveNum(currentWave);
 	scene->GetUI()->getWaveDisplay()->UpdateEnemiesNum(currentEnemyCount);
 
