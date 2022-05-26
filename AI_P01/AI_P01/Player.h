@@ -2,6 +2,7 @@
 #include "Interactable.h"
 #include "Character.h"
 #include "Weapon.h"
+#include <SFML/Audio.hpp>
 
 struct FInputs
 {
@@ -91,5 +92,8 @@ private:
     FInputs playerTwoPreset = { sf::Keyboard::Up, sf::Keyboard::Down, sf::Keyboard::Left, sf::Keyboard::Right, sf::Keyboard::RControl, sf::Keyboard::Enter };
 
     sf::Vector2f spawnpoint;
+
+    sf::Sound PlayerDieSFX;
+    sf::SoundBuffer buffer;
 };
 

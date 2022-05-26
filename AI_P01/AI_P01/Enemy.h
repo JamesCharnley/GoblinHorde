@@ -12,6 +12,8 @@ Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.
 
 #pragma once
 #include "Character.h"
+#include <SFML/Audio.hpp>
+
 class Enemy :
     public Character
 {
@@ -45,5 +47,10 @@ private:
 
     int damage = 5;
     float attackRange = 3.0f;
+
+    sf::Sound hitSFX;
+    sf::Sound goblinDieSFX;
+    sf::SoundBuffer buffer;
+ 
 };
 

@@ -88,8 +88,24 @@ void Enemy::TakeDamage(int _amount, Character* _player)
 {
 	currentHealth -= _amount;
 
+	// Goblin Hit SFX.
+	if (!buffer.loadFromFile("Resources/SFX/Hit.wav"))
+	{
+
+	}	
+	hitSFX.setBuffer(buffer);
+	hitSFX.play();
+
 	if (currentHealth <= 0)
 	{
+		// Goblin Die SFX.
+		if (!buffer.loadFromFile("Resources/SFX/GoblinDie.wav"))
+		{
+
+		}
+		goblinDieSFX.setBuffer(buffer);
+		goblinDieSFX.play();
+
 		Player* player = dynamic_cast<Player*>(_player);
 		if (player)
 		{

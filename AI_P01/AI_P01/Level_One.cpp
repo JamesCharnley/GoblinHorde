@@ -88,7 +88,7 @@ void Level_One::Start()
 	{
 
 	}
-	music.setVolume(10.0f);
+	music.setVolume(5.0f);
 	music.play();
 	music.setLoop(true);
 	
