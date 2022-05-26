@@ -105,6 +105,7 @@ void MainMenu::ButtonAction(DisplayMode _mode)
 
 void MainMenu::ClearMenu()
 {
+	canStartGame = false;
 	DestroySceneObject(quitButton);
 	quitButton = nullptr;
 	DestroySceneObject(backButton);
