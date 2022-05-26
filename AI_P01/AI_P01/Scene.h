@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2021 Media Design School
+File Name : Scene.h
+Description : Base class of a scene, implementation for drawing and updating a vector of GameObjects
+Author : Devon Millar, James Charnley, Sam Chandler, Mahalon
+Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.nz, mahalon.Devoe@mds.ac.nz
+**************************************************************************/
+
 #pragma once
 #include "SFML/Graphics.hpp"
 
