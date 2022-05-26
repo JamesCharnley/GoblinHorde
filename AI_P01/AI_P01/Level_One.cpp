@@ -42,12 +42,8 @@ void Level_One::Start()
 	weaponPurchase->SetPosition(sf::Vector2f(base->GetPosition().x + base->GetRadius() * 0.5f, base->GetPosition().y - base->GetRadius() * 0.5f));
 	AddSceneObject(weaponPurchase);
 
-	Health_PickUp* healthTest = new Health_PickUp(window, this);
-	healthTest->SetPosition(sf::Vector2f((float)Utils::WindowWidth / 3.0f, (float)Utils::WindowHeight / 2.0f));
-	AddSceneObject(healthTest);
-
 	WeaponUpgrade* weaponUpgrade = new WeaponUpgrade(window, this);
-	weaponUpgrade->SetPosition(sf::Vector2f((float)Utils::WindowWidth - ((float)Utils::WindowWidth / 3.0f), (float)Utils::WindowHeight / 2.0f));
+	weaponUpgrade->SetPosition(sf::Vector2f(base->GetPosition().x, base->GetPosition().y + base->GetRadius() * 0.5f));
 	AddSceneObject(weaponUpgrade);
 
 	WaveManager* spawner = new WaveManager(window, this, base);

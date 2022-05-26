@@ -8,6 +8,7 @@ PlayerStats::PlayerStats(sf::Vector2f _position) :
 	playerHealth = new GameText("Resources/Font/WarPriest.ttf", _position);
 	playerAmmo = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 30));
 	playerGold = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 60));
+	equippedWeapon = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 90));
 }
 
 //Renders each of the stats text to the window
@@ -16,6 +17,7 @@ void PlayerStats::Render(sf::RenderWindow* _window)
 	playerHealth->Render(_window);
 	playerAmmo->Render(_window);
 	playerGold->Render(_window);
+	equippedWeapon->Render(_window);
 }
 
 //Updates the stats value
@@ -32,4 +34,9 @@ void PlayerStats::UpdateGold(int _num)
 void PlayerStats::UpdateAmmo(int _num)
 {
 	playerAmmo->SetString("Ammo:   " + std::to_string(_num));
+}
+
+void PlayerStats::UpdateEquippedWeapon(std::string _name)
+{
+	equippedWeapon->SetString("Weapon: " + _name);
 }

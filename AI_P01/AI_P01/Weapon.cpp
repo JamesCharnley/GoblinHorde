@@ -7,9 +7,9 @@
 //assign weapon stats here
 std::map<EWeapon, FWeapon::Data> FWeapon::dataMap =
 {															      //dmg | firerate | ammo | bullet speed
-	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			20,		3.0f,	 100,	600.0f,		"Glock")},
-	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				20,		10.0f,	 150,	800.0f,		"SMG")},
-	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			50,		2.0f,	 100,	1000.0f,	"Rifle")},
+	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			10,		3.0f,	 100,	600.0f,		"Glock")},
+	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				10,		7.0f,	 150,	800.0f,		"SMG")},
+	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			20,		5.0f,	 100,	1000.0f,	"Rifle")},
 	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200,	80.0f,	 100,	600.0f,		"Debug gun")},
 };
 

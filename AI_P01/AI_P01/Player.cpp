@@ -57,6 +57,7 @@ void Player::Update(float _deltatime)
 		scene->GetUI()->getPlayer1Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer1Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer1Stats()->UpdateAmmo(0);
+		scene->GetUI()->getPlayer1Stats()->UpdateEquippedWeapon(equippedWeapon->name);
 	}
 
 	else if (playerNum == 2)
@@ -64,6 +65,7 @@ void Player::Update(float _deltatime)
 		scene->GetUI()->getPlayer2Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer2Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer2Stats()->UpdateAmmo(0);
+		scene->GetUI()->getPlayer2Stats()->UpdateEquippedWeapon(equippedWeapon->name);
 	}
 
 	CheckForInput(playerNumber);

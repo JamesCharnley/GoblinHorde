@@ -15,6 +15,7 @@ public:
 	void UpdateHealth(int _num);
 	void UpdateGold(int _num);
 	void UpdateAmmo(int _num);
+	void UpdateEquippedWeapon(std::string _name);
 
 private:
 
@@ -25,5 +26,6 @@ private:
 	class GameText* playerHealth;
 	class GameText* playerGold;
 	class GameText* playerAmmo;
+	class GameText* equippedWeapon;
 };
 
