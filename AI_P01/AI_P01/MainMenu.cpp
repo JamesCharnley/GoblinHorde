@@ -44,6 +44,7 @@ void MainMenu::Update(float _dtime)
 			if (canStartGame == false)
 			{
 				canStartGame = true;
+				numberOfPlayers = 1;
 				ActivateSinglePlayerDisplay();
 			}
 			
@@ -62,6 +63,7 @@ void MainMenu::Update(float _dtime)
 			if (canStartGame == false)
 			{
 				canStartGame = true;
+				numberOfPlayers = 2;
 				ActivateMultiplayerDisplay();
 			}
 
@@ -136,13 +138,13 @@ void MainMenu::ActivateModeSelectionDisplay()
 
 void MainMenu::ActivateSinglePlayerDisplay()
 {
-	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
+	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
 	AddSceneObject(startButton);
 }
 
 void MainMenu::ActivateMultiplayerDisplay()
 {
-	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
+	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
 	AddSceneObject(startButton);
 }
 

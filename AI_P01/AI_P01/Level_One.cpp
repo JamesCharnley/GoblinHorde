@@ -46,7 +46,7 @@ void Level_One::Start()
 	weaponUpgrade->SetPosition(sf::Vector2f((float)Utils::WindowWidth - ((float)Utils::WindowWidth / 3.0f), (float)Utils::WindowHeight / 2.0f));
 	AddSceneObject(weaponUpgrade);
 
-	WaveManager* spawner = new WaveManager(window, this);
+	WaveManager* spawner = new WaveManager(window, this, base);
 	spawner->SetPosition(sf::Vector2f(-100, -100));
 
 	// create all GameObjects

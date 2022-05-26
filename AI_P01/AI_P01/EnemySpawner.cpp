@@ -7,9 +7,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Player.h"
+#include "Base.h"
 
-EnemySpawner::EnemySpawner(sf::RenderWindow* _window, Scene* _scene)
+EnemySpawner::EnemySpawner(sf::RenderWindow* _window, Scene* _scene, Base* _base)
 {
+	base = _base;
 	window = _window;
 	scene = _scene;
 }
@@ -66,12 +68,12 @@ void EnemySpawner::SpawnEnemy(sf::Vector2f _position)
 
 	if (randomNum < 5)
 	{
-		enemy = new GoblinWeak(window, scene, this);
+		enemy = new GoblinWeak(window, scene, this, base);
 	}
 
 	else
 	{
-		enemy = new GoblinNormal(window, scene, this);
+		enemy = new GoblinNormal(window, scene, this, base);
 	}
 	
 	enemy->SetRadius(25.0f);

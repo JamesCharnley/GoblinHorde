@@ -6,7 +6,7 @@ class Spawn;
 class WaveManager : public EnemySpawner
 {
 public:
-	WaveManager(sf::RenderWindow* _window, Scene* _scene) : EnemySpawner(_window, _scene) {};
+	WaveManager(sf::RenderWindow* _window, Scene* _scene, class Base* _base) : EnemySpawner(_window, _scene, _base) {};
 	~WaveManager();
 
 	// Adds a Spawn pointer to spawnPoints vector

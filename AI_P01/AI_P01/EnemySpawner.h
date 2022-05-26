@@ -7,7 +7,7 @@ class EnemySpawner :
 
 public:
 
-    EnemySpawner(sf::RenderWindow* _window, class Scene* _scene);
+    EnemySpawner(sf::RenderWindow* _window, class Scene* _scene, class Base* _base);
 
     virtual void Update(float _deltatime) override;
 
@@ -18,6 +18,8 @@ public:
     void AddPlayer(class Player* _player);
 
 protected:
+
+    class Base* base;
 
     int maximumEnemies = 2;
     int currentEnemyCount = 0;

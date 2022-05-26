@@ -1,9 +1,10 @@
 #include "Start_Button.h"
 #include "Scene.h"
+#include "GoblinHorde.h"
 
-Start_Button::Start_Button(sf::RenderWindow* _window, Scene* _scene, sf::Vector2f _position) : Button(_position, "Start", _window, _scene)
+Start_Button::Start_Button(sf::RenderWindow* _window, Scene* _scene, sf::Vector2f _position, int _numOfPlayers) : Button(_position, "Start", _window, _scene)
 {
-
+	numberOfPlayers = _numOfPlayers;
 }
 
 void Start_Button::Update(float _deltatime)
@@ -15,6 +16,7 @@ void Start_Button::Update(float _deltatime)
 
 		if (rectangle.getGlobalBounds().contains(mousePos))
 		{
+			scene->SetNumberOfPlayers(numberOfPlayers);
 			scene->ChangeScene("Level_One");
 		}
 	}

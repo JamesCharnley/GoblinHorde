@@ -29,7 +29,7 @@ public:
 
 	class GoblinHordeUI* GetUI();
 	
-
+	void SetNumberOfPlayers(int _num);
 
 protected:
 

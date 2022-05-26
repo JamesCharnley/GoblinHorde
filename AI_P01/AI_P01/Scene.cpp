@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "Scene.h"
 #include "GoblinHordeUI.h"
+#include "GoblinHorde.h"
 
 Scene::Scene() 
 {
@@ -94,6 +95,15 @@ void Scene::ChangeScene(std::string _sceneName)
 GoblinHordeUI* Scene::GetUI() // coding convention issue
 {
 	return userInterface;
+}
+
+void Scene::SetNumberOfPlayers(int _num)
+{
+	GoblinHorde* gh = dynamic_cast<GoblinHorde*>(game);
+	if (gh)
+	{
+		gh->numberOfPlayers = _num;
+	}
 }
 
 

@@ -2,16 +2,19 @@
 #include "Player.h"
 #include "EnemySpawner.h"
 #include "Enemy.h"
+#include "Base.h"
 
-Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
+Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, Base* _base) : Character(_window, _scene)
 {
+	base = _base;
 	moveSpeed = 100.0f;
 	//circle.setFillColor(sf::Color::Red);
 	AddCollider(ECollisionType::Block);
 }
 
-Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner) : Character(_window, _scene)
+Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner, Base* _base) : Character(_window, _scene)
 {
+	base = _base;
 	moveSpeed = 150.0f;
 	spawner = _spawner;
 	//circle.setFillColor(sf::Color::Red);
@@ -38,7 +41,9 @@ void Enemy::Update(float _deltatime)
 		
 	}
 
-	if (closestPlayer)
+	baseDistance = SFML_VectorMath::GetDistance(GetPosition(), base->GetPosition());
+
+	if (closestPlayer && baseDistance >= shortestDist)
 	{
 		velocity = closestPlayer->GetPosition() - GetPosition();
 		velocity = SFML_VectorMath::Clamp(velocity);
@@ -52,6 +57,24 @@ void Enemy::Update(float _deltatime)
 			closestPlayer->TakeDamage(damage);
 			damageTimer = damageIntervial;
 			
+		}
+	}
+	else
+	{
+		velocity = base->GetPosition() - GetPosition();
+		velocity = SFML_VectorMath::Clamp(velocity);
+		if (baseDistance > base->GetCollisionRadius())
+		{
+			Move(velocity * (moveSpeed * _deltatime));
+		}
+		
+
+		if (damageTimer <= 0.0f && base->GetCollisionRadius() + GetCollisionRadius() >= baseDistance - attackRange)
+		{
+			//damage the player and reset timer
+			base->TakeDamage(damage);
+			damageTimer = damageIntervial;
+
 		}
 	}
 }

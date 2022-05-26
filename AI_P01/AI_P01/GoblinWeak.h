@@ -4,7 +4,7 @@
 class GoblinWeak : public Enemy
 {
 public:
-	GoblinWeak(sf::RenderWindow* _window, Scene* _scene);
-	GoblinWeak(sf::RenderWindow* _window, Scene* _scene, class EnemySpawner* _spawner);
+	GoblinWeak(sf::RenderWindow* _window, Scene* _scene, class Base* _base);
+	GoblinWeak(sf::RenderWindow* _window, Scene* _scene, class EnemySpawner* _spawner, class Base* _base);
 };
 

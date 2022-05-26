@@ -5,8 +5,8 @@ class Enemy :
 {
 public:
 
-    Enemy(sf::RenderWindow* _window, Scene* _scene);
-    Enemy(sf::RenderWindow* _window, Scene* _scene, class EnemySpawner* _spawner);
+    Enemy(sf::RenderWindow* _window, Scene* _scene, class Base* _base);
+    Enemy(sf::RenderWindow* _window, Scene* _scene, class EnemySpawner* _spawner, class Base* _base);
 
     virtual void Update(float _deltatime) override;
 
@@ -24,6 +24,9 @@ protected:
 
     int goldReward = 100;
 
+    class Base* base;
+
+    float baseDistance = 0;
 private:
     float damageTimer = 0.0f;
     float damageIntervial = 1.0f;

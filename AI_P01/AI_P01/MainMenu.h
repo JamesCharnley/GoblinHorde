@@ -37,6 +37,8 @@ private:
 
 	bool canStartGame = false;
 
+	int numberOfPlayers = 1;
+
 	void ClearMenu();
 	void ActivateDefaultDisplay();
 	void ActivateModeSelectionDisplay();
