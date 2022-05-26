@@ -3,7 +3,7 @@ Bachelor of Software Engineering
 Media Design School
 Auckland
 New Zealand
-(c) 2021 Media Design School
+(c) 2022 Media Design School
 File Name : GameText.h
 Description : Text with it's own render function that does not inherit from GameObject
 Author : Devon Millar, James Charnley, Sam Chandler, Mahalon

@@ -3,7 +3,7 @@ Bachelor of Software Engineering
 Media Design School
 Auckland
 New Zealand
-(c) 2021 Media Design School
+(c) 2022 Media Design School
 File Name : Scene.h
 Description : Base class of a scene, implementation for drawing and updating a vector of GameObjects
 Author : Devon Millar, James Charnley, Sam Chandler, Mahalon

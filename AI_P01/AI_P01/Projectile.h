@@ -3,7 +3,7 @@ Bachelor of Software Engineering
 Media Design School
 Auckland
 New Zealand
-(c) 2021 Media Design School
+(c) 2022 Media Design School
 File Name : Projectile.h
 Description : A projectile that moves in a staight line, instances created with a Weapon
 Author : Devon Millar, James Charnley, Sam Chandler, Mahalon

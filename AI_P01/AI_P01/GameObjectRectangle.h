@@ -3,7 +3,7 @@ Bachelor of Software Engineering
 Media Design School
 Auckland
 New Zealand
-(c) 2021 Media Design School
+(c) 2022 Media Design School
 File Name : GameObjectRectangle.h
 Description : GameObject with a rectangle sprite
 Author : Devon Millar, James Charnley, Sam Chandler, Mahalon

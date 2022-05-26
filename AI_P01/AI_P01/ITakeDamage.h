@@ -3,7 +3,7 @@ Bachelor of Software Engineering
 Media Design School
 Auckland
 New Zealand
-(c) 2021 Media Design School
+(c) 2022 Media Design School
 File Name : Interactable.h
 Description : Abstract base class for objects that take damage
 Author : Devon Millar, James Charnley, Sam Chandler, Mahalon

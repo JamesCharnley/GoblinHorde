@@ -3,7 +3,7 @@ Bachelor of Software Engineering
 Media Design School
 Auckland
 New Zealand
-(c) 2021 Media Design School
+(c) 2022 Media Design School
 File Name : Base.h
 Description : A base with health theat can be attacked by Enemies
 Author : Devon Millar, James Charnley, Sam Chandler, Mahalon
