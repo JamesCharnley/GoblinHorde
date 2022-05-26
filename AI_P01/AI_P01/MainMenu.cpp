@@ -20,18 +20,17 @@ MainMenu::MainMenu(Game* _gameClass, sf::RenderWindow* _window)
 
 void MainMenu::Start()
 {
-	 
 	window->setFramerateLimit(60);
 
 	displayMode = DisplayMode::DefaultMode;
-
-	messageText = new GameObject_Text(window, this, "");
-	AddSceneObject(messageText);
 
 	// Set Menu Background.
 	MenuBackground = new GameObject_Rectangle(window, this);
 	MenuBackground->AddSprite("Resources/Textures/Grass.png");
 	AddSceneObject(MenuBackground);
+
+	messageText = new GameObject_Text(window, this, "");
+	AddSceneObject(messageText);
 
 	// Set Menu Title, half window width - half its own width.
 	MenuTitle = new GameObject_Rectangle(window, this);
@@ -39,11 +38,7 @@ void MainMenu::Start()
 	MenuTitle->AddSprite("Resources/Textures/MenuTitle.png");
 	AddSceneObject(MenuTitle);
 
-	
-
 	ActivateDefaultDisplay();
-
-	
 
 	Scene::Start();
 }
