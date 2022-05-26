@@ -52,7 +52,7 @@ void Level_One::Start()
 
 	// create all GameObjects
 	Player* player1 = new Player(window, this);
-	player1->AddSprite("Resources/Textures/PlayerPH.png");
+	player1->AddSprite("Resources/Textures/Player1.png");
 	player1->SetColor(sf::Color::Transparent);
 	player1->SetRadius(25.0f);
 	player1->SetPlayersNumber(1);
@@ -67,7 +67,7 @@ void Level_One::Start()
 	if (numberOfPlayers == 2)
 	{
 		Player* player2 = new Player(window, this);
-		player2->AddSprite("Resources/Textures/PlayerPH.png");
+		player2->AddSprite("Resources/Textures/Player2.png");
 		player2->SetColor(sf::Color::Transparent);
 		player2->SetRadius(25.0f);
 		player2->SetPlayersNumber(2);
