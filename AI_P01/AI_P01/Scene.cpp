@@ -106,6 +106,11 @@ void Scene::SetNumberOfPlayers(int _num)
 	}
 }
 
+void Scene::Quit()
+{
+	game->Exit();
+}
+
 
 
 

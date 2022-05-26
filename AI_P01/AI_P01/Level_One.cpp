@@ -34,8 +34,12 @@ void Level_One::Start()
 	Base* base = new Base(window, this);
 	AddSceneObject(base);
 
-	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this, EWeapon::DebugGun);
-	weaponPurchase->SetPosition(base->GetPosition());
+	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this, EWeapon::SMG);
+	weaponPurchase->SetPosition(sf::Vector2f(base->GetPosition().x - base->GetRadius() * 0.5f, base->GetPosition().y - base->GetRadius() * 0.5f));
+	AddSceneObject(weaponPurchase);
+
+	weaponPurchase = new WeaponPurchase(window, this, EWeapon::Rifle);
+	weaponPurchase->SetPosition(sf::Vector2f(base->GetPosition().x + base->GetRadius() * 0.5f, base->GetPosition().y - base->GetRadius() * 0.5f));
 	AddSceneObject(weaponPurchase);
 
 	Health_PickUp* healthTest = new Health_PickUp(window, this);

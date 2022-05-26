@@ -20,5 +20,10 @@ public:
     virtual bool CanInteract(class Player* _player) override;
     virtual void Interact(class Player* _player) override;
     //TODO: render weapon
+
+protected:
+
+    std::map<EWeapon, int> prices{ {EWeapon::Glock, 100}, {EWeapon::SMG, 500}, {EWeapon::Rifle, 1000} };
+    int price = 0;
 };
 

@@ -2,6 +2,7 @@
 #include "Base.h"
 #include "SFML_VectorMath.h"
 #include "Player.h"
+#include "Scene.h"
 
 Base::Base(sf::RenderWindow* _window, Scene* _scene)
 {
@@ -45,6 +46,8 @@ void Base::TakeDamage(int _amount)
 	if ((currentHealth - _amount) <= 0)
 	{
 		currentHealth = 0;
+		//gameover
+		scene->ChangeScene("Main_Menu");
 	}
 	else
 	{

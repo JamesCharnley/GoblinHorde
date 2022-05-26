@@ -10,7 +10,7 @@
 Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
 {
 	weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Glock));
-	weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Rifle));
+	//weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Rifle));
 	equippedWeapon = weapons.at(equippedWeaponIndex);
 
 	//for(Weapon weapon : weapons)

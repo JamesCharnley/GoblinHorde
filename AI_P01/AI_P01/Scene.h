@@ -31,6 +31,8 @@ public:
 	
 	void SetNumberOfPlayers(int _num);
 
+	void Quit();
+
 protected:
 
 	Scene();
