@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scene.h"
+#include <SFML/Audio.hpp>
 
 enum class DisplayMode
 {
@@ -36,6 +37,7 @@ private:
 	class GameObject_Text* messageText;
 	class GameObject_Rectangle* MenuTitle;
 	class GameObject_Rectangle* MenuBackground;
+	sf::Music music;
 
 	bool canStartGame = false;
 

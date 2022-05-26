@@ -38,6 +38,15 @@ void MainMenu::Start()
 	MenuTitle->AddSprite("Resources/Textures/MenuTitle.png");
 	AddSceneObject(MenuTitle);
 
+	// Set music and to loop.
+	if (!music.openFromFile("Resources/SFX/InGame.ogg"))
+	{
+
+	}
+	music.setVolume(10.0f);
+	music.play();
+	music.setLoop(true);
+
 	ActivateDefaultDisplay();
 
 	Scene::Start();
