@@ -18,7 +18,7 @@ Base::Base(sf::RenderWindow* _window, Scene* _scene)
 	
 	currentHealth = maxHealth * 0.9f;
 
-	healthBar = new GameObject_Rectangle(_window, _scene);
+	healthBar = new GameObjectRectangle(_window, _scene);
 	healthBar->SetColor(sf::Color::Red);
 	healthBar->SetSize(sf::Vector2f(GetRadius(), 20.0f));
 	healthBar->SetPosition(GetPosition());
@@ -36,7 +36,7 @@ Base::~Base()
 
 void Base::Render()
 {
-	GameObject_Circle::Render();
+	GameObjectCircle::Render();
 
 	healthBar->Render();
 }

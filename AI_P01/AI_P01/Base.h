@@ -1,10 +1,22 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2021 Media Design School
+File Name : Base.h
+Description : A base with health theat can be attacked by Enemies
+Author : Devon Millar, James Charnley, Sam Chandler, Mahalon
+Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.nz, mahalon.Devoe@mds.ac.nz
+**************************************************************************/
+
 #pragma once
-#include "GameObject_Circle.h"
-#include "GameObject_Rectangle.h"
+#include "GameObjectCircle.h"
+#include "GameObjectRectangle.h"
 #include "ITakeDamage.h"
 
 class Base :
-    public GameObject_Circle, public ITakeDamage
+    public GameObjectCircle, public ITakeDamage
 {
 
 public:
@@ -32,6 +44,6 @@ protected:
     float maxHealth = 1000.0f;
     float currentHealth = 0;
 
-    GameObject_Rectangle* healthBar = nullptr;
+    GameObjectRectangle* healthBar = nullptr;
 };
 

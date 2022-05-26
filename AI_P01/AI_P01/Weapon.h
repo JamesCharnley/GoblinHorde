@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject_Circle.h"
+#include "GameObjectCircle.h"
 
 enum class EWeapon
 {
@@ -38,7 +38,7 @@ struct FWeapon
 
 
 class Weapon :
-    public GameObject_Circle
+    public GameObjectCircle
 {
 
 public:

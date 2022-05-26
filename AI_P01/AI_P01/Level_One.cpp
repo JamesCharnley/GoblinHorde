@@ -1,5 +1,5 @@
 #include "Level_One.h"
-#include "GameObject_Rectangle.h"
+#include "GameObjectRectangle.h"
 #include "Player.h"
 #include "Collider.h"
 #include "EnemySpawner.h"
@@ -26,7 +26,7 @@ void Level_One::Start()
 	// set fps limit
 	window->setFramerateLimit(60);
 
-	GameObject_Rectangle* bg = new GameObject_Rectangle(window, this);
+	GameObjectRectangle* bg = new GameObjectRectangle(window, this);
 	bg->SetPosition(sf::Vector2f(Utils::WindowWidth / 2, Utils::WindowHeight / 2));
 	bg->AddSprite("Resources/Textures/Grass.png");
 	bg->SetSize(sf::Vector2f(Utils::WindowWidth, Utils::WindowHeight));

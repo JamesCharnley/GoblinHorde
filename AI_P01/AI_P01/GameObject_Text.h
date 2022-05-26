@@ -1,11 +1,11 @@
 #pragma once
 #include "GameObject.h"
-class GameObject_Text :
+class GameObjectText :
     public GameObject
 {
 public:
 
-    GameObject_Text(sf::RenderWindow* _window, class Scene* _scene, std::string _text);
+    GameObjectText(sf::RenderWindow* _window, class Scene* _scene, std::string _text);
     // Render() override. called every frame from Scene() class
     virtual void Render() override;
 

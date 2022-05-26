@@ -1,9 +1,9 @@
 #include "Sprite_Component.h"
 #include <iostream>
-#include "GameObject_Circle.h"
+#include "GameObjectCircle.h"
 
 
-GameObject_Circle::GameObject_Circle(sf::RenderWindow* _window, Scene* _scene)
+GameObjectCircle::GameObjectCircle(sf::RenderWindow* _window, Scene* _scene)
 {
 	// create sf::CircleShape with default radius of 1
 	circle = sf::CircleShape(1);
@@ -21,7 +21,7 @@ GameObject_Circle::GameObject_Circle(sf::RenderWindow* _window, Scene* _scene)
 	scene = _scene;
 }
 
-GameObject_Circle::GameObject_Circle()
+GameObjectCircle::GameObjectCircle()
 {
 	// initialize and set defaults
 	circle = sf::CircleShape(1);
@@ -29,7 +29,7 @@ GameObject_Circle::GameObject_Circle()
 	objectShape = &circle;
 }
 
-void GameObject_Circle::Render()
+void GameObjectCircle::Render()
 {
 	// render SFML shape
 	window->draw(circle);
@@ -37,12 +37,12 @@ void GameObject_Circle::Render()
 	GameObject::Render();
 }
 
-float GameObject_Circle::GetRadius()
+float GameObjectCircle::GetRadius()
 {
 	return circle.getRadius();
 }
 
-void GameObject_Circle::SetRadius(float _radius)
+void GameObjectCircle::SetRadius(float _radius)
 {
 	circle.setRadius(_radius);
 

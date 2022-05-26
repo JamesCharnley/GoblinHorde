@@ -1,8 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
-#include "GameObject_Circle.h"
-#include "GameObject_Rectangle.h"
+#include "GameObjectCircle.h"
+#include "GameObjectRectangle.h"
 #include "SFML_VectorMath.h"
 #include "Collider.h"
 
@@ -24,16 +24,16 @@ bool Collider::CheckForCollision(GameObject* _other)
 		}
 	}
 
-	GameObject_Circle* thisCircle = dynamic_cast<GameObject_Circle*>(gameObject);
-	GameObject_Circle* otherCircle = dynamic_cast<GameObject_Circle*>(_other);
+	GameObjectCircle* thisCircle = dynamic_cast<GameObjectCircle*>(gameObject);
+	GameObjectCircle* otherCircle = dynamic_cast<GameObjectCircle*>(_other);
 
 	if (thisCircle && otherCircle)
 	{
 		return CheckForCollisionCircleToCircle(thisCircle, otherCircle);
 	}
 
-	GameObject_Rectangle* thisRectangle = dynamic_cast<GameObject_Rectangle*>(gameObject);
-	GameObject_Rectangle* otherRectangle = dynamic_cast<GameObject_Rectangle*>(_other);
+	GameObjectRectangle* thisRectangle = dynamic_cast<GameObjectRectangle*>(gameObject);
+	GameObjectRectangle* otherRectangle = dynamic_cast<GameObjectRectangle*>(_other);
 
 	if (thisRectangle && otherCircle)
 	{
@@ -83,7 +83,7 @@ bool Collider::GetCheckForCollision()
 	return isCheckForCollision;
 }
 
-bool Collider::CheckForCollisionCircleToCircle(GameObject_Circle* _thisCircle, GameObject_Circle* _otherCircle)
+bool Collider::CheckForCollisionCircleToCircle(GameObjectCircle* _thisCircle, GameObjectCircle* _otherCircle)
 {
 	if (_thisCircle == nullptr || _otherCircle == nullptr) return false;
 	float dist = SFML_VectorMath::GetDistance(_otherCircle->GetPosition(), _thisCircle->GetPosition());
@@ -109,7 +109,7 @@ bool Collider::CheckForCollisionCircleToCircle(GameObject_Circle* _thisCircle, G
 	return false;
 }
 
-bool Collider::CheckForCollisionCircleToRectangle(GameObject_Circle* _circle, GameObject_Rectangle* _rectangle)
+bool Collider::CheckForCollisionCircleToRectangle(GameObjectCircle* _circle, GameObjectRectangle* _rectangle)
 {
 	sf::Vector2f circleDistance;
 	circleDistance.x = abs(_circle->GetPosition().x - _rectangle->GetPosition().x);

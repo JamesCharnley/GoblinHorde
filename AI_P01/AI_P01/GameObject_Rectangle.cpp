@@ -2,7 +2,7 @@
 #include "Sprite_Component.h"
 #include "GameObject_Rectangle.h"
 
-GameObject_Rectangle::GameObject_Rectangle()
+GameObjectRectangle::GameObjectRectangle()
 {
 	// initialize and set defaults
 	rectangle = sf::RectangleShape(sf::Vector2f(1, 1));
@@ -10,7 +10,7 @@ GameObject_Rectangle::GameObject_Rectangle()
 	objectShape = &rectangle;
 }
 
-GameObject_Rectangle::GameObject_Rectangle(sf::RenderWindow* _window, Scene* _scene)
+GameObjectRectangle::GameObjectRectangle(sf::RenderWindow* _window, Scene* _scene)
 {
 	// initialize and set defaults. 
 	rectangle = sf::RectangleShape(sf::Vector2f(1, 1));
@@ -22,7 +22,7 @@ GameObject_Rectangle::GameObject_Rectangle(sf::RenderWindow* _window, Scene* _sc
 	scene = _scene;
 }
 
-void GameObject_Rectangle::Render()
+void GameObjectRectangle::Render()
 {
 	// render SFML shape
 	window->draw(rectangle);
@@ -30,12 +30,12 @@ void GameObject_Rectangle::Render()
 	GameObject::Render();
 }
 
-sf::Vector2f GameObject_Rectangle::GetSize()
+sf::Vector2f GameObjectRectangle::GetSize()
 {
 	return rectangle.getSize();
 }
 
-void GameObject_Rectangle::SetSize(sf::Vector2f _size)
+void GameObjectRectangle::SetSize(sf::Vector2f _size)
 {
 	rectangle.setSize(_size);
 	rectangle.setOrigin(sf::Vector2f(_size.x / 2, _size.y / 2));

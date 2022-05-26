@@ -3,7 +3,7 @@
 #include "Scene.h"
 
 Button::Button(sf::Vector2f position, std::string text, sf::RenderWindow* _window, Scene* _scnene) : 
-	GameObject_Rectangle(_window, _scnene) //Potential Error
+	GameObjectRectangle(_window, _scnene) //Potential Error
 {
 	window = _window;
 	buttonText = new GameText("Resources/Font/WarPriest.ttf", position);
@@ -17,7 +17,7 @@ Button::Button(sf::Vector2f position, std::string text, sf::RenderWindow* _windo
 
 void Button::Render()
 {
-	GameObject_Rectangle::Render();
+	GameObjectRectangle::Render();
 
 	buttonText->Render(window);
 }

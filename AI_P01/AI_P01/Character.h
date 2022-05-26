@@ -1,10 +1,22 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2021 Media Design School
+File Name : Character.h
+Description : Shared implementation for character, base class of Enemy and Player
+Author : Devon Millar, James Charnley, Sam Chandler, Mahalon
+Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.nz, mahalon.Devoe@mds.ac.nz
+**************************************************************************/
+
 #pragma once
-#include "GameObject_Circle.h"
+#include "GameObjectCircle.h"
 #include "ITakeDamage.h"
 
 
 class Character :
-    public GameObject_Circle, public ITakeDamage
+    public GameObjectCircle, public ITakeDamage
 {
 
 public:

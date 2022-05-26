@@ -24,12 +24,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject_Circle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject_Rectangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Level_One.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -141,7 +135,13 @@
     <ClCompile Include="BackButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject_Text.cpp">
+    <ClCompile Include="GameObjectText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectCircle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectRectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,9 +179,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject_Rectangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SFML_VectorMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -189,9 +186,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject_Circle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
@@ -275,7 +269,13 @@
     <ClInclude Include="BackButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject_Text.h">
+    <ClInclude Include="GameObjectCircle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectRectangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

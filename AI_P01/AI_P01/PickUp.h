@@ -1,9 +1,9 @@
 #pragma once
 #include "Interactable.h"
-#include "GameObject_Circle.h"
+#include "GameObjectCircle.h"
 
 class PickUp :
-    public GameObject_Circle, public Interactable
+    public GameObjectCircle, public Interactable
 {
 
 public:

@@ -34,9 +34,9 @@ private:
 	class MultiplayerModeButton* multiplayerButton;
 	class BackButton* backButton;
 
-	class GameObject_Text* messageText;
-	class GameObject_Rectangle* MenuTitle;
-	class GameObject_Rectangle* MenuBackground;
+	class GameObjectText* messageText;
+	class GameObjectRectangle* MenuTitle;
+	class GameObjectRectangle* MenuBackground;
 	sf::Music music;
 
 	bool canStartGame = false;

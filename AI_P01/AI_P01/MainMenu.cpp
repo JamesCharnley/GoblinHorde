@@ -7,7 +7,7 @@
 #include "MultiplayerModeButton.h"
 #include "BackButton.h"
 #include "Utility.h"
-#include "GameObject_Text.h"
+#include "GameObjectText.h"
 MainMenu::MainMenu(Game* _gameClass, sf::RenderWindow* _window)
 {
 	if (isDebug)
@@ -25,15 +25,15 @@ void MainMenu::Start()
 	displayMode = DisplayMode::DefaultMode;
 
 	// Set Menu Background.
-	MenuBackground = new GameObject_Rectangle(window, this);
+	MenuBackground = new GameObjectRectangle(window, this);
 	MenuBackground->AddSprite("Resources/Textures/Grass.png");
 	AddSceneObject(MenuBackground);
 
-	messageText = new GameObject_Text(window, this, "");
+	messageText = new GameObjectText(window, this, "");
 	AddSceneObject(messageText);
 
 	// Set Menu Title, half window width - half its own width.
-	MenuTitle = new GameObject_Rectangle(window, this);
+	MenuTitle = new GameObjectRectangle(window, this);
 	MenuTitle->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 -375.0f, 100.0f));
 	MenuTitle->AddSprite("Resources/Textures/MenuTitle.png");
 	AddSceneObject(MenuTitle);

@@ -1,7 +1,7 @@
 #pragma once
-#include "GameObject_Circle.h"
+#include "GameObjectCircle.h"
 class Projectile :
-    public GameObject_Circle
+    public GameObjectCircle
 {
 public:
 

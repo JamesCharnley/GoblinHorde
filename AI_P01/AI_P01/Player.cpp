@@ -123,7 +123,7 @@ void Player::Update(float _deltatime)
 void Player::Render()
 {
 	
-	GameObject_Circle::Render();
+	GameObjectCircle::Render();
 	window->draw(actionText);
 	if (equippedWeapon != nullptr)
 	{

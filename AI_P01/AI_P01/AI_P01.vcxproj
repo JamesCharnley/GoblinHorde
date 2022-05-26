@@ -155,9 +155,9 @@
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameObject_Circle.cpp" />
-    <ClCompile Include="GameObject_Rectangle.cpp" />
-    <ClCompile Include="GameObject_Text.cpp" />
+    <ClCompile Include="GameObjectCircle.cpp" />
+    <ClCompile Include="GameObjectRectangle.cpp" />
+    <ClCompile Include="GameObjectText.cpp" />
     <ClCompile Include="GameText.cpp" />
     <ClCompile Include="GoblinHorde.cpp" />
     <ClCompile Include="GoblinHordeUI.cpp" />
@@ -200,9 +200,9 @@
     <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObject_Circle.h" />
-    <ClInclude Include="GameObject_Rectangle.h" />
-    <ClInclude Include="GameObject_Text.h" />
+    <ClInclude Include="GameObjectCircle.h" />
+    <ClInclude Include="GameObjectRectangle.h" />
+    <ClInclude Include="GameObjectText.h" />
     <ClInclude Include="GameText.h" />
     <ClInclude Include="GoblinHorde.h" />
     <ClInclude Include="GoblinHordeUI.h" />

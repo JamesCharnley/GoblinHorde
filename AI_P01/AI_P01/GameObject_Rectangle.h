@@ -1,13 +1,25 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2021 Media Design School
+File Name : GameObjectRectangle.h
+Description : GameObject with a rectangle sprite
+Author : Devon Millar, James Charnley, Sam Chandler, Mahalon
+Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.nz, mahalon.Devoe@mds.ac.nz
+**************************************************************************/
+
 #pragma once
 #include "GameObject.h"
-class GameObject_Rectangle :
+class GameObjectRectangle :
     public GameObject
 {
 
 public:
 
     // custom constructor for a rectangle shape. Takes ref to sf::RenderWindow and ref to Scene() class
-    GameObject_Rectangle(sf::RenderWindow* _window, class Scene* _scene);
+    GameObjectRectangle(sf::RenderWindow* _window, class Scene* _scene);
 
     // Render() override. called every frame from Scene() class
     virtual void Render() override;
@@ -21,7 +33,7 @@ public:
 protected:
 
     // private constructor: Class cannot work without the correct parameters passed to the custom constructor
-    GameObject_Rectangle();
+    GameObjectRectangle();
 
     // Must be assigned to 'objectShape' variable in constructor
     sf::RectangleShape rectangle;

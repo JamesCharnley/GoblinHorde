@@ -1,8 +1,20 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2021 Media Design School
+File Name : EnemySpawner.h
+Description : Implementation to spawn enemies at a point
+Author : Devon Millar, James Charnley, Sam Chandler, Mahalon
+Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.nz, mahalon.Devoe@mds.ac.nz
+**************************************************************************/
+
 #pragma once
-#include "GameObject_Circle.h"
+#include "GameObjectCircle.h"
 
 class EnemySpawner :
-    public GameObject_Circle
+    public GameObjectCircle
 {
 
 public:
