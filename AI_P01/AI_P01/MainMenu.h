@@ -34,6 +34,8 @@ private:
 	class BackButton* backButton;
 
 	class GameObject_Text* messageText;
+	class GameObject_Rectangle* MenuTitle;
+	class GameObject_Rectangle* MenuBackground;
 
 	bool canStartGame = false;
 
