@@ -37,6 +37,7 @@ private:
     float attackRange = 3.0f;
 
     sf::Sound hitSFX;
+    sf::Sound goblinDieSFX;
     sf::SoundBuffer buffer;
  
 };
