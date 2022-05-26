@@ -1,5 +1,7 @@
 #pragma once
 #include "Character.h"
+#include <SFML/Audio.hpp>
+
 class Enemy :
     public Character
 {
@@ -33,5 +35,9 @@ private:
 
     int damage = 5;
     float attackRange = 3.0f;
+
+    sf::Sound hitSFX;
+    sf::SoundBuffer buffer;
+ 
 };
 

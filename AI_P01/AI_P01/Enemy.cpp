@@ -88,6 +88,14 @@ void Enemy::TakeDamage(int _amount, Character* _player)
 {
 	currentHealth -= _amount;
 
+	
+	if (!buffer.loadFromFile("Resources/SFX/Hit.wav"))
+	{
+
+	}	
+	hitSFX.setBuffer(buffer);
+	hitSFX.play();
+
 	if (currentHealth <= 0)
 	{
 		Player* player = dynamic_cast<Player*>(_player);
