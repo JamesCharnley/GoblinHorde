@@ -6,20 +6,12 @@ BackButton::BackButton(sf::RenderWindow* _window, Scene* _scene, sf::Vector2f _p
 
 }
 
-void BackButton::Update(float _deltatime)
+void BackButton::PerformAction()
 {
-	GameObjectRectangle::Update(_deltatime);
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	MainMenu* menu = dynamic_cast<MainMenu*>(scene);
+	if (menu)
 	{
-		sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
-
-		if (rectangle.getGlobalBounds().contains(mousePos))
-		{
-			MainMenu* menu = dynamic_cast<MainMenu*>(scene);
-			if (menu)
-			{
-				menu->ButtonAction(DisplayMode::DefaultMode);
-			}
-		}
+		menu->ButtonAction(DisplayMode::DefaultMode);
 	}
 }
+

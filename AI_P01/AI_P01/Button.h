@@ -18,9 +18,11 @@ class Button : public GameObjectRectangle
 public:
 	Button(sf::Vector2f position, std::string text, sf::RenderWindow* _window, Scene* _scene);
 	virtual void Render() override;
-
+	virtual void Update(float _deltaTime) override;
 	void SetSelectedDisplay(bool _active);
 	bool IsSelectedDisplay() { return selectedDisplayMode; };
+
+	virtual void PerformAction();
 
 protected:
 

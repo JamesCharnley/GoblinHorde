@@ -122,11 +122,24 @@ void MainMenu::Update(float _dtime)
 	{
 		CheckForControllerInput();
 	}
+
+	if (sf::Joystick::isButtonPressed(0, 0))
+	{
+		actionLock = true;
+	}
+	else
+	{
+		actionLock = false;
+	}
 }
 
 
 void MainMenu::ButtonAction(DisplayMode _mode)
 {
+	if (actionLock)
+	{
+		return;
+	}
 	displayMode = _mode;
 
 	switch (displayMode)
@@ -197,29 +210,13 @@ void MainMenu::ActivateDefaultDisplay()
 	
 }
 
-void MainMenu::ActivateModeSelectionDisplay()
-{
-	if (selectedButtonIndex < activeButtons.size())
-	{
-		if (activeButtons[selectedButtonIndex] != nullptr)
-		{
-			if (selectedButton != nullptr)
-			{
-				selectedButton->SetSelectedDisplay(false);
-			}
-			selectedButton = activeButtons[selectedButtonIndex];
-			if (!selectedButton->IsSelectedDisplay())
-			{
-				selectedButton->SetSelectedDisplay(true);
-			}
-		}
-	}
-}
+
 
 void MainMenu::ActivateSinglePlayerDisplay()
 {
 	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
 	AddSceneObject(startButton);
+	activeButtons.push_back(startButton);
 }
 
 void MainMenu::ActivateMultiplayerDisplay()
@@ -237,19 +234,40 @@ void MainMenu::AddBackButton()
 	ClearMenu();
 	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.75f, Utils::WindowHeight * 0.25f));
 	AddSceneObject(backButton);
+	activeButtons.push_back(backButton);
 }
 
+
+void MainMenu::ActivateModeSelectionDisplay()
+{
+	std::cout << "ActivateModeSelectionDisplay " << selectedButtonIndex << std::endl;
+	if (selectedButtonIndex < activeButtons.size())
+	{
+		if (activeButtons[selectedButtonIndex] != nullptr)
+		{
+			if (selectedButton != nullptr)
+			{
+				selectedButton->SetSelectedDisplay(false);
+			}
+			selectedButton = activeButtons[selectedButtonIndex];
+			if (!selectedButton->IsSelectedDisplay())
+			{
+				selectedButton->SetSelectedDisplay(true);
+			}
+		}
+	}
+}
 void MainMenu::SetSelectedButton(sf::Vector2f _stickAxis)
 {
 	std::cout << "SetSelectedButton" << std::endl;
-	if (_stickAxis.x > 0)
+	if (_stickAxis.y < 0)
 	{
-		if (selectedButtonIndex - 1 > 0)
+		if (selectedButtonIndex - 1 >= 0)
 		{
 			selectedButtonIndex -= 1;
 		}
 	}
-	else if (_stickAxis.x < 0)
+	else if (_stickAxis.y > 0)
 	{
 		if (selectedButtonIndex + 1 < activeButtons.size())
 		{

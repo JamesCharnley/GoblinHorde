@@ -35,6 +35,8 @@ public:
 
 	void ButtonAction(DisplayMode _mode);
 
+	bool actionLock = false;
+
 private:
 
 	DisplayMode displayMode;
@@ -66,8 +68,10 @@ private:
 	class Button* selectedButton = nullptr;
 	int selectedButtonIndex = 0;
 	bool stickCoolDown = false;
-	float stickCoolDownTime = 0.8f;
+	float stickCoolDownTime = 0.4f;
 	float stickTimer = 0;
+
+	
 
 	void SetSelectedButton(sf::Vector2f _stickAxis);
 

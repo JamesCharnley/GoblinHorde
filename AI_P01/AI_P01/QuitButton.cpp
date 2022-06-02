@@ -6,16 +6,7 @@ QuitButton::QuitButton(sf::RenderWindow* _window, Scene* _scene, sf::Vector2f _p
 
 }
 
-void QuitButton::Update(float _deltatime)
+void QuitButton::PerformAction()
 {
-	GameObjectRectangle::Update(_deltatime);
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
-
-		if (rectangle.getGlobalBounds().contains(mousePos))
-		{
-			scene->Quit();
-		}
-	}
+	scene->Quit();
 }
