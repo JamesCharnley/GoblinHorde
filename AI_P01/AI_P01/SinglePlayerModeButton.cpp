@@ -7,12 +7,15 @@ SinglePlayerModeButton::SinglePlayerModeButton(sf::RenderWindow* _window, Scene*
 
 void SinglePlayerModeButton::Update(float _deltatime)
 {
+	GameObject_Rectangle::Update(_deltatime);
+	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
 
 		if (rectangle.getGlobalBounds().contains(mousePos))
 		{
+			
 			MainMenu* menu = dynamic_cast<MainMenu*>(scene);
 			if (menu)
 			{

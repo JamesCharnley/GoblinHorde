@@ -9,6 +9,7 @@ Start_Button::Start_Button(sf::RenderWindow* _window, Scene* _scene, sf::Vector2
 
 void Start_Button::Update(float _deltatime)
 {
+	GameObject_Rectangle::Update(_deltatime);
 	//When the mouse clicks on the button, scene changes to level one
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{

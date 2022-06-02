@@ -106,6 +106,22 @@ void MainMenu::Update(float _dtime)
 			canStartGame = false;
 		}
 	}
+
+	if (stickTimer > 0)
+	{
+		stickTimer -= _dtime;
+	}
+	else
+	{
+		if (stickCoolDown)
+		{
+			stickCoolDown = false;
+		}
+	}
+	if (!stickCoolDown)
+	{
+		CheckForControllerInput();
+	}
 }
 
 
@@ -137,6 +153,9 @@ void MainMenu::ButtonAction(DisplayMode _mode)
 
 void MainMenu::ClearMenu()
 {
+	selectedButton = nullptr;
+	activeButtons.clear();
+
 	canStartGame = false;
 	DestroySceneObject(quitButton);
 	quitButton = nullptr;
@@ -149,24 +168,52 @@ void MainMenu::ClearMenu()
 	DestroySceneObject(startButton);
 	startButton = nullptr;
 	messageText->SetText(" ");
+
+	
 }
 
 void MainMenu::ActivateDefaultDisplay()
 {
 	ClearMenu();
+
+	singleplayerButton = new SinglePlayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.4f));
+	AddSceneObject(singleplayerButton);
+	activeButtons.push_back(singleplayerButton);
+
+	multiplayerButton = new MultiplayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
+	AddSceneObject(multiplayerButton);
+	activeButtons.push_back(multiplayerButton);
+
 	quitButton = new Quit_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.75f));
 	AddSceneObject(quitButton);
+	activeButtons.push_back(quitButton);
+
+	selectedButtonIndex = 0;
+
+	ActivateModeSelectionDisplay();
 	//Title_Button* title = new Title_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.25f));
 	//AddSceneObject(title);
-	singleplayerButton = new SinglePlayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.3f, Utils::WindowHeight * 0.5f));
-	AddSceneObject(singleplayerButton);
-	multiplayerButton = new MultiplayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.6f, Utils::WindowHeight * 0.5f));
-	AddSceneObject(multiplayerButton);
+	
 	
 }
 
 void MainMenu::ActivateModeSelectionDisplay()
 {
+	if (selectedButtonIndex < activeButtons.size())
+	{
+		if (activeButtons[selectedButtonIndex] != nullptr)
+		{
+			if (selectedButton != nullptr)
+			{
+				selectedButton->SetSelectedDisplay(false);
+			}
+			selectedButton = activeButtons[selectedButtonIndex];
+			if (!selectedButton->IsSelectedDisplay())
+			{
+				selectedButton->SetSelectedDisplay(true);
+			}
+		}
+	}
 }
 
 void MainMenu::ActivateSinglePlayerDisplay()
@@ -190,4 +237,49 @@ void MainMenu::AddBackButton()
 	ClearMenu();
 	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.75f, Utils::WindowHeight * 0.25f));
 	AddSceneObject(backButton);
+}
+
+void MainMenu::SetSelectedButton(sf::Vector2f _stickAxis)
+{
+	std::cout << "SetSelectedButton" << std::endl;
+	if (_stickAxis.x > 0)
+	{
+		if (selectedButtonIndex - 1 > 0)
+		{
+			selectedButtonIndex -= 1;
+		}
+	}
+	else if (_stickAxis.x < 0)
+	{
+		if (selectedButtonIndex + 1 < activeButtons.size())
+		{
+			selectedButtonIndex += 1;
+		}
+	}
+	ActivateModeSelectionDisplay();
+}
+
+void MainMenu::CheckForControllerInput()
+{
+	float deadZone = 15.0f;
+
+	float lStickX = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::X);	//left sick
+	float lStickY = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Y);
+
+	if (lStickX > -deadZone && lStickX < deadZone)
+	{
+		lStickX = 0;
+	}
+	if (lStickY > -deadZone && lStickY < deadZone)
+	{
+		lStickY = 0;
+	}
+
+	if (lStickX != 0 || lStickY != 0)
+	{
+		SetSelectedButton(sf::Vector2f(lStickX, lStickY));
+		stickCoolDown = true;
+		stickTimer = stickCoolDownTime;
+	}
+	
 }

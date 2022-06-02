@@ -8,6 +8,7 @@ Quit_Button::Quit_Button(sf::RenderWindow* _window, Scene* _scene, sf::Vector2f 
 
 void Quit_Button::Update(float _deltatime)
 {
+	GameObject_Rectangle::Update(_deltatime);
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
