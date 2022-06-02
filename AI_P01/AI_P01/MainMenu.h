@@ -62,6 +62,17 @@ private:
 	void ActivatePlayReadyDisplay();
 	void AddBackButton();
 
+	std::vector<class Button*> activeButtons;
+	class Button* selectedButton = nullptr;
+	int selectedButtonIndex = 0;
+	bool stickCoolDown = false;
+	float stickCoolDownTime = 0.8f;
+	float stickTimer = 0;
+
+	void SetSelectedButton(sf::Vector2f _stickAxis);
+
+	void CheckForControllerInput();
+
 	#ifdef _DEBUG
 		bool isDebug = true;
 	#else

@@ -11,6 +11,7 @@ GameText::GameText(std::string filePath, sf::Vector2f position)
 void GameText::SetString(std::string newText)
 {
 	gameText.setString(newText);
+	gameText.setOrigin(sf::Vector2f(gameText.getLocalBounds().width / 2, (gameText.getLocalBounds().height + gameText.getCharacterSize() / 2) / 2));
 }
 
 
