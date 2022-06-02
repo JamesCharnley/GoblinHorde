@@ -1,8 +1,8 @@
 #include "MainMenu.h"
 #include "Button.h"
-#include "Start_Button.h"
-#include "Quit_Button.h"
-#include "Title_Button.h"
+#include "StartButton.h"
+#include "QuitButton.h"
+#include "TitleButton.h"
 #include "SinglePlayerModeButton.h"
 #include "MultiplayerModeButton.h"
 #include "BackButton.h"
@@ -25,15 +25,15 @@ void MainMenu::Start()
 	displayMode = DisplayMode::DefaultMode;
 
 	// Set Menu Background.
-	MenuBackground = new GameObject_Rectangle(window, this);
+	MenuBackground = new GameObjectRectangle(window, this);
 	MenuBackground->AddSprite("Resources/Textures/Grass.png");
 	AddSceneObject(MenuBackground);
 
-	messageText = new GameObject_Text(window, this, "");
+	messageText = new GameObjectText(window, this, "");
 	AddSceneObject(messageText);
 
 	// Set Menu Title, half window width - half its own width.
-	MenuTitle = new GameObject_Rectangle(window, this);
+	MenuTitle = new GameObjectRectangle(window, this);
 	MenuTitle->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 -375.0f, 100.0f));
 	MenuTitle->AddSprite("Resources/Textures/MenuTitle.png");
 	AddSceneObject(MenuTitle);
@@ -184,7 +184,7 @@ void MainMenu::ActivateDefaultDisplay()
 	AddSceneObject(multiplayerButton);
 	activeButtons.push_back(multiplayerButton);
 
-	quitButton = new Quit_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.75f));
+	quitButton = new QuitButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.75f));
 	AddSceneObject(quitButton);
 	activeButtons.push_back(quitButton);
 
@@ -218,13 +218,13 @@ void MainMenu::ActivateModeSelectionDisplay()
 
 void MainMenu::ActivateSinglePlayerDisplay()
 {
-	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
+	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
 	AddSceneObject(startButton);
 }
 
 void MainMenu::ActivateMultiplayerDisplay()
 {
-	startButton = new Start_Button(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
+	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
 	AddSceneObject(startButton);
 }
 

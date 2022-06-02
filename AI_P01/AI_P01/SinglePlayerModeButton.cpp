@@ -7,7 +7,7 @@ SinglePlayerModeButton::SinglePlayerModeButton(sf::RenderWindow* _window, Scene*
 
 void SinglePlayerModeButton::Update(float _deltatime)
 {
-	GameObject_Rectangle::Update(_deltatime);
+	GameObjectRectangle::Update(_deltatime);
 	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{

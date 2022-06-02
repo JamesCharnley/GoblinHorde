@@ -8,7 +8,7 @@ MultiplayerModeButton::MultiplayerModeButton(sf::RenderWindow* _window, Scene* _
 
 void MultiplayerModeButton::Update(float _deltatime)
 {
-	GameObject_Rectangle::Update(_deltatime);
+	GameObjectRectangle::Update(_deltatime);
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window);
