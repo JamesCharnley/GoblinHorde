@@ -26,6 +26,8 @@ public:
 	//Render the sf::Text to window
 	void Render(sf::RenderWindow* window);
 
+	void SetColor(sf::Color _color) { gameText.setFillColor(_color); };
+
 private:
 	sf::Font gameFont;
 	sf::Text gameText;

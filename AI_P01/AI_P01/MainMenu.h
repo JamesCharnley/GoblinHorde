@@ -37,6 +37,15 @@ public:
 
 	bool actionLock = false;
 
+	int GetNumberOfPlayers() { return numberOfPlayers; };
+
+	void AddPlayer();
+	void RemovePlayer();
+
+	void StartGame();
+
+	bool IsDebugMode() { return isDebug; };
+
 private:
 
 	DisplayMode displayMode;
@@ -50,11 +59,17 @@ private:
 	class GameObjectText* messageText;
 	class GameObjectRectangle* MenuTitle;
 	class GameObjectRectangle* MenuBackground;
+
+	class LobbySlot* lobbySlot1;
+	class LobbySlot* lobbySlot2;
+	class LobbySlot* lobbySlot3;
+	class LobbySlot* lobbySlot4;
+
 	sf::Music music;
 
 	bool canStartGame = false;
 
-	int numberOfPlayers = 1;
+	int numberOfPlayers = 0;
 
 	void ClearMenu();
 	void ActivateDefaultDisplay();

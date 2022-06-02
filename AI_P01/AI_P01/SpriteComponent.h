@@ -23,6 +23,9 @@ public:
     void Render(sf::RenderWindow* _window);
 
     void UpdateSize(sf::Vector2f _size);
+    sf::Vector2f GetScale() { return sprite.getScale(); };
+    sf::Vector2f GetOrigin() { return sprite.getOrigin(); };
+    void SetTransparency(float _value);
 
 protected:
     SpriteComponent();

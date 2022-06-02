@@ -13,7 +13,7 @@ Button::Button(sf::Vector2f position, std::string text, sf::RenderWindow* _windo
 														//change 30 to getCharacterSize() from gameText
 	SetSize(sf::Vector2f(text.length() * 17, 30));
 	SetPosition(position);
-	rectangle.setFillColor(sf::Color::Red);
+	rectangle.setFillColor(sf::Color::White);
 	originSize = GetSize();
 }
 

@@ -36,3 +36,11 @@ void SpriteComponent::UpdateSize(sf::Vector2f _size)
 	sprite.setScale(sf::Vector2f(newSizeX, newSizeY));
 	sprite.setOrigin(sf::Vector2f((float)texSize.x / 2, (float)texSize.y / 2));
 }
+
+void SpriteComponent::SetTransparency(float _value)
+{
+	//std::cout << (int)sprite.getColor().r << ", " << (int)sprite.getColor().g << ", " << (int)sprite.getColor().b << ", " << (int)sprite.getColor().a << std::endl;
+	sprite.setColor(sf::Color(255 * _value, 255 * _value, 255 * _value, 255 * _value));
+	//std::cout << (int)sprite.getColor().r << ", " << (int)sprite.getColor().g << ", " << (int)sprite.getColor().b << ", " << (int)sprite.getColor().a << std::endl;
+	
+}

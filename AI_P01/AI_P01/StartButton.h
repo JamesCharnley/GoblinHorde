@@ -16,11 +16,11 @@ Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.
 class StartButton : public Button
 {
 public:
-	StartButton(sf::RenderWindow* _window, Scene* _scene, sf::Vector2f _position, int _numOfPlayers);
+	StartButton(sf::RenderWindow* _window, Scene* _scene, sf::Vector2f _position);
 	virtual void PerformAction() override;
-
+	virtual void Update(float _deltaTime) override;
 private:
 
-	int numberOfPlayers = 1;
+	
 };
 

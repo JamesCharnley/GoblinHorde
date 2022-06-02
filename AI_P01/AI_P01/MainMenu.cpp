@@ -8,6 +8,8 @@
 #include "BackButton.h"
 #include "Utility.h"
 #include "GameObject_Text.h"
+#include "LobbySlot.h"
+
 MainMenu::MainMenu(Game* _gameClass, sf::RenderWindow* _window)
 {
 	if (isDebug)
@@ -34,7 +36,7 @@ void MainMenu::Start()
 
 	// Set Menu Title, half window width - half its own width.
 	MenuTitle = new GameObjectRectangle(window, this);
-	MenuTitle->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 -375.0f, 100.0f));
+	MenuTitle->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 - 375.0f, 100.0f));
 	MenuTitle->AddSprite("Resources/Textures/MenuTitle.png");
 	AddSceneObject(MenuTitle);
 
@@ -55,57 +57,6 @@ void MainMenu::Start()
 void MainMenu::Update(float _dtime)
 {
 	Scene::Update(_dtime);
-
-
-	if (displayMode == DisplayMode::SinglePlayer)
-	{
-		if (sf::Joystick::isConnected(0))
-		{
-			messageText->SetText("Controller Connected. Ready to start game.");
-			if (canStartGame == false)
-			{
-				canStartGame = true;
-				numberOfPlayers = 1;
-				ActivateSinglePlayerDisplay();
-			}
-			
-		}
-		else
-		{
-			messageText->SetText("No Controller Detected. Controls default to keyboard.");
-			canStartGame = false;
-		}
-	}
-	if (displayMode == DisplayMode::MultiPlayer)
-	{
-		if (sf::Joystick::isConnected(0) && sf::Joystick::isConnected(1))
-		{
-			messageText->SetText("Two Controllers Connected. Ready to start game.");
-			if (canStartGame == false)
-			{
-				canStartGame = true;
-				numberOfPlayers = 2;
-				ActivateMultiplayerDisplay();
-			}
-
-		}
-		else if (isDebug)
-		{
-			messageText->SetText("Debug build: skipping controller requirement");
-			if (canStartGame == false)
-			{
-				canStartGame = true;
-				numberOfPlayers = 2; 
-				ActivateMultiplayerDisplay();
-			}
-
-		}
-		else
-		{
-			messageText->SetText("Not Enough Controllers Detected.");
-			canStartGame = false;
-		}
-	}
 
 	if (stickTimer > 0)
 	{
@@ -154,7 +105,7 @@ void MainMenu::ButtonAction(DisplayMode _mode)
 		AddBackButton();
 		break;
 	case DisplayMode::MultiPlayer:
-		AddBackButton();
+		ActivateMultiplayerDisplay();
 		break;
 	case DisplayMode::PlayReady:
 		ActivatePlayReadyDisplay();
@@ -164,10 +115,30 @@ void MainMenu::ButtonAction(DisplayMode _mode)
 	}
 }
 
+void MainMenu::AddPlayer()
+{
+	numberOfPlayers++;
+	std::cout << "Players: " << numberOfPlayers << std::endl;
+}
+
+void MainMenu::RemovePlayer()
+{
+	numberOfPlayers--;
+	std::cout << "Players: " << numberOfPlayers << std::endl;
+}
+
+void MainMenu::StartGame()
+{
+	SetNumberOfPlayers(numberOfPlayers);
+	ChangeScene("Level_One");
+}
+
 void MainMenu::ClearMenu()
 {
 	selectedButton = nullptr;
 	activeButtons.clear();
+
+	numberOfPlayers = 0;
 
 	canStartGame = false;
 	DestroySceneObject(quitButton);
@@ -181,7 +152,14 @@ void MainMenu::ClearMenu()
 	DestroySceneObject(startButton);
 	startButton = nullptr;
 	messageText->SetText(" ");
-
+	DestroySceneObject(lobbySlot1);
+	lobbySlot1 = nullptr;
+	DestroySceneObject(lobbySlot2);
+	lobbySlot2 = nullptr;
+	DestroySceneObject(lobbySlot3);
+	lobbySlot3 = nullptr;
+	DestroySceneObject(lobbySlot4);
+	lobbySlot4 = nullptr;
 	
 }
 
@@ -189,15 +167,15 @@ void MainMenu::ActivateDefaultDisplay()
 {
 	ClearMenu();
 
-	singleplayerButton = new SinglePlayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.4f));
-	AddSceneObject(singleplayerButton);
-	activeButtons.push_back(singleplayerButton);
+	//singleplayerButton = new SinglePlayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.4f));
+	//AddSceneObject(singleplayerButton);
+	//activeButtons.push_back(singleplayerButton);
 
 	multiplayerButton = new MultiplayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
 	AddSceneObject(multiplayerButton);
 	activeButtons.push_back(multiplayerButton);
 
-	quitButton = new QuitButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.75f));
+	quitButton = new QuitButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.6f));
 	AddSceneObject(quitButton);
 	activeButtons.push_back(quitButton);
 
@@ -214,15 +192,38 @@ void MainMenu::ActivateDefaultDisplay()
 
 void MainMenu::ActivateSinglePlayerDisplay()
 {
-	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
+	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
 	AddSceneObject(startButton);
 	activeButtons.push_back(startButton);
 }
 
 void MainMenu::ActivateMultiplayerDisplay()
 {
-	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f), numberOfPlayers);
+	ClearMenu();
+
+	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.4f));
+	AddSceneObject(backButton);
+	activeButtons.push_back(backButton);
+
+	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
 	AddSceneObject(startButton);
+	activeButtons.push_back(startButton);
+
+	lobbySlot1 = new LobbySlot(window, this, 0);
+	lobbySlot1->SetPosition(sf::Vector2f((Utils::WindowWidth / 4) * 1 - (Utils::WindowWidth / 4) * 0.5f, Utils::WindowHeight * 0.75f));
+	AddSceneObject(lobbySlot1);
+
+	lobbySlot2 = new LobbySlot(window, this, 1);
+	lobbySlot2->SetPosition(sf::Vector2f((Utils::WindowWidth / 4) * 2 - (Utils::WindowWidth / 4) * 0.5f, Utils::WindowHeight * 0.75f));
+	AddSceneObject(lobbySlot2);
+
+	lobbySlot3 = new LobbySlot(window, this, 2);
+	lobbySlot3->SetPosition(sf::Vector2f((Utils::WindowWidth / 4) * 3 - (Utils::WindowWidth / 4) * 0.5f, Utils::WindowHeight * 0.75f));
+	AddSceneObject(lobbySlot3);
+
+	lobbySlot4 = new LobbySlot(window, this, 3);
+	lobbySlot4->SetPosition(sf::Vector2f((Utils::WindowWidth / 4) * 4 - (Utils::WindowWidth / 4) * 0.5f, Utils::WindowHeight * 0.75f));
+	AddSceneObject(lobbySlot4);
 }
 
 void MainMenu::ActivatePlayReadyDisplay()
@@ -232,7 +233,7 @@ void MainMenu::ActivatePlayReadyDisplay()
 void MainMenu::AddBackButton()
 {
 	ClearMenu();
-	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.75f, Utils::WindowHeight * 0.25f));
+	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.4f));
 	AddSceneObject(backButton);
 	activeButtons.push_back(backButton);
 }

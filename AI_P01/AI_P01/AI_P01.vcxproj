@@ -167,6 +167,7 @@
     <ClCompile Include="Interactable.cpp" />
     <ClCompile Include="ITakeDamage.cpp" />
     <ClCompile Include="LevelOne.cpp" />
+    <ClCompile Include="LobbySlot.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MultiplayerModeButton.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Interactable.h" />
     <ClInclude Include="ITakeDamage.h" />
     <ClInclude Include="LevelOne.h" />
+    <ClInclude Include="LobbySlot.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MultiplayerModeButton.h" />
     <ClInclude Include="PickUp.h" />
