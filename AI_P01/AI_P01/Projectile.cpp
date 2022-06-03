@@ -9,7 +9,7 @@
 #include "Utility.h"
 #include "Projectile.h"
 
-Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner, float _damage, float _speed)
+Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner, float _damage, float _speed, const char* _spriteFile)
 {
 	window = _window;
 	scene = _scene;
@@ -23,6 +23,8 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 	direction = SFMLVectorMath::AngleToDirection(GetRotation());
 	direction = SFMLVectorMath::Normalize(direction);
 
+	AddSprite(_spriteFile);
+	SetColor(sf::Color::Transparent);
 	// set radius and setup collider
 	SetRadius(5.0f);
 	AddCollider(ECollisionType::Block);
@@ -43,6 +45,7 @@ Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation
 
 void Projectile::Update(float _deltatime)
 {
+	GameObjectCircle::Update(_deltatime);
 	SetPosition(GetPosition() + direction * (speed * _deltatime));
 
 	// destroy projectile if it leaves window

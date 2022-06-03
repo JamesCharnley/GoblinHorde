@@ -76,6 +76,9 @@ protected:
     FWeapon::Data weaponData;
     GameObject* owner = nullptr;
     bool inAction = false;
+
+    const char* bulletSpriteFile;
+
 private:
     FWeapon::Data GetBaseWeaponData();
 

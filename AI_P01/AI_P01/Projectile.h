@@ -17,7 +17,7 @@ class Projectile :
 {
 public:
 
-    Projectile(sf::RenderWindow* _window, class Scene* _scene, float _rotation, GameObject* _owner, float _damage = 20.0f, float _speed = 600.0f);
+    Projectile(sf::RenderWindow* _window, class Scene* _scene, float _rotation, GameObject* _owner, float _damage = 20.0f, float _speed = 600.0f, const char* _spriteFile = "Resources/Textures/GlockBullet.png");
 
     virtual void Update(float _deltatime) override;
 

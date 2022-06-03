@@ -20,6 +20,22 @@ Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWe
 	owner = _owner;
 	weaponData = FWeapon::GetData(_weaponBase);
 	name = weaponData.name;
+	if (name == "Glock")
+	{
+		bulletSpriteFile = "Resources/Textures/GlockBullet.png";
+	}
+	else if (name == "SMG")
+	{
+		bulletSpriteFile = "Resources/Textures/SMGBullet.png";
+	}
+	else if (name == "Rifle")
+	{
+		bulletSpriteFile = "Resources/Textures/RifleBullet.png";
+	}
+	else
+	{
+		bulletSpriteFile = "Resources/Textures/GlockBullet.png";
+	}
 }
 
 void Weapon::Update(float _deltatime)
@@ -38,7 +54,7 @@ void Weapon::PerformAction()
 	if (!inAction)
 	{
 		// shoot 
-		Projectile* proj = new Projectile(window, scene, GetRotation(), this, weaponData.damage, weaponData.speed);
+		Projectile* proj = new Projectile(window, scene, GetRotation(), this, weaponData.damage, weaponData.speed, bulletSpriteFile);
 		proj->SetPosition(GetPosition());
 		scene->AddSceneObject(proj);
 		cooldownTimer = 1.0f / weaponData.actionsPerSecond;
