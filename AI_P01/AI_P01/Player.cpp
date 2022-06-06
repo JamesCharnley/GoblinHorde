@@ -303,20 +303,20 @@ void Player::CheckForInput(int _player)
 
 	if (rStickX > -deadZone && rStickX < deadZone)
 	{
-		rStickX = 0;
+		rStickX = 0.0f;
 	}
 	if (rStickY > -deadZone && rStickY < deadZone)
 	{
-		rStickY = 0;
+		rStickY = 0.0f;
 	}
 
-	if (lStickX > 0)
+	if (lStickX != 0.0f)
 	{
-		//lStickX /= 100;
+		lStickX /= (100.0f - deadZone);
 	}
-	if (lStickY > 0)
+	if (lStickY != 0.0f)
 	{
-		//lStickY /= 100;
+		lStickY /= (100.0f - deadZone);
 	}
 	if (!lastFrameSwitchWeapon && sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::PovX) > 0.0f)
 	{
