@@ -94,7 +94,7 @@ void Player::Update(float _deltatime)
 				actionText.setString(actionTextString);
 				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
 				{
-					base->Repair(25.0f * _deltatime);
+					base->Repair(_deltatime);
 				}
 			}
 			else

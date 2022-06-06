@@ -23,6 +23,8 @@ LevelOne::LevelOne(class Game* _gameClass, sf::RenderWindow* _window, int _numbe
 
 void LevelOne::Start()
 {
+	assert(numberOfPlayers > 0);
+
 	// set fps limit
 	window->setFramerateLimit(60);
 
@@ -32,7 +34,8 @@ void LevelOne::Start()
 	bg->SetSize(sf::Vector2f(Utils::WINDOW_X, Utils::WINDOW_Y));
 	AddSceneObject(bg);
 
-	Base* base = new Base(window, this);
+	const float WAVE_BREAK_TIME = 10.0f;
+	Base* base = new Base(window, this, numberOfPlayers, WAVE_BREAK_TIME);
 	AddSceneObject(base);
 
 	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this, EWeapon::SMG);
@@ -47,8 +50,7 @@ void LevelOne::Start()
 	weaponUpgrade->SetPosition(sf::Vector2f(base->GetPosition().x, base->GetPosition().y + base->GetRadius() * 0.5f));
 	AddSceneObject(weaponUpgrade);
 	
-	assert(numberOfPlayers > 0);
-	WaveManager* spawner = new WaveManager(window, this, base, numberOfPlayers);
+	WaveManager* spawner = new WaveManager(window, this, base, numberOfPlayers, WAVE_BREAK_TIME);
 	spawner->SetPosition(sf::Vector2f(-100, -100));
 
 	// create all GameObjects

@@ -9,7 +9,7 @@
 #include "Player.h"
 #include "Utility.h"
 
-WaveManager::WaveManager(sf::RenderWindow* _window, Scene* _scene, Base* _base, int _playerCount) 
+WaveManager::WaveManager(sf::RenderWindow* _window, Scene* _scene, Base* _base, int _playerCount, float _waveBreakTime) 
 	: EnemySpawner(_window, _scene, _base), DIFFICULTY_MODIFIER((float)_playerCount)
 {
 	//scale difficulty by player count
@@ -18,6 +18,7 @@ WaveManager::WaveManager(sf::RenderWindow* _window, Scene* _scene, Base* _base, 
 	waveDmg = baseWaveDmg;
 	waveHealth = baseWaveHealth;
 	totalWaveEnemies = baseTotalWaveEnemies;
+	waveBreakDuration = _waveBreakTime;
 }
 
 WaveManager::~WaveManager()

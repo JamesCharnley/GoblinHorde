@@ -31,6 +31,8 @@ void Game::Start()
 	ChangeScene(defaultStartScene);
 
 	sf::Clock deltaClock;
+	float deltaTime = 0;
+
 	while (window->isOpen())
 	{
 
@@ -44,13 +46,15 @@ void Game::Start()
 		if (currentScene != nullptr)
 		{
 			//Call Update() in current scene class
-			currentScene->Update(deltaClock.restart().asSeconds());
+			deltaTime = deltaClock.restart().asSeconds();
+			currentScene->Update(deltaTime);
 		}
 		if (newScene)
 		{
 			//Load a new scene class if NewScene is true
 			LoadScene(nextScene);
 		}
+		window->setTitle(sf::String("Goblin horde " + std::to_string((int)(1.0f / deltaTime)) + " FPS / " + std::to_string(deltaTime) + "ms"));
 	}
 }
 

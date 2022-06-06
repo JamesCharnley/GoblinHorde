@@ -18,7 +18,7 @@ class Spawn;
 class WaveManager : public EnemySpawner
 {
 public:
-	WaveManager(sf::RenderWindow* _window, Scene* _scene, class Base* _base, int _playerCount = 1);
+	WaveManager(sf::RenderWindow* _window, Scene* _scene, class Base* _base, int _playerCount = 1, float _waveBreakTime = 10.0f);
 	~WaveManager();
 
 	//ads a spawn pointer to spawnPoints vector
@@ -35,7 +35,7 @@ private:
 	void NextWave();
 
 	std::vector<Spawn*> spawnPoints;
-	float waveBreakDuration = 10.0f;
+	float waveBreakDuration;
 	float waveBreakTimer = 0.0f;
 
 	int currentWave = 0;

@@ -22,7 +22,7 @@ class Base :
 public:
 
     // custom constructor. Parameters: sf::RenderWindow*, Scene*
-    Base(sf::RenderWindow* _window, Scene* _scene);
+    Base(sf::RenderWindow* _window, Scene* _scene, int _playerCount, float _repairTime);
     virtual ~Base() override;
     virtual void Render() override;
 
@@ -32,15 +32,15 @@ public:
 
     bool InRange(class Player* _player);
 
-    void Repair(float _repairAmount);
+    void Repair(float _deltaTime);
 
     float GetCurrentHealth() { return currentHealth; };
     float GetMaxHealth() { return maxHealth; };
 
-protected:
 
-    
-
+protected:    
+    const int PLAYER_COUNT = 1;
+    const float REPAIR_TIME = 10.0f;
     float maxHealth = 1000.0f;
     float currentHealth = 0;
 

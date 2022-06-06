@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "Scene.h"
 
-Base::Base(sf::RenderWindow* _window, Scene* _scene)
+Base::Base(sf::RenderWindow* _window, Scene* _scene, int _playerCount, float _repairTime) : PLAYER_COUNT(_playerCount), REPAIR_TIME(_repairTime)
 {
 	window = _window;
 	scene = _scene;
@@ -78,16 +78,11 @@ bool Base::InRange(Player* _player)
 	return false;
 }
 
-void Base::Repair(float _repairAmount)
+void Base::Repair(float _deltaTime)
 {
-	if (currentHealth + _repairAmount <= maxHealth)
-	{
-		currentHealth += _repairAmount;
-	}
-	else
-	{
-		currentHealth = maxHealth;
-	}
+	float addedHealth = ((_deltaTime / REPAIR_TIME) * maxHealth) / (float)PLAYER_COUNT;
+	currentHealth += addedHealth;
+	currentHealth = std::min(currentHealth, maxHealth);
 	healthBar->SetScale(sf::Vector2f(currentHealth / maxHealth, 1));
 }
 
