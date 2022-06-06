@@ -57,23 +57,22 @@ void EnemySpawner::AddPlayer(Player* _player)
 	players.push_back(_player);
 }
 
-void EnemySpawner::SpawnEnemy(sf::Vector2f _position)
+void EnemySpawner::SpawnEnemy(sf::Vector2f _position, float _health, float _damage)
 {
-
 	//Spawns an enemy based on the random generated number
 	srand(time(NULL));
 
 	float randomNum = rand() % 10 + 1;
 	Enemy* enemy = nullptr;
 
-	if (randomNum < 5)
+	if (randomNum < 9)
 	{
-		enemy = new GoblinWeak(window, scene, this, base);
+		enemy = new GoblinWeak(window, scene, this, base, _health, _damage);
 	}
 
 	else
 	{
-		enemy = new GoblinNormal(window, scene, this, base);
+		enemy = new GoblinNormal(window, scene, this, base, _health * 2.0f, _damage * 1.5f);
 	}
 	
 	enemy->SetRadius(25.0f);

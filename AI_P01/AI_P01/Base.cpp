@@ -12,7 +12,7 @@ Base::Base(sf::RenderWindow* _window, Scene* _scene)
 	AddSprite("Resources/Textures/BaseGroundPH.png");
 	SetColor(sf::Color::Transparent);
 	SetRadius(125.0f);
-	SetPosition(sf::Vector2f((float)Utils::WindowWidth / 2.0f, (float)Utils::WindowHeight / 2.0f));
+	SetPosition(sf::Vector2f((float)Utils::WINDOW_X / 2.0f, (float)Utils::WINDOW_Y / 2.0f));
 	AddCollider(ECollisionType::Overlap);
 	collisionRadius = 125.0f;
 	

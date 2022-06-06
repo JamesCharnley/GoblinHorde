@@ -70,7 +70,7 @@ void Game::Exit()
 void Game::CreateGameWindow()
 {
 	//Store RenderWindow in GameWindow ptr
-	window = new sf::RenderWindow(sf::VideoMode(Utils::WindowWidth, Utils::WindowHeight), gameName);
+	window = new sf::RenderWindow(sf::VideoMode(Utils::WINDOW_X, Utils::WINDOW_Y), gameName);
 }
 
 void Game::LoadScene(std::string _sceneName)

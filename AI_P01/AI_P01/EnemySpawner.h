@@ -35,10 +35,10 @@ protected:
 
     int maximumEnemies = 2;
     int currentEnemyCount = 0;
-    float spawnInterval = 3.0f;
+    float spawnInterval = 2.5f;
     float spawnTimer = 0;
 
-    void SpawnEnemy(sf::Vector2f _position);
+    void SpawnEnemy(sf::Vector2f _position, float _health = 20.0f, float _damage = 5.0f);
     inline virtual void SpawnEnemy() { SpawnEnemy(sf::Vector2f(0.0f, 0.0f)); }
 
     std::vector<class Player*> players;

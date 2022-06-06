@@ -16,7 +16,7 @@ Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.
 class GoblinNormal : public Enemy
 {
 public:
-	GoblinNormal(sf::RenderWindow* _window, Scene* _scene, class Base* _base);
-	GoblinNormal(sf::RenderWindow* _window, Scene* _scene, class EnemySpawner* _spawner, class Base* _base);
+	GoblinNormal(sf::RenderWindow* _window, Scene* _scene, class Base* _base, float _health = 20.0f, float _damage = 5.0f);
+	GoblinNormal(sf::RenderWindow* _window, Scene* _scene, class EnemySpawner* _spawner, class Base* _base, float _health = 20.0f, float _damage = 5.0f);
 };
 

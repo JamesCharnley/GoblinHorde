@@ -4,7 +4,7 @@
 #include "Enemy.h"
 #include "Base.h"
 
-Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, Base* _base) : Character(_window, _scene)
+Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, Base* _base, float _health, float _damage) : Character(_window, _scene, _health)
 {
 	base = _base;
 	moveSpeed = 50.0f;
@@ -12,13 +12,9 @@ Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, Base* _base) : Character(
 	AddCollider(ECollisionType::Block);
 }
 
-Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner, Base* _base) : Character(_window, _scene)
+Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner, Base* _base, float _health, float _damage) : Enemy(_window, _scene, _base, _health, _damage)
 {
-	base = _base;
-	moveSpeed = 50.0f;
 	spawner = _spawner;
-	//circle.setFillColor(sf::Color::Red);
-	AddCollider(ECollisionType::Block);
 }
 
 void Enemy::Update(float _deltatime)

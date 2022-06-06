@@ -10,7 +10,7 @@ BaseCreator::BaseCreator(sf::RenderWindow* _window, Scene* _scene)
 	baseGround->AddSprite("Resources/Textures/BaseGroundPH.png");
 	baseGround->SetColor(sf::Color::Transparent);
 	baseGround->SetSize(sf::Vector2f(200.0f, 200.0f));
-	baseGround->SetPosition(sf::Vector2f((float)Utils::WindowWidth / 2.0f, (float)Utils::WindowHeight / 2.0f));
+	baseGround->SetPosition(sf::Vector2f((float)Utils::WINDOW_X / 2.0f, (float)Utils::WINDOW_Y / 2.0f));
 
 	_scene->AddSceneObject(baseGround);
 

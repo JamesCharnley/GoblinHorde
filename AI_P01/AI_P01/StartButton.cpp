@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include "SpriteComponent.h"
 #include "GameText.h"
+#include "Utility.h"
 
 StartButton::StartButton(sf::RenderWindow* _window, Scene* _scene, sf::Vector2f _position) : Button(_position, "Start", _window, _scene)
 {
@@ -15,7 +16,7 @@ void StartButton::PerformAction()
 	MainMenu* menu = dynamic_cast<MainMenu*>(scene);
 	if (menu)
 	{
-		if (menu->GetNumberOfPlayers() > 0 || menu->IsDebugMode())
+		if (menu->GetNumberOfPlayers() > 0 || Utils::IS_DEBUG)
 		{
 			menu->StartGame();
 		}
@@ -30,7 +31,7 @@ void StartButton::Update(float _deltaTime)
 	MainMenu* menu = dynamic_cast<MainMenu*>(scene);
 	if (menu)
 	{
-		if (menu->GetNumberOfPlayers() > 0 || menu->IsDebugMode())
+		if (menu->GetNumberOfPlayers() > 0 || Utils::IS_DEBUG)
 		{
 			sprite->SetTransparency(1.0f);
 			buttonText->SetColor(sf::Color::White);

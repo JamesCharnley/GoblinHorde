@@ -49,7 +49,7 @@ void Projectile::Update(float _deltatime)
 	SetPosition(GetPosition() + direction * (speed * _deltatime));
 
 	// destroy projectile if it leaves window
-	if (GetPosition().x > (float)Utils::WindowWidth || GetPosition().x < 0 || GetPosition().y > (float)Utils::WindowHeight || GetPosition().y < 0)
+	if (GetPosition().x > (float)Utils::WINDOW_X || GetPosition().x < 0 || GetPosition().y > (float)Utils::WINDOW_Y || GetPosition().y < 0)
 	{
 		Destroy();
 	}

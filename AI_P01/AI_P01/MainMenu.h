@@ -44,8 +44,6 @@ public:
 
 	void StartGame();
 
-	bool IsDebugMode() { return isDebug; };
-
 private:
 
 	DisplayMode displayMode;
@@ -91,11 +89,5 @@ private:
 	void SetSelectedButton(sf::Vector2f _stickAxis);
 
 	void CheckForControllerInput();
-
-	#ifdef _DEBUG
-		bool isDebug = true;
-	#else
-		bool isDebug = false;
-	#endif
 };
 

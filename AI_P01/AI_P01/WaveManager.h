@@ -35,17 +35,22 @@ private:
 	void NextWave();
 
 	std::vector<Spawn*> spawnPoints;
-	float waveBreakDuration = 3.0f;
+	float waveBreakDuration = 10.0f;
 	float waveBreakTimer = 0.0f;
 
 	int currentWave = 0;
 	int waveSpawnedEnemies= 0;
 
-	//linear for now, shold look into feeding the wave number into a function for these values later
-	int totalWaveEnemies = 4;
-	int totalWaveEnemiesIncrement = 3;
-	int maximumEnemiesIncrement = 2;
+	int baseTotalWaveEnemies = 4;
+	int totalWaveEnemies;
+	float maximumEnemiesIncrement = 1.5;
+
+	float baseWaveDmg = 5.0f;
+	float baseWaveHealth = 20.0f;
+	float waveDmg = 5.0f;
+	float waveHealth = 20.0f;
 
 	const float DIFFICULTY_MODIFIER;
+
 };
 

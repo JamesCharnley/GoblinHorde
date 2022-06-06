@@ -13,6 +13,8 @@ Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.
 #pragma once
 #include "Scene.h"
 #include <SFML/Audio.hpp>
+#include <cassert>
+
 
 class LevelOne :
     public Scene

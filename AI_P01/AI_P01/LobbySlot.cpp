@@ -17,7 +17,7 @@ LobbySlot::LobbySlot(sf::RenderWindow* _window, Scene* _scene, int _controllerIn
 	AddSprite("Resources/Textures/LobbySlot_BG.png");
 	sprite->SetTransparency(0.85f);
 
-	SetSize(sf::Vector2f(Utils::WindowWidth * 0.2f, Utils::WindowWidth * 0.2f));
+	SetSize(sf::Vector2f(Utils::WINDOW_X * 0.2f, Utils::WINDOW_X * 0.2f));
 
 	controllerIconTexture.loadFromFile("Resources/Textures/ControllerIcon.png");
 	controllerIcon.setTexture(controllerIconTexture);

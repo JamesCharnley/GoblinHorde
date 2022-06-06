@@ -19,8 +19,8 @@ class Enemy :
 {
 public:
 
-    Enemy(sf::RenderWindow* _window, Scene* _scene, class Base* _base);
-    Enemy(sf::RenderWindow* _window, Scene* _scene, class EnemySpawner* _spawner, class Base* _base);
+    Enemy(sf::RenderWindow* _window, Scene* _scene, class Base* _base, float _health = 20.0f, float _damage = 5.0f);
+    Enemy(sf::RenderWindow* _window, Scene* _scene, class EnemySpawner* _spawner, class Base* _base, float _health = 20.0f, float _damage = 5.0f);
 
     virtual void Update(float _deltatime) override;
 
@@ -36,7 +36,7 @@ protected:
     class Player* closestPlayer = nullptr;
     class EnemySpawner* spawner = nullptr;
 
-    int goldReward = 100;
+    int goldReward = 35;
 
     class Base* base;
 
@@ -45,7 +45,7 @@ private:
     float damageTimer = 0.0f;
     float damageIntervial = 1.0f;
 
-    int damage = 5;
+    float damage = 5.0f;
     float attackRange = 3.0f;
 
     sf::Sound hitSFX;

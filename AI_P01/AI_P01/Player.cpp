@@ -7,7 +7,7 @@
 #include "Base.h"
 
 
-Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene)
+Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene, 100.0f)
 {
 	weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Glock));
 	//weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Rifle));
@@ -149,7 +149,7 @@ void Player::SetPlayersNumber(int _number)
 void Player::AddGold(int _amount)
 {
 	currentGold += _amount;
-	std::cout << "Gold: " << currentGold << std::endl;
+	//std::cout << "Gold: " << currentGold << std::endl;
 }
 
 void Player::RemoveGold(int _amount)
@@ -182,7 +182,7 @@ void Player::PollController(int _controllerIndex)
 		if (sf::Joystick::isButtonPressed(_controllerIndex, i))
 		{
 			pressedButtonNames.push_back(GetButtonMapping(i));
-			std::cout << "Pressed: " << i << std::endl;
+			//std::cout << "Pressed: " << i << std::endl;
 		}
 	}
 

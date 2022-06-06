@@ -3,14 +3,15 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Weapon.h"
+#include "Utility.h"
 
 //assign weapon stats here
 std::map<EWeapon, FWeapon::Data> FWeapon::dataMap =
 {															      //dmg | firerate | ammo | bullet speed
-	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			10,		3.0f,	 100,	600.0f,		"Glock")},
-	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				10,		7.0f,	 150,	800.0f,		"SMG")},
-	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			20,		5.0f,	 100,	1000.0f,	"Rifle")},
-	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200,	80.0f,	 100,	600.0f,		"Debug gun")},
+	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			7.0f,		3.0f,	 100,	600.0f,		"Glock")},
+	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				6.0f,		7.0f,	 150,	800.0f,		"SMG")},
+	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			25.0f,		5.0f,	 100,	1000.0f,	"Rifle")},
+	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200.0f,		80.0f,	 100,	600.0f,		"Debug gun")},
 };
 
 Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWeapon _weaponBase)
@@ -80,6 +81,12 @@ FWeapon::Data Weapon::GetWeaponData()
 
 void Weapon::Upgrade()
 {
+
+	float oldDmg = weaponData.damage;
+	float oldFireRate = weaponData.actionsPerSecond;
+	float oldSpeed = weaponData.speed;
+
+
 	weaponData.level++;
 
 	//set weaponData to the base atribute + the level bonus
@@ -97,7 +104,16 @@ void Weapon::Upgrade()
 
 	//projectile speed
 	const float BASE_PERCENT_SPEED = 10.0f;
-	weaponData.damage += (GetBaseWeaponData().speed * (BASE_PERCENT_SPEED / 100.0f)); //add basePercent of base damage each upgrade
+	weaponData.speed += (GetBaseWeaponData().speed * (BASE_PERCENT_SPEED / 100.0f)); //add basePercent of base damage each upgrade
+
+	if (Utils::IS_DEBUG)
+	{
+		std::cout << "\n**Upgraded weapon**\n";
+		std::cout << "DMG: " << oldDmg << " > " << weaponData.damage << "\n";
+		std::cout << "APS: " << oldFireRate << " > " << weaponData.actionsPerSecond << "\n";
+		std::cout << "SPD: " << oldSpeed << " > " << weaponData.speed << "\n";
+		std::cout << "DPS: " << oldDmg * oldFireRate << " > " << weaponData.damage * weaponData.actionsPerSecond << "\n\n";
+	}
 
 }
 

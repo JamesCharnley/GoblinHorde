@@ -22,7 +22,7 @@ class Character :
 public:
 
     // Custom constructor: takes ref to sf::RenderWindow and Scene() class
-    Character(sf::RenderWindow* _window, class Scene* _scene);
+    Character(sf::RenderWindow* _window, class Scene* _scene, float _maxHealth);
 
     // override update
     virtual void Update(float _deltatime) override;

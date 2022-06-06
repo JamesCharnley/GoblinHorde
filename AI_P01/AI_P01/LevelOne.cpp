@@ -27,9 +27,9 @@ void LevelOne::Start()
 	window->setFramerateLimit(60);
 
 	GameObjectRectangle* bg = new GameObjectRectangle(window, this);
-	bg->SetPosition(sf::Vector2f(Utils::WindowWidth / 2, Utils::WindowHeight / 2));
+	bg->SetPosition(sf::Vector2f(Utils::WINDOW_X / 2, Utils::WINDOW_Y / 2));
 	bg->AddSprite("Resources/Textures/Grass.png");
-	bg->SetSize(sf::Vector2f(Utils::WindowWidth, Utils::WindowHeight));
+	bg->SetSize(sf::Vector2f(Utils::WINDOW_X, Utils::WINDOW_Y));
 	AddSceneObject(bg);
 
 	Base* base = new Base(window, this);
@@ -46,7 +46,8 @@ void LevelOne::Start()
 	WeaponUpgrade* weaponUpgrade = new WeaponUpgrade(window, this);
 	weaponUpgrade->SetPosition(sf::Vector2f(base->GetPosition().x, base->GetPosition().y + base->GetRadius() * 0.5f));
 	AddSceneObject(weaponUpgrade);
-
+	
+	assert(numberOfPlayers > 0);
 	WaveManager* spawner = new WaveManager(window, this, base, numberOfPlayers);
 	spawner->SetPosition(sf::Vector2f(-100, -100));
 
@@ -58,7 +59,7 @@ void LevelOne::Start()
 	player1->SetPlayersNumber(1);
 	player1->SetCollisionRadius(25.0f);
 	player1->GetCollider()->SetCollisionType(ECollisionType::Block);
-	player1->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 - player1->GetRadius() * 3, Utils::WindowHeight / 2));
+	player1->SetPosition(sf::Vector2f(Utils::WINDOW_X / 2 - player1->GetRadius() * 3, Utils::WINDOW_Y / 2));
 	player1->SetSpawnPoint(player1->GetPosition());
 	AddSceneObject(player1);
 
@@ -73,7 +74,7 @@ void LevelOne::Start()
 		player2->SetPlayersNumber(2);
 		player2->SetCollisionRadius(25.0f);
 		player2->GetCollider()->SetCollisionType(ECollisionType::Block);
-		player2->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 + player1->GetRadius() * 3, Utils::WindowHeight / 2));
+		player2->SetPosition(sf::Vector2f(Utils::WINDOW_X / 2 + player1->GetRadius() * 3, Utils::WINDOW_Y / 2));
 		player2->SetSpawnPoint(player2->GetPosition());
 		AddSceneObject(player2);
 		spawner->AddPlayer(player2);

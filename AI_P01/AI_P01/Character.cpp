@@ -3,11 +3,11 @@
 #include "Scene.h"
 #include "Character.h"
 
-Character::Character(sf::RenderWindow* _window, Scene* _scene)
+Character::Character(sf::RenderWindow* _window, Scene* _scene, float _maxHealth)
 {
 	window = _window;
 	scene = _scene;
-
+	maxHealth = _maxHealth;
 	currentHealth = maxHealth;
 }
 

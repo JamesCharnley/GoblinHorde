@@ -12,7 +12,7 @@
 
 MainMenu::MainMenu(Game* _gameClass, sf::RenderWindow* _window)
 {
-	if (isDebug)
+	if (Utils::IS_DEBUG)
 	{
 		std::cout << "**Debug build**\n";
 	}
@@ -36,7 +36,7 @@ void MainMenu::Start()
 
 	// Set Menu Title, half window width - half its own width.
 	MenuTitle = new GameObjectRectangle(window, this);
-	MenuTitle->SetPosition(sf::Vector2f(Utils::WindowWidth / 2 - 375.0f, 100.0f));
+	MenuTitle->SetPosition(sf::Vector2f(Utils::WINDOW_X / 2 - 375.0f, 100.0f));
 	MenuTitle->AddSprite("Resources/Textures/MenuTitle.png");
 	AddSceneObject(MenuTitle);
 
@@ -129,8 +129,11 @@ void MainMenu::RemovePlayer()
 
 void MainMenu::StartGame()
 {
-	SetNumberOfPlayers(numberOfPlayers);
-	ChangeScene("Level_One");
+	if (numberOfPlayers > 0)
+	{
+		SetNumberOfPlayers(numberOfPlayers);
+		ChangeScene("Level_One");
+	}
 }
 
 void MainMenu::ClearMenu()
@@ -171,11 +174,11 @@ void MainMenu::ActivateDefaultDisplay()
 	//AddSceneObject(singleplayerButton);
 	//activeButtons.push_back(singleplayerButton);
 
-	multiplayerButton = new MultiplayerModeButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
+	multiplayerButton = new MultiplayerModeButton(window, this, sf::Vector2f(Utils::WINDOW_X * 0.5f, Utils::WINDOW_Y * 0.5f));
 	AddSceneObject(multiplayerButton);
 	activeButtons.push_back(multiplayerButton);
 
-	quitButton = new QuitButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.6f));
+	quitButton = new QuitButton(window, this, sf::Vector2f(Utils::WINDOW_X * 0.5f, Utils::WINDOW_Y * 0.6f));
 	AddSceneObject(quitButton);
 	activeButtons.push_back(quitButton);
 
@@ -192,7 +195,7 @@ void MainMenu::ActivateDefaultDisplay()
 
 void MainMenu::ActivateSinglePlayerDisplay()
 {
-	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
+	startButton = new StartButton(window, this, sf::Vector2f(Utils::WINDOW_X * 0.5f, Utils::WINDOW_Y * 0.5f));
 	AddSceneObject(startButton);
 	activeButtons.push_back(startButton);
 }
@@ -201,28 +204,28 @@ void MainMenu::ActivateMultiplayerDisplay()
 {
 	ClearMenu();
 
-	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.4f));
+	backButton = new BackButton(window, this, sf::Vector2f(Utils::WINDOW_X * 0.5f, Utils::WINDOW_Y * 0.4f));
 	AddSceneObject(backButton);
 	activeButtons.push_back(backButton);
 
-	startButton = new StartButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.5f));
+	startButton = new StartButton(window, this, sf::Vector2f(Utils::WINDOW_X * 0.5f, Utils::WINDOW_Y * 0.5f));
 	AddSceneObject(startButton);
 	activeButtons.push_back(startButton);
 
 	lobbySlot1 = new LobbySlot(window, this, 0);
-	lobbySlot1->SetPosition(sf::Vector2f((Utils::WindowWidth / 4) * 1 - (Utils::WindowWidth / 4) * 0.5f, Utils::WindowHeight * 0.75f));
+	lobbySlot1->SetPosition(sf::Vector2f((Utils::WINDOW_X / 4) * 1 - (Utils::WINDOW_X / 4) * 0.5f, Utils::WINDOW_Y * 0.75f));
 	AddSceneObject(lobbySlot1);
 
 	lobbySlot2 = new LobbySlot(window, this, 1);
-	lobbySlot2->SetPosition(sf::Vector2f((Utils::WindowWidth / 4) * 2 - (Utils::WindowWidth / 4) * 0.5f, Utils::WindowHeight * 0.75f));
+	lobbySlot2->SetPosition(sf::Vector2f((Utils::WINDOW_X / 4) * 2 - (Utils::WINDOW_X / 4) * 0.5f, Utils::WINDOW_Y * 0.75f));
 	AddSceneObject(lobbySlot2);
 
 	lobbySlot3 = new LobbySlot(window, this, 2);
-	lobbySlot3->SetPosition(sf::Vector2f((Utils::WindowWidth / 4) * 3 - (Utils::WindowWidth / 4) * 0.5f, Utils::WindowHeight * 0.75f));
+	lobbySlot3->SetPosition(sf::Vector2f((Utils::WINDOW_X / 4) * 3 - (Utils::WINDOW_X / 4) * 0.5f, Utils::WINDOW_Y * 0.75f));
 	AddSceneObject(lobbySlot3);
 
 	lobbySlot4 = new LobbySlot(window, this, 3);
-	lobbySlot4->SetPosition(sf::Vector2f((Utils::WindowWidth / 4) * 4 - (Utils::WindowWidth / 4) * 0.5f, Utils::WindowHeight * 0.75f));
+	lobbySlot4->SetPosition(sf::Vector2f((Utils::WINDOW_X / 4) * 4 - (Utils::WINDOW_X / 4) * 0.5f, Utils::WINDOW_Y * 0.75f));
 	AddSceneObject(lobbySlot4);
 }
 
@@ -233,7 +236,7 @@ void MainMenu::ActivatePlayReadyDisplay()
 void MainMenu::AddBackButton()
 {
 	ClearMenu();
-	backButton = new BackButton(window, this, sf::Vector2f(Utils::WindowWidth * 0.5f, Utils::WindowHeight * 0.4f));
+	backButton = new BackButton(window, this, sf::Vector2f(Utils::WINDOW_X * 0.5f, Utils::WINDOW_Y * 0.4f));
 	AddSceneObject(backButton);
 	activeButtons.push_back(backButton);
 }
@@ -241,7 +244,7 @@ void MainMenu::AddBackButton()
 
 void MainMenu::ActivateModeSelectionDisplay()
 {
-	std::cout << "ActivateModeSelectionDisplay " << selectedButtonIndex << std::endl;
+	//std::cout << "ActivateModeSelectionDisplay " << selectedButtonIndex << std::endl;
 	if (selectedButtonIndex < activeButtons.size())
 	{
 		if (activeButtons[selectedButtonIndex] != nullptr)
@@ -260,7 +263,7 @@ void MainMenu::ActivateModeSelectionDisplay()
 }
 void MainMenu::SetSelectedButton(sf::Vector2f _stickAxis)
 {
-	std::cout << "SetSelectedButton" << std::endl;
+	//std::cout << "SetSelectedButton" << std::endl;
 	if (_stickAxis.y < 0)
 	{
 		if (selectedButtonIndex - 1 >= 0)

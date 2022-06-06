@@ -7,14 +7,17 @@
 #include <iostream>
 #include <random>
 #include "Player.h"
+#include "Utility.h"
 
 WaveManager::WaveManager(sf::RenderWindow* _window, Scene* _scene, Base* _base, int _playerCount) 
 	: EnemySpawner(_window, _scene, _base), DIFFICULTY_MODIFIER((float)_playerCount)
 {
 	//scale difficulty by player count
-	totalWaveEnemies *= DIFFICULTY_MODIFIER;
-	totalWaveEnemiesIncrement *= DIFFICULTY_MODIFIER;
+	baseTotalWaveEnemies *= DIFFICULTY_MODIFIER;
 	maximumEnemiesIncrement *= DIFFICULTY_MODIFIER;
+	waveDmg = baseWaveDmg;
+	waveHealth = baseWaveHealth;
+	totalWaveEnemies = baseTotalWaveEnemies;
 }
 
 WaveManager::~WaveManager()
@@ -36,8 +39,8 @@ void WaveManager::AddSpawn(Spawn* _spawn)
 void WaveManager::Update(float _deltatime)
 {
 	//updates the wave display
-	scene->GetUI()->getWaveDisplay()->UpdateWaveNum(currentWave);
-	scene->GetUI()->getWaveDisplay()->UpdateEnemiesNum(currentEnemyCount);
+	scene->GetUI()->getWaveDisplay()->UpdateWaveNum(currentWave + 1);
+	scene->GetUI()->getWaveDisplay()->UpdateEnemiesNum(totalWaveEnemies - waveSpawnedEnemies + currentEnemyCount);
 
 	if (waveSpawnedEnemies >= totalWaveEnemies)
 	{
@@ -65,7 +68,7 @@ void WaveManager::Update(float _deltatime)
 void WaveManager::SpawnEnemy()
 {
 	waveSpawnedEnemies++;
-	EnemySpawner::SpawnEnemy(spawnPoints.at(rand() % spawnPoints.size())->GetSpawnPosition());	//TODO: test this with larger vector
+	EnemySpawner::SpawnEnemy(spawnPoints.at(rand() % spawnPoints.size())->GetSpawnPosition(), waveHealth, waveDmg);
 }
 
 //advance to next wave
@@ -73,16 +76,22 @@ void WaveManager::NextWave()
 {
 	currentWave++;
 	waveSpawnedEnemies = 0;
-	totalWaveEnemies += totalWaveEnemiesIncrement;
 	maximumEnemies += maximumEnemiesIncrement;
 	waveBreakTimer = waveBreakDuration;
+	totalWaveEnemies = floor((baseTotalWaveEnemies + (currentWave * 1.5f)) * DIFFICULTY_MODIFIER);
+	waveHealth = baseWaveHealth + (currentWave * 3.5f);
+	waveDmg = baseWaveDmg + (log(((currentWave / 10.0f) + 1)) * 10.0f);
+	spawnInterval *= 0.9f;
 
-	std::cout << "\n**Starting wave " << currentWave << "**\n";
-	std::cout << "Wave enemies " << totalWaveEnemies << "\n";
-	std::cout << "Max on screen enemies " << maximumEnemies << "\n";
-	std::cout << "Spawn interval " << spawnInterval << "\n\n";
-
-	
+	if (Utils::IS_DEBUG)
+	{
+		std::cout << "\n**Starting wave " << currentWave + 1 << "**\n";
+		std::cout << "Wave enemies " << totalWaveEnemies << "\n";
+		std::cout << "Max on screen enemies " << maximumEnemies << "\n";
+		std::cout << "Spawn interval " << spawnInterval << "\n";
+		std::cout << "Enemy health " << waveHealth << "\n";
+		std::cout << "Enemy damage " << waveDmg << "\n\n";
+	}
 	
 	for (std::vector<Player*>::iterator it = players.begin(); it < players.end(); it++)
 	{
