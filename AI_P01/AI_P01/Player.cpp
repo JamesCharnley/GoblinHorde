@@ -150,12 +150,6 @@ void Player::AddGold(int _amount)
 {
 	currentGold += _amount;
 	//std::cout << "Gold: " << currentGold << std::endl;
-
-}
-
-void Player::RemoveGold(int _amount)
-{
-	currentGold -= _amount;
 	if (!buffer.loadFromFile("Resources/SFX/Gold.wav"))
 	{
 
@@ -163,6 +157,12 @@ void Player::RemoveGold(int _amount)
 	PlayerGoldSFX.setBuffer(buffer);
 	PlayerGoldSFX.setVolume(25);
 	PlayerGoldSFX.play();
+}
+
+void Player::RemoveGold(int _amount)
+{
+	currentGold -= _amount;
+
 }
 
 
