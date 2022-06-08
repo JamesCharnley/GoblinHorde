@@ -27,7 +27,7 @@ public:
 	void UpdateHealth(int _num);
 	void UpdateGold(int _num);
 	void UpdateAmmo(int _num);
-	void UpdateEquippedWeapon(std::string _name);
+	void UpdateEquippedWeapon(std::string _name, int _weaponLvl);
 
 private:
 

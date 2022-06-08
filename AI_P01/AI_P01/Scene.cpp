@@ -4,6 +4,8 @@
 #include "Scene.h"
 #include "GoblinHordeUI.h"
 #include "GoblinHorde.h"
+#include "Enemy.h"
+#include "Projectile.h"
 
 Scene::Scene() 
 {
@@ -62,6 +64,20 @@ void Scene::DestroySceneObject(GameObject* _object)
 {
 	if (_object == nullptr) return;
 	// check if object already exists in queue
+	Enemy* enemy = dynamic_cast<Enemy*>(_object);
+	if (enemy)
+	{
+		 //Goblin Die SFX.
+		if (!buffer.loadFromFile("Resources/SFX/GoblinDie.wav"))
+		{
+
+		}
+		goblinDieSFX.setBuffer(buffer);
+		goblinDieSFX.setVolume(25);
+		goblinDieSFX.play();
+	}
+
+
 	int length = (int)destroySceneObjectQueue.size();
 	for (int i = 0; i < length; i++)
 	{

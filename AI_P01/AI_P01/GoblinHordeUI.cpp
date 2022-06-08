@@ -4,12 +4,13 @@
 #include "Player.h"
 #include "PlayerStats.h"
 #include "WaveDisplay.h"
+#include "Utility.h"
 
 GoblinHordeUI::GoblinHordeUI()
-{
-	player1Stats = new PlayerStats(sf::Vector2f(0, 0));
-	player2Stats = new PlayerStats(sf::Vector2f(1550, 0));
-	waveDisplay = new WaveDisplay(sf::Vector2f(800, 0));
+{	
+	player1Stats = new PlayerStats(sf::Vector2f(100, 15));
+	player2Stats = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, 15));
+	waveDisplay = new WaveDisplay(sf::Vector2f(800, 15));
 }
 
 GoblinHordeUI::~GoblinHordeUI()

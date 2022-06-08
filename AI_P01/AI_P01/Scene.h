@@ -12,6 +12,7 @@ Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.
 
 #pragma once
 #include "SFML/Graphics.hpp"
+#include <SFML/Audio.hpp>
 
 class Scene
 {
@@ -75,5 +76,8 @@ protected:
 	void DeleteAllSceneObjects();
 
 	void CollisionCheck();
+
+	sf::Sound goblinDieSFX;
+	sf::SoundBuffer buffer;
 };
 

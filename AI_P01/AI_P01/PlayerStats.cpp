@@ -6,9 +6,9 @@ PlayerStats::PlayerStats(sf::Vector2f _position) :
 {
 	//Each of the GameText would be display in a column
 	playerHealth = new GameText("Resources/Font/WarPriest.ttf", _position);
-	playerAmmo = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 30));
-	playerGold = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 60));
-	equippedWeapon = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 90));
+	playerAmmo = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x - 15, _position.y + 30));
+	playerGold = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x - 25, _position.y + 60));
+	equippedWeapon = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x + 50, _position.y + 90));
 }
 
 //Renders each of the stats text to the window
@@ -36,7 +36,7 @@ void PlayerStats::UpdateAmmo(int _num)
 	playerAmmo->SetString("Ammo:   " + std::to_string(_num));
 }
 
-void PlayerStats::UpdateEquippedWeapon(std::string _name)
+void PlayerStats::UpdateEquippedWeapon(std::string _name, int _weaponLvl)
 {
-	equippedWeapon->SetString("Weapon: " + _name);
+	equippedWeapon->SetString("Weapon: " + _name + " LV" + std::to_string(_weaponLvl));
 }

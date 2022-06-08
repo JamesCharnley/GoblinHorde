@@ -31,5 +31,7 @@ public:
 private:
 	sf::Font gameFont;
 	sf::Text gameText;
+
+	bool posChanged;
 };
 

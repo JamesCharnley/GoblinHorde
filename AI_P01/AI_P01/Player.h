@@ -106,6 +106,7 @@ private:
     sf::Vector2f spawnpoint;
 
     sf::Sound PlayerDieSFX;
+    sf::Sound PlayerGoldSFX;
     sf::SoundBuffer buffer;
 };
 

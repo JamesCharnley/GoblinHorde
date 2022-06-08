@@ -57,7 +57,7 @@ void Player::Update(float _deltatime)
 		scene->GetUI()->getPlayer1Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer1Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer1Stats()->UpdateAmmo(0);
-		scene->GetUI()->getPlayer1Stats()->UpdateEquippedWeapon(equippedWeapon->name);
+		scene->GetUI()->getPlayer1Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
 	}
 
 	else if (playerNum == 2)
@@ -65,7 +65,7 @@ void Player::Update(float _deltatime)
 		scene->GetUI()->getPlayer2Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer2Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer2Stats()->UpdateAmmo(0);
-		scene->GetUI()->getPlayer2Stats()->UpdateEquippedWeapon(equippedWeapon->name);
+		scene->GetUI()->getPlayer2Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
 	}
 
 	CheckForInput(playerNumber);
@@ -150,11 +150,19 @@ void Player::AddGold(int _amount)
 {
 	currentGold += _amount;
 	//std::cout << "Gold: " << currentGold << std::endl;
+
 }
 
 void Player::RemoveGold(int _amount)
 {
 	currentGold -= _amount;
+	if (!buffer.loadFromFile("Resources/SFX/Gold.wav"))
+	{
+
+	}
+	PlayerGoldSFX.setBuffer(buffer);
+	PlayerGoldSFX.setVolume(25);
+	PlayerGoldSFX.play();
 }
 
 
