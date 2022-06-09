@@ -7,6 +7,18 @@ WeaponPurchase::WeaponPurchase(sf::RenderWindow* _window, Scene* _scene, EWeapon
     window = _window;
     scene = _scene;
     weapon = new Weapon(_window, _scene, nullptr, _weapon);
+
+    if (_weapon == EWeapon::SMG)
+    {
+        AddSprite("Resources/Textures/SMG.png");
+        SetColor(sf::Color::Transparent);
+    }
+    else if (_weapon == EWeapon::Rifle)
+    {
+        AddSprite("Resources/Textures/Rifle.png");
+        SetColor(sf::Color::Transparent);
+    }
+
     SetRadius(30);
     AddCollider(ECollisionType::Overlap);
     SetCollisionRadius(GetRadius());

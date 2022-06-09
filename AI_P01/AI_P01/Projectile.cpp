@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Utility.h"
 #include "Projectile.h"
+#include "Interactable.h"
 
 Projectile::Projectile(sf::RenderWindow* _window, Scene* _scene, float _rotation, GameObject* _owner, float _damage, float _speed, const char* _spriteFile)
 {
@@ -76,6 +77,11 @@ void Projectile::OnCollision(GameObject* _other)
 	}
 	Base* base = dynamic_cast<Base*>(_other);
 	if (base)
+	{
+		return;
+	}
+	Interactable* interactable = dynamic_cast<Interactable*>(_other);
+	if (interactable)
 	{
 		return;
 	}

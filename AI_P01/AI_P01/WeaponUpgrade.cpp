@@ -8,7 +8,8 @@ WeaponUpgrade::WeaponUpgrade(sf::RenderWindow* _window, Scene* _scene)
     scene = _scene;
 
     actionText = "Upgrade Weapon";
-
+    AddSprite("Resources/Textures/Upgrade.png");
+    SetColor(sf::Color::Transparent);
     SetRadius(30);
     AddCollider(ECollisionType::Overlap);
     SetCollisionRadius(GetRadius());
