@@ -19,7 +19,7 @@ class WeaponPurchase :
 {
 public:
 
-    WeaponPurchase(sf::RenderWindow* _window, Scene* _scene, EWeapon _weapon);
+    WeaponPurchase(sf::RenderWindow* _window, Scene* _scene, EWeapon _weapon, float _playerCount);
     inline ~WeaponPurchase() { delete weapon; }
 
     Weapon* weapon;

@@ -14,7 +14,7 @@ std::map<EWeapon, FWeapon::Data> FWeapon::dataMap =
 	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200.0f,		80.0f,	 100,	600.0f,		"Debug gun")},
 };
 
-Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWeapon _weaponBase)
+Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWeapon _weaponBase, float _gunshotVolumeScale)
 {
 	window = _window;
 	scene = _scene;
@@ -37,6 +37,12 @@ Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWe
 	{
 		bulletSpriteFile = "Resources/Textures/GlockBullet.png";
 	}
+	if (!buffer.loadFromFile("Resources/SFX/Gunshot.wav"))
+	{
+
+	}
+	gunshotSFX.setBuffer(buffer);
+	gunshotSFX.setVolume(50.0f * _gunshotVolumeScale);
 }
 
 void Weapon::Update(float _deltatime)
@@ -54,6 +60,8 @@ void Weapon::PerformAction()
 {
 	if (!inAction)
 	{
+		gunshotSFX.play();
+
 		// shoot 
 		Projectile* proj = new Projectile(window, scene, GetRotation(), this, weaponData.damage, weaponData.speed, bulletSpriteFile);
 		proj->SetPosition(GetPosition());

@@ -38,11 +38,11 @@ void LevelOne::Start()
 	Base* base = new Base(window, this, numberOfPlayers, WAVE_BREAK_TIME);
 	AddSceneObject(base);
 
-	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this, EWeapon::SMG);
+	WeaponPurchase* weaponPurchase = new WeaponPurchase(window, this, EWeapon::SMG, numberOfPlayers);
 	weaponPurchase->SetPosition(sf::Vector2f(base->GetPosition().x - base->GetRadius() * 0.5f, base->GetPosition().y - base->GetRadius() * 0.5f));
 	AddSceneObject(weaponPurchase);
 
-	weaponPurchase = new WeaponPurchase(window, this, EWeapon::Rifle);
+	weaponPurchase = new WeaponPurchase(window, this, EWeapon::Rifle, numberOfPlayers);
 	weaponPurchase->SetPosition(sf::Vector2f(base->GetPosition().x + base->GetRadius() * 0.5f, base->GetPosition().y - base->GetRadius() * 0.5f));
 	AddSceneObject(weaponPurchase);
 
@@ -55,7 +55,7 @@ void LevelOne::Start()
 
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
-		Player* player = new Player(window, this);
+		Player* player = new Player(window, this, numberOfPlayers);
 		player->AddSprite("Resources/Textures/Player1.png");
 		player->SetColor(sf::Color::Transparent);
 		player->SetRadius(25.0f);

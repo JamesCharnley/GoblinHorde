@@ -32,7 +32,7 @@ class Player :
 {
 public:
 
-    Player(sf::RenderWindow* _window, Scene* _scene);
+    Player(sf::RenderWindow* _window, Scene* _scene, float _playerCount);
     ~Player();
     virtual void Update(float _deltatime) override;
     virtual void Render() override;

@@ -1,12 +1,12 @@
 #include "Player.h"
 #include "WeaponPurchase.h"
 #include "Weapon.h"
-WeaponPurchase::WeaponPurchase(sf::RenderWindow* _window, Scene* _scene, EWeapon _weapon)
+WeaponPurchase::WeaponPurchase(sf::RenderWindow* _window, Scene* _scene, EWeapon _weapon, float _playerCount)
 {
     
     window = _window;
     scene = _scene;
-    weapon = new Weapon(_window, _scene, nullptr, _weapon);
+    weapon = new Weapon(_window, _scene, nullptr, _weapon, 1.0f / _playerCount);
     SetRadius(30);
     AddCollider(ECollisionType::Overlap);
     SetCollisionRadius(GetRadius());
