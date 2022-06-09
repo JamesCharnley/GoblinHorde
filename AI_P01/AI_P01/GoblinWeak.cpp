@@ -9,7 +9,7 @@ GoblinWeak::GoblinWeak(sf::RenderWindow* _window, Scene* _scene, class Base* _ba
 
 GoblinWeak::GoblinWeak(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner, class Base* _base, float _health, float _damage) : Enemy(_window, _scene, _spawner, _base, _health, _damage)
 {
-	moveSpeed = 200.f;
+	moveSpeed = 150.f;
 	sf::Texture* text;
 	text = new sf::Texture();
 	text->loadFromFile("Resources/Textures/Orc.png");

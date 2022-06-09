@@ -101,5 +101,9 @@ void WaveManager::NextWave()
 		{
 			player->Respawn();
 		}
+		else
+		{
+			player->ResetHealth();
+		}
 	}
 }  

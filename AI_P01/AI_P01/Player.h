@@ -69,6 +69,8 @@ public:
 
     void SetSpawnPoint(sf::Vector2f _pos);
 
+    void ResetHealth() { currentHealth = maxHealth; };
+
 protected:
 
     FInputs selectedInputPreset;

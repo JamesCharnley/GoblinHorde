@@ -62,7 +62,7 @@ void LevelOne::Start()
 		player->SetPlayersNumber(i + 1);
 		player->SetCollisionRadius(25.0f);
 		player->GetCollider()->SetCollisionType(ECollisionType::Block);
-		player->SetPosition(sf::Vector2f((Utils::WINDOW_X / 2 - player->GetRadius() * 3) + player->GetRadius() * i, Utils::WINDOW_Y / 2));
+		player->SetPosition(sf::Vector2f((Utils::WINDOW_X / 2 - player->GetRadius() * 3) + player->GetRadius() * 3 * i, Utils::WINDOW_Y / 2));
 		player->SetSpawnPoint(player->GetPosition());
 		AddSceneObject(player);
 
