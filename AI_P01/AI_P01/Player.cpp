@@ -68,6 +68,22 @@ void Player::Update(float _deltatime)
 		scene->GetUI()->getPlayer2Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
 	}
 
+	else if (playerNum == 3)
+	{
+		scene->GetUI()->getPlayer3Stats()->UpdateHealth(currentHealth);
+		scene->GetUI()->getPlayer3Stats()->UpdateGold(currentGold);
+		scene->GetUI()->getPlayer3Stats()->UpdateAmmo(0);
+		scene->GetUI()->getPlayer3Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
+	}
+
+	else if (playerNum == 4)
+	{
+		scene->GetUI()->getPlayer4Stats()->UpdateHealth(currentHealth);
+		scene->GetUI()->getPlayer4Stats()->UpdateGold(currentGold);
+		scene->GetUI()->getPlayer4Stats()->UpdateAmmo(0);
+		scene->GetUI()->getPlayer4Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
+	}
+
 	CheckForInput(playerNumber);
 	if (rotationDelayTimer <= 0 && !lockRotation)
 	{
@@ -134,6 +150,7 @@ void Player::Render()
 void Player::SetPlayersNumber(int _number)
 {
 	playerNumber = _number;
+	playerNum = _number;
 	if (_number == 1)
 	{
 		selectedInputPreset = playerOnePreset;

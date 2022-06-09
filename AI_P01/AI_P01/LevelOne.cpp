@@ -53,34 +53,49 @@ void LevelOne::Start()
 	WaveManager* spawner = new WaveManager(window, this, base, numberOfPlayers, WAVE_BREAK_TIME);
 	spawner->SetPosition(sf::Vector2f(-100, -100));
 
-	// create all GameObjects
-	Player* player1 = new Player(window, this);
-	player1->AddSprite("Resources/Textures/Player1.png");
-	player1->SetColor(sf::Color::Transparent);
-	player1->SetRadius(25.0f);
-	player1->SetPlayersNumber(1);
-	player1->SetCollisionRadius(25.0f);
-	player1->GetCollider()->SetCollisionType(ECollisionType::Block);
-	player1->SetPosition(sf::Vector2f(Utils::WINDOW_X / 2 - player1->GetRadius() * 3, Utils::WINDOW_Y / 2));
-	player1->SetSpawnPoint(player1->GetPosition());
-	AddSceneObject(player1);
-
-	spawner->AddPlayer(player1);
-
-	if (numberOfPlayers == 2)
+	for (int i = 0; i < numberOfPlayers; i++)
 	{
-		Player* player2 = new Player(window, this);
-		player2->AddSprite("Resources/Textures/Player2.png");
-		player2->SetColor(sf::Color::Transparent);
-		player2->SetRadius(25.0f);
-		player2->SetPlayersNumber(2);
-		player2->SetCollisionRadius(25.0f);
-		player2->GetCollider()->SetCollisionType(ECollisionType::Block);
-		player2->SetPosition(sf::Vector2f(Utils::WINDOW_X / 2 + player1->GetRadius() * 3, Utils::WINDOW_Y / 2));
-		player2->SetSpawnPoint(player2->GetPosition());
-		AddSceneObject(player2);
-		spawner->AddPlayer(player2);
+		Player* player = new Player(window, this);
+		player->AddSprite("Resources/Textures/Player1.png");
+		player->SetColor(sf::Color::Transparent);
+		player->SetRadius(25.0f);
+		player->SetPlayersNumber(i + 1);
+		player->SetCollisionRadius(25.0f);
+		player->GetCollider()->SetCollisionType(ECollisionType::Block);
+		player->SetPosition(sf::Vector2f((Utils::WINDOW_X / 2 - player->GetRadius() * 3) + player->GetRadius() * i, Utils::WINDOW_Y / 2));
+		player->SetSpawnPoint(player->GetPosition());
+		AddSceneObject(player);
+
+		spawner->AddPlayer(player);
 	}
+	// create all GameObjects
+	//Player* player1 = new Player(window, this);
+	//player1->AddSprite("Resources/Textures/Player1.png");
+	//player1->SetColor(sf::Color::Transparent);
+	//player1->SetRadius(25.0f);
+	//player1->SetPlayersNumber(1);
+	//player1->SetCollisionRadius(25.0f);
+	//player1->GetCollider()->SetCollisionType(ECollisionType::Block);
+	//player1->SetPosition(sf::Vector2f(Utils::WINDOW_X / 2 - player1->GetRadius() * 3, Utils::WINDOW_Y / 2));
+	//player1->SetSpawnPoint(player1->GetPosition());
+	//AddSceneObject(player1);
+	//
+	//spawner->AddPlayer(player1);
+	//
+	//if (numberOfPlayers == 2)
+	//{
+	//	Player* player2 = new Player(window, this);
+	//	player2->AddSprite("Resources/Textures/Player2.png");
+	//	player2->SetColor(sf::Color::Transparent);
+	//	player2->SetRadius(25.0f);
+	//	player2->SetPlayersNumber(2);
+	//	player2->SetCollisionRadius(25.0f);
+	//	player2->GetCollider()->SetCollisionType(ECollisionType::Block);
+	//	player2->SetPosition(sf::Vector2f(Utils::WINDOW_X / 2 + player1->GetRadius() * 3, Utils::WINDOW_Y / 2));
+	//	player2->SetSpawnPoint(player2->GetPosition());
+	//	AddSceneObject(player2);
+	//	spawner->AddPlayer(player2);
+	//}
 	
 	spawner->AddSpawn(new SpawnBorder(sf::Vector2f(), sf::Vector2f(window->getSize().x, 0.0f), sf::Vector2f(0.0f, window->getSize().y), sf::Vector2f(window->getSize().x, window->getSize().y)));
 	AddSceneObject(spawner);

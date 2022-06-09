@@ -47,6 +47,14 @@ void LobbySlot::Update(float _deltaTime)
 {
 	GameObjectRectangle::Update(_deltaTime);
 	
+	if (isAutoActive)
+	{
+		if (!activeStatus)
+		{
+			ActivatedStatus();
+		}
+	}
+
 	if (activeStatus)
 	{
 		statusMessage.setCharacterSize(24);
@@ -67,14 +75,14 @@ void LobbySlot::Update(float _deltaTime)
 	controllerIcon.setPosition(GetPosition());
 	buttonPromptIcon.setPosition(GetPosition());
 
-	if (sf::Joystick::isConnected(controllerIndex))
+	if (sf::Joystick::isConnected(controllerIndex) && !isAutoActive)
 	{
 		if (!unActiveStatus && !activeStatus)
 		{
 			UnActivatedStatus();
 		}
 	}
-	else
+	else if(!isAutoActive)
 	{
 		if (!noControllerStatus)
 		{
@@ -122,6 +130,11 @@ void LobbySlot::Render()
 		window->draw(buttonPromptIcon);
 		window->draw(promptMessage);
 	}
+}
+
+void LobbySlot::AutoActivate()
+{
+	isAutoActive = true;
 }
 
 void LobbySlot::NoControllerStatus()

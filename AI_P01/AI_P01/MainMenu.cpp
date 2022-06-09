@@ -222,10 +222,18 @@ void MainMenu::ActivateMultiplayerDisplay()
 
 	lobbySlot3 = new LobbySlot(window, this, 2);
 	lobbySlot3->SetPosition(sf::Vector2f((Utils::WINDOW_X / 4) * 3 - (Utils::WINDOW_X / 4) * 0.5f, Utils::WINDOW_Y * 0.75f));
+	if (Utils::IS_DEBUG)
+	{
+		lobbySlot3->AutoActivate();
+	}
 	AddSceneObject(lobbySlot3);
 
 	lobbySlot4 = new LobbySlot(window, this, 3);
 	lobbySlot4->SetPosition(sf::Vector2f((Utils::WINDOW_X / 4) * 4 - (Utils::WINDOW_X / 4) * 0.5f, Utils::WINDOW_Y * 0.75f));
+	if (Utils::IS_DEBUG)
+	{
+		lobbySlot4->AutoActivate();
+	}
 	AddSceneObject(lobbySlot4);
 }
 

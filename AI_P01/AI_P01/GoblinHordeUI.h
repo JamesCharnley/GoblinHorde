@@ -27,6 +27,8 @@ public:
 	//Player.cpp will be able to display the health, ammo and gold onto the UI
 	class PlayerStats* getPlayer1Stats();
 	class PlayerStats* getPlayer2Stats();
+	class PlayerStats* getPlayer3Stats();
+	class PlayerStats* getPlayer4Stats();
 
 	//WaveManger.cpp will be able to display the breakTimer, current num of enemies and current wave onto the UI
 	class WaveDisplay* getWaveDisplay();
@@ -36,6 +38,8 @@ private:
 	// pointer to playerStats and WaveDisplay
 	class PlayerStats* player1Stats;
 	class PlayerStats* player2Stats;
+	class PlayerStats* player3Stats;
+	class PlayerStats* player4Stats;
 	class WaveDisplay* waveDisplay;
 
 };

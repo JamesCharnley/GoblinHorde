@@ -10,6 +10,8 @@ public:
     virtual void Update(float _deltaTime) override;
     virtual void Render() override;
 
+    void AutoActivate();
+
 protected:
 
     sf::Texture controllerIconTexture;
@@ -36,5 +38,7 @@ protected:
     void NoControllerStatus();
     void UnActivatedStatus();
     void ActivatedStatus();
+
+    bool isAutoActive = false;
 };
 
