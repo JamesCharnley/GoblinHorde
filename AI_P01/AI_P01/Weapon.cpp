@@ -10,7 +10,7 @@ std::map<EWeapon, FWeapon::Data> FWeapon::dataMap =
 {															      //dmg | firerate | ammo | bullet speed
 	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			7.0f,		3.0f,	 100,	600.0f,		"Glock")},
 	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				6.0f,		7.0f,	 150,	800.0f,		"SMG")},
-	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			25.0f,		4.0f,	 100,	1000.0f,	"Rifle")},
+	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			25.0f,		2.5f,	 100,	1000.0f,	"Rifle")},
 	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200.0f,		80.0f,	 100,	600.0f,		"Debug gun")},
 };
 
