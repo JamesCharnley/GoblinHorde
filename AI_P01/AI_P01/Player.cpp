@@ -7,9 +7,9 @@
 #include "Base.h"
 
 
-Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _scene, 100.0f)
+Player::Player(sf::RenderWindow* _window, Scene* _scene, float _playerCount) : Character(_window, _scene, 100.0f)
 {
-	weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Glock));
+	weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Glock, 1.0f / _playerCount));
 	//weapons.push_back(new Weapon(_window, _scene, this, EWeapon::Rifle));
 	equippedWeapon = weapons.at(equippedWeaponIndex);
 
@@ -172,7 +172,7 @@ void Player::AddGold(int _amount)
 
 	}
 	PlayerGoldSFX.setBuffer(buffer);
-	PlayerGoldSFX.setVolume(25);
+	PlayerGoldSFX.setVolume(15);
 	PlayerGoldSFX.play();
 }
 

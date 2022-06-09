@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "WeaponPurchase.h"
 #include "Weapon.h"
-WeaponPurchase::WeaponPurchase(sf::RenderWindow* _window, Scene* _scene, EWeapon _weapon)
+WeaponPurchase::WeaponPurchase(sf::RenderWindow* _window, Scene* _scene, EWeapon _weapon, float _playerCount)
 {
     
     window = _window;

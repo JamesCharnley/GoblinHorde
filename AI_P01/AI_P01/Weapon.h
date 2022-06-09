@@ -12,6 +12,7 @@ Mail : devon.millar@mds.ac.nz, james.charnley@mds.ac.nz, samuel.chandler@mds.ac.
 
 #pragma once
 #include "GameObjectCircle.h"
+#include <SFML/Audio.hpp>
 
 enum class EWeapon
 {
@@ -56,7 +57,7 @@ class Weapon :
 public:
 
     // Custom constructor: takes ref to sf::RenderWindow and Scene() class
-    Weapon(sf::RenderWindow* _window, class Scene* _scene, GameObject* _owner, EWeapon _weaponBase = EWeapon::Glock);
+    Weapon(sf::RenderWindow* _window, class Scene* _scene, GameObject* _owner, EWeapon _weaponBase = EWeapon::Glock, float _gunshotVolumeScale = 1.0f);
     virtual void Update(float _deltatime) override;
     void PerformAction();
     inline GameObject* GetOwner() { return owner; };
@@ -81,6 +82,10 @@ protected:
 
 private:
     FWeapon::Data GetBaseWeaponData();
+
+    sf::Sound gunshotSFX;
+    sf::SoundBuffer buffer;
+
 
 };
 
