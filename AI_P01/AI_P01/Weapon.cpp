@@ -37,7 +37,10 @@ Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWe
 	{
 		bulletSpriteFile = "Resources/Textures/GlockBullet.png";
 	}
-	if (!buffer.loadFromFile("Resources/SFX/Gunshot.wav"))
+
+	std::string sndFolder = "Resources/SFX/";
+
+	if (!buffer.loadFromFile(sndFolder + "Gunshot_" + weaponData.name + ".wav"))
 	{
 
 	}
