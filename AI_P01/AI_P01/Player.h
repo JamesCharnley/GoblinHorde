@@ -27,6 +27,63 @@ public:
     sf::Keyboard::Key LockRotationKey;
     sf::Keyboard::Key ShootKey;
 };
+struct ControllerState
+{
+    struct Buttons
+    {
+    private:
+        std::vector<bool*> buttons = { &A, &B, &X, &Y, &LB, &RB, &Back, &Menu, &LS, &RS};
+
+    public:
+        Buttons()
+        {
+            count = buttons.size();
+        }
+        bool A = false;
+        bool B = false;
+        bool X = false;
+        bool Y = false;
+        bool LB = false;
+        bool RB = false;
+        bool Back = false;
+        bool Menu = false;
+        bool LS = false;
+        bool RS = false;
+        int count;
+
+        struct HatSwitch
+        {
+            bool up     = false;
+            bool down   = false;
+            bool left   = false;
+            bool right  = false;
+        };
+        HatSwitch DPad;
+
+        void Set(int _index, bool _value)
+        {
+            *buttons.at(_index) = _value;
+        }
+    };
+
+    struct Axis
+    {
+        struct XYAxis
+        {
+            float x = 0.0f;
+            float y = 0.0f;
+        };
+
+        XYAxis LS;
+        XYAxis RS;
+        XYAxis DPad;
+        float Trig = 0.0f;
+    };
+    Buttons button;
+    Axis axis;
+};
+
+
 class Player :
     public Character
 {
@@ -96,6 +153,7 @@ protected:
     void UpdateActionText();
 
 private:
+    ControllerState input;
     std::vector<Weapon*> weapons;
     int equippedWeaponIndex = 0;
 

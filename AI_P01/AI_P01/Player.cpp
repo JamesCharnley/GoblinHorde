@@ -186,36 +186,31 @@ void Player::RemoveGold(int _amount)
 
 void Player::PollController(int _controllerIndex)
 {
-	//std::cout << "Left Stick:";
-	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::X) << ", ";	//left sick
-	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::Y) << "\n";
+	//left stick
+	input.axis.LS.x = sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::X);
+	input.axis.LS.y = sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::Y);
 
-	//std::cout << "Right Stick: ";
-	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::U) << ", ";	//right sick
-	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::V) << "\n";
+	//right stick
+	input.axis.RS.x = sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::U);
+	input.axis.RS.y = sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::V);
 
-	//std::cout << "Triggers: ";
-	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::Z) << "\n";	//triggers
+	//triggers
+	input.axis.Trig = sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::Z);	//triggers
 
-	//std::cout << "DPad: ";
-	//std::cout << sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::PovX) << ", " << sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY) << " \n";
+	//Dpad
+	input.axis.DPad.x = sf::Joystick::getAxisPosition(_controllerIndex, sf::Joystick::Axis::PovX);
+	input.axis.DPad.y = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY);
 
-	std::vector<std::string> pressedButtonNames;
+	input.button.DPad.up = input.axis.DPad.y > 0;
+	input.button.DPad.down = input.axis.DPad.y < 0;
+	input.button.DPad.right = input.axis.DPad.x > 0;
+	input.button.DPad.left = input.axis.DPad.x < 0;
 
-	for (int i = 0; i <= 9; i++)
+
+	for (int i = 0; i < input.button.count; i++)
 	{
-		if (sf::Joystick::isButtonPressed(_controllerIndex, i))
-		{
-			pressedButtonNames.push_back(GetButtonMapping(i));
-			//std::cout << "Pressed: " << i << std::endl;
-		}
+		input.button.Set(i, sf::Joystick::isButtonPressed(_controllerIndex, i));
 	}
-
-	for (std::string buttonName : pressedButtonNames)
-	{
-		//std::cout << buttonName << ", ";
-	}
-	
 }
 
 std::string Player::GetButtonMapping(int _button)
@@ -308,63 +303,57 @@ void Player::CheckForInput(int _player)
 	velocity.x = 0;
 	velocity.y = 0;
 
-	PollController(0);
+	PollController(_player - 1);
 	float deadZone = 15.0f;
 
-	float lStickX = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::X);	//left sick
-	float lStickY = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::Y);
-
-	if (lStickX > -deadZone && lStickX < deadZone)
+	if (input.axis.LS.x > -deadZone && input.axis.LS.x < deadZone)
 	{
-		lStickX = 0;
+		input.axis.LS.x = 0;
 	}
-	if (lStickY > -deadZone && lStickY < deadZone)
+	if (input.axis.LS.y > -deadZone && input.axis.LS.y < deadZone)
 	{
-		lStickY = 0;
+		input.axis.LS.y = 0;
 	}
 
-	float rStickX = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::U);
-	float rStickY = sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::V);
-
-	if (rStickX > -deadZone && rStickX < deadZone)
+	if (input.axis.RS.x > -deadZone && input.axis.RS.x < deadZone)
 	{
-		rStickX = 0.0f;
+		input.axis.RS.x = 0.0f;
 	}
-	if (rStickY > -deadZone && rStickY < deadZone)
+	if (input.axis.RS.y > -deadZone && input.axis.RS.y < deadZone)
 	{
-		rStickY = 0.0f;
+		input.axis.RS.y = 0.0f;
 	}
 
-	if (lStickX != 0.0f)
+	if (input.axis.LS.x != 0.0f)
 	{
-		lStickX /= (100.0f - deadZone);
+		input.axis.LS.x /= (100.0f - deadZone);
 	}
-	if (lStickY != 0.0f)
+	if (input.axis.LS.y != 0.0f)
 	{
-		lStickY /= (100.0f - deadZone);
+		input.axis.LS.y /= (100.0f - deadZone);
 	}
-	if (!lastFrameSwitchWeapon && sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::PovX) > 0.0f)
+	if (!lastFrameSwitchWeapon && input.button.DPad.left)
 	{
 		NextWeapon();
 		lastFrameSwitchWeapon = true;
 	}
-	else if (!lastFrameSwitchWeapon && sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::PovX) < 0.0f)
+	else if (!lastFrameSwitchWeapon && input.button.DPad.right)
 	{
 		PreviousWeapon();
 		lastFrameSwitchWeapon = true;
 	}
-	else if (sf::Joystick::getAxisPosition(_player - 1, sf::Joystick::Axis::PovX) == 0.0f)
+	else if (input.axis.DPad.x == 0.0f)
 	{
 		lastFrameSwitchWeapon = false;
 	}
 
-	velocity.x = lStickX;
-	velocity.y = lStickY;
+	velocity.x = input.axis.LS.x;
+	velocity.y = input.axis.LS.y;
 
 	sf::Vector2f rotVelocity;
 
-	rotVelocity.x = rStickX;
-	rotVelocity.y = rStickY;
+	rotVelocity.x = input.axis.RS.x;
+	rotVelocity.y = input.axis.RS.y;
 
 	rotVelocity = SFMLVectorMath::Clamp(rotVelocity);
 
@@ -410,7 +399,7 @@ void Player::CheckForInput(int _player)
 	}
 
 
-	if (sf::Joystick::isButtonPressed(_player - 1, 5) || sf::Keyboard::isKeyPressed(selectedInputPreset.ShootKey))
+	if (input.button.RB || sf::Keyboard::isKeyPressed(selectedInputPreset.ShootKey))
 	{
 		// shoot
 		if (equippedWeapon != nullptr)
