@@ -33,6 +33,13 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene, float _playerCount) : C
 	actionText.setFillColor(sf::Color::Red);
 
 	base = nullptr;
+	playerGoldSFX.setVolume(15);
+	playerSFX.setVolume(20);
+
+	goldBuffer.loadFromFile("Resources/SFX/Gold.wav");
+	hurtSFXBuffer.loadFromFile("Resources/SFX/PlayerHurt.wav");
+	dieSFXBuffer.loadFromFile("Resources/SFX/PlayerDie.wav");
+	playerGoldSFX.setBuffer(goldBuffer);
 }
 
 Player::~Player()
@@ -170,13 +177,8 @@ void Player::AddGold(int _amount)
 {
 	currentGold += _amount;
 	//std::cout << "Gold: " << currentGold << std::endl;
-	if (!buffer.loadFromFile("Resources/SFX/Gold.wav"))
-	{
 
-	}
-	PlayerGoldSFX.setBuffer(buffer);
-	PlayerGoldSFX.setVolume(15);
-	PlayerGoldSFX.play();
+	playerGoldSFX.play();
 }
 
 void Player::RemoveGold(int _amount)
@@ -277,16 +279,15 @@ void Player::TakeDamage(int _amount)
 
 	if (currentHealth <= 0)
 	{
-		// Player Death SFX.
-		if (!buffer.loadFromFile("Resources/SFX/PlayerDie.wav"))
-		{
-
-		}
-		PlayerDieSFX.setBuffer(buffer);
-		PlayerDieSFX.play();
+		playerSFX.setBuffer(dieSFXBuffer);
+		playerSFX.play();
 		isDead = true;
-
 	}
+	else
+	{
+		playerSFX.setBuffer(hurtSFXBuffer);
+	}
+	playerSFX.play();
 }
 
 void Player::Respawn()

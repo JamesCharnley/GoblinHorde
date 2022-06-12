@@ -166,8 +166,10 @@ private:
 
     sf::Vector2f spawnpoint;
 
-    sf::Sound PlayerDieSFX;
-    sf::Sound PlayerGoldSFX;
-    sf::SoundBuffer buffer;
+    sf::Sound playerSFX;
+    sf::Sound playerGoldSFX;
+    sf::SoundBuffer hurtSFXBuffer;
+    sf::SoundBuffer dieSFXBuffer;
+    sf::SoundBuffer goldBuffer;
 };
 
