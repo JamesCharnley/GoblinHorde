@@ -7,11 +7,11 @@
 
 //assign weapon stats here
 std::map<EWeapon, FWeapon::Data> FWeapon::dataMap =
-{															      //dmg | firerate | ammo | bullet speed
-	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			7.0f,		3.0f,	 100,	600.0f,		"Glock")},
-	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				6.0f,		7.0f,	 150,	800.0f,		"SMG")},
-	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			25.0f,		2.5f,	 100,	1000.0f,	"Rifle")},
-	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200.0f,		80.0f,	 100,	600.0f,		"Debug gun")},
+{															      //dmg |   firerate  | ammo  | reload time  | bullet speed | name
+	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			7.0f,		3.0f,	 7,			1.0f,		600.0f,		"Glock")},
+	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				6.0f,		7.0f,	 35,		2.0f,		800.0f,		"SMG")},
+	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			25.0f,		2.5f,	 5,			3.0f,		1000.0f,	"Rifle")},
+	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200.0f,		80.0f,	 INFINITY,	0.0f,		600.0f,		"Debug gun")},
 };
 
 Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWeapon _weaponBase, float _gunshotVolumeScale)
@@ -21,6 +21,8 @@ Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWe
 	owner = _owner;
 	weaponData = FWeapon::GetData(_weaponBase);
 	name = weaponData.name;
+	currentAmmo = weaponData.ammo;
+
 	if (name == "Glock")
 	{
 		bulletSpriteFile = "Resources/Textures/GlockBullet.png";
@@ -63,6 +65,18 @@ void Weapon::PerformAction()
 {
 	if (!inAction)
 	{
+		//reload after a short delay if the weapon has no ammo
+		if (currentAmmo <= 0)
+		{
+			const float IMPLICIT_RELOAD_DELAY = 0.3f;	
+			inAction = true;
+			cooldownTimer = IMPLICIT_RELOAD_DELAY;
+			finishCoolDownDelegate = &Weapon::Reload;
+			//play sound
+			return;
+		}
+
+		currentAmmo--;
 		gunshotSFX.play();
 
 		// shoot 
@@ -84,6 +98,26 @@ void Weapon::PerformAction()
 		}
 	}
 }
+
+void Weapon::Reload()
+{
+	if (currentAmmo == weaponData.ammo)
+	{
+		return;
+	}
+
+	cooldownTimer = weaponData.reloadTime;
+	inAction = true;
+	finishCoolDownDelegate = &Weapon::FinishReload;
+	//play sound
+}
+
+void Weapon::FinishReload()
+{
+	currentAmmo = weaponData.ammo;
+	//play sound
+}
+
 
 FWeapon::Data Weapon::GetWeaponData()
 {
@@ -135,6 +169,17 @@ void Weapon::Cooldown(float _deltatime)
 	{
 		cooldownTimer = 0;
 		inAction = false;
+		if (finishCoolDownDelegate != nullptr)
+		{
+			void(Weapon::* oldDelegate)() = finishCoolDownDelegate;
+			(this->*finishCoolDownDelegate)();
+
+			//clear completed delegate unless it has been changed in the called delegate
+			if (oldDelegate == finishCoolDownDelegate)
+			{
+				finishCoolDownDelegate = nullptr;
+			}
+		}
 	}
 	else
 	{

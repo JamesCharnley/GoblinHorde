@@ -32,8 +32,8 @@ struct FWeapon
     {
         Data()
             : weapon(EWeapon::SMG), weaponType(EWeaponType::Gun), damage(20.0f), actionsPerSecond(8.0f), hasAmmo(true), ammo(100), level(1), name("Weapon") {}
-        Data(EWeapon _weapon, EWeaponType _weaponType, int _damage, float _actionsPerSecond, int _ammo, float _bulletSpeed, const char* _name)
-            : weapon(_weapon), weaponType(_weaponType), damage(_damage), actionsPerSecond(_actionsPerSecond), hasAmmo(true), ammo(_ammo), speed(_bulletSpeed), level(1), name(_name) {}
+        Data(EWeapon _weapon, EWeaponType _weaponType, int _damage, float _actionsPerSecond, int _ammo, float _reloadTime, float _bulletSpeed, const char* _name)
+            : weapon(_weapon), weaponType(_weaponType), damage(_damage), actionsPerSecond(_actionsPerSecond), hasAmmo(true), ammo(_ammo), reloadTime(_reloadTime), speed(_bulletSpeed), level(1), name(_name) {}
 
         EWeapon weapon;
         EWeaponType weaponType;
@@ -42,6 +42,7 @@ struct FWeapon
         float speed;
         bool hasAmmo;
         int ammo;
+        float reloadTime;
         int level;
         const char* name;
     };
@@ -60,6 +61,7 @@ public:
     Weapon(sf::RenderWindow* _window, class Scene* _scene, GameObject* _owner, EWeapon _weaponBase = EWeapon::Glock, float _gunshotVolumeScale = 1.0f);
     virtual void Update(float _deltatime) override;
     void PerformAction();
+    void Reload();
     inline GameObject* GetOwner() { return owner; };
     inline void SetOwner(GameObject* _owner) { owner = _owner; }
     FWeapon::Data GetWeaponData();
@@ -73,11 +75,11 @@ public:
 protected:
 
     void Cooldown(float _deltatime);
+    void FinishReload();
     float cooldownTimer = 0;
     FWeapon::Data weaponData;
     GameObject* owner = nullptr;
     bool inAction = false;
-
     const char* bulletSpriteFile;
 
 private:
@@ -85,7 +87,9 @@ private:
 
     sf::Sound gunshotSFX;
     sf::SoundBuffer buffer;
-
+    int currentAmmo;
+    float reloadTimer = 0.0f;
+    void(Weapon::*finishCoolDownDelegate)() = nullptr;
 
 };
 
