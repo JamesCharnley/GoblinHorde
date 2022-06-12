@@ -42,12 +42,17 @@ Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWe
 
 	std::string sndFolder = "Resources/SFX/";
 
-	if (!buffer.loadFromFile(sndFolder + "Gunshot_" + weaponData.name + ".wav"))
+	if (!gunshotBuffer.loadFromFile(sndFolder + "Gunshot_" + weaponData.name + ".wav"))
 	{
 
 	}
-	gunshotSFX.setBuffer(buffer);
-	gunshotSFX.setVolume(50.0f * _gunshotVolumeScale);
+	reloadStartBuffer.loadFromFile(sndFolder + "ReloadStart.wav");
+	reloadEndBuffer.loadFromFile(sndFolder + "ReloadEnd.wav");
+	ImplicitReloadBuffer.loadFromFile(sndFolder + "ImplicitReloadStart.wav");
+
+	gunshotSound.setBuffer(gunshotBuffer);
+	gunshotSound.setVolume(50.0f * _gunshotVolumeScale);
+	reloadSound.setVolume(50.0f * _gunshotVolumeScale);
 }
 
 void Weapon::Update(float _deltatime)
@@ -72,12 +77,13 @@ void Weapon::PerformAction()
 			inAction = true;
 			cooldownTimer = IMPLICIT_RELOAD_DELAY;
 			finishCoolDownDelegate = &Weapon::Reload;
-			//play sound
+			reloadSound.setBuffer(ImplicitReloadBuffer);
+			reloadSound.play();
 			return;
 		}
 
 		currentAmmo--;
-		gunshotSFX.play();
+		gunshotSound.play();
 
 		// shoot 
 		Projectile* proj = new Projectile(window, scene, GetRotation(), this, weaponData.damage, weaponData.speed, bulletSpriteFile);
@@ -106,6 +112,9 @@ void Weapon::Reload()
 		return;
 	}
 
+	reloadSound.setBuffer(reloadStartBuffer);
+	reloadSound.play();
+
 	cooldownTimer = weaponData.reloadTime;
 	inAction = true;
 	finishCoolDownDelegate = &Weapon::FinishReload;
@@ -114,8 +123,13 @@ void Weapon::Reload()
 
 void Weapon::FinishReload()
 {
+	reloadSound.setBuffer(reloadEndBuffer);
+	reloadSound.play();
 	currentAmmo = weaponData.ammo;
-	//play sound
+	const float POST_RELOAD_DELAY = 0.3f;
+
+	inAction = true;
+	cooldownTimer = POST_RELOAD_DELAY;
 }
 
 

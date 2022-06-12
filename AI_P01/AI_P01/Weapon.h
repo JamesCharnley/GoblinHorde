@@ -85,8 +85,14 @@ protected:
 private:
     FWeapon::Data GetBaseWeaponData();
 
-    sf::Sound gunshotSFX;
-    sf::SoundBuffer buffer;
+    sf::Sound reloadSound;
+    sf::Sound gunshotSound;
+
+    sf::SoundBuffer gunshotBuffer;
+    sf::SoundBuffer reloadStartBuffer;
+    sf::SoundBuffer reloadEndBuffer;
+    sf::SoundBuffer ImplicitReloadBuffer;
+
     int currentAmmo;
     float reloadTimer = 0.0f;
     void(Weapon::*finishCoolDownDelegate)() = nullptr;
