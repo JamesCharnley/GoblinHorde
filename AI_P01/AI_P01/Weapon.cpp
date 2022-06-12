@@ -101,7 +101,7 @@ void Weapon::PerformAction()
 
 void Weapon::Reload()
 {
-	if (currentAmmo == weaponData.ammo)
+	if (currentAmmo == weaponData.ammo || finishCoolDownDelegate == &Weapon::FinishReload)
 	{
 		return;
 	}

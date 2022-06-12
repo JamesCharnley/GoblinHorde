@@ -151,6 +151,7 @@ protected:
     class Base* base;
 
     void UpdateActionText();
+    void ReloadWeapon();
 
 private:
     ControllerState input;

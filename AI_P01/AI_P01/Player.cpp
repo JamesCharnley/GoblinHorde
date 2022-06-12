@@ -84,6 +84,9 @@ void Player::Update(float _deltatime)
 		scene->GetUI()->getPlayer4Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
 	}
 
+	//populate input struct
+	PollController(playerNumber - 1);
+
 	CheckForInput(playerNumber);
 	if (rotationDelayTimer <= 0 && !lockRotation)
 	{
@@ -108,7 +111,7 @@ void Player::Update(float _deltatime)
 			{
 				actionTextString = "Repair Base";
 				actionText.setString(actionTextString);
-				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+				if (input.button.A)
 				{
 					base->Repair(_deltatime);
 				}
@@ -303,9 +306,8 @@ void Player::CheckForInput(int _player)
 	velocity.x = 0;
 	velocity.y = 0;
 
-	PollController(_player - 1);
+	//movement input
 	float deadZone = 15.0f;
-
 	if (input.axis.LS.x > -deadZone && input.axis.LS.x < deadZone)
 	{
 		input.axis.LS.x = 0;
@@ -332,6 +334,8 @@ void Player::CheckForInput(int _player)
 	{
 		input.axis.LS.y /= (100.0f - deadZone);
 	}
+
+	//weapon switching
 	if (!lastFrameSwitchWeapon && input.button.DPad.left)
 	{
 		NextWeapon();
@@ -347,6 +351,7 @@ void Player::CheckForInput(int _player)
 		lastFrameSwitchWeapon = false;
 	}
 
+	//appy movement
 	velocity.x = input.axis.LS.x;
 	velocity.y = input.axis.LS.y;
 
@@ -399,6 +404,9 @@ void Player::CheckForInput(int _player)
 	}
 
 
+	//handle actions
+
+	//shoot
 	if (input.button.RB || sf::Keyboard::isKeyPressed(selectedInputPreset.ShootKey))
 	{
 		// shoot
@@ -406,6 +414,12 @@ void Player::CheckForInput(int _player)
 		{
 			equippedWeapon->PerformAction();
 		}
+	}
+
+	//reload
+	if (input.button.X)
+	{
+		ReloadWeapon();
 	}
 
 	velocity = SFMLVectorMath::Clamp(velocity);
@@ -429,7 +443,7 @@ void Player::PollInteractable()
 		// check if can interact
 		if (currentInteractable->CanInteract(this))
 		{
-			if (sf::Joystick::isButtonPressed(playerNumber - 1, 0) && actionButtonPressed == false)
+			if (input.button.A && actionButtonPressed == false)
 			{
 				actionButtonPressed = true;
 				currentInteractable->Interact(this);
@@ -447,11 +461,19 @@ void Player::PollInteractable()
 		UpdateActionText();
 	}
 
-	if (!sf::Joystick::isButtonPressed(playerNumber - 1, 0))
+	if (!input.button.A)
 	{
 		actionButtonPressed = false;
 	}
 	
+}
+
+void Player::ReloadWeapon()
+{
+	if (equippedWeapon != nullptr)
+	{
+		equippedWeapon->Reload();
+	}
 }
 
 void Player::UpdateActionText()
