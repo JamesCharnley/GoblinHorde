@@ -497,7 +497,7 @@ void Player::checkConstraints()
 
 	if (this->GetPosition().x > Utils::WINDOW_X - GetRadius() / 2)
 	{
-		this->SetPosition(sf::Vector2f(Utils::WINDOW_X, this->GetPosition().y));
+		this->SetPosition(sf::Vector2f(Utils::WINDOW_X - GetRadius() / 2, this->GetPosition().y));
 	}
 
 	if (this->GetPosition().y < 0 + GetRadius() / 2)
