@@ -8,10 +8,10 @@
 
 GoblinHordeUI::GoblinHordeUI()
 {	
-	player1Stats = new PlayerStats(sf::Vector2f(100, 15));
-	player2Stats = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, 15));
-	player3Stats = new PlayerStats(sf::Vector2f(100, Utils::WINDOW_Y - 120));
-	player4Stats = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, Utils::WINDOW_Y - 120));
+	player1Stats = new PlayerStats(sf::Vector2f(100, 15), sf::Color::Red);
+	player2Stats = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, 15), sf::Color::Blue);
+	player3Stats = new PlayerStats(sf::Vector2f(100, Utils::WINDOW_Y - 150), sf::Color::Yellow);
+	player4Stats = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, Utils::WINDOW_Y - 150), sf::Color::Cyan);
 	waveDisplay = new WaveDisplay(sf::Vector2f(800, 15));
 }
 

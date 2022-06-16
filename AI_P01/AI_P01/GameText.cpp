@@ -1,10 +1,10 @@
 #include "GameText.h"
 
-GameText::GameText(std::string filePath, sf::Vector2f position)
+GameText::GameText(std::string filePath, sf::Vector2f position, sf::Color color)
 {
 	gameFont.loadFromFile(filePath);
 	gameText.setFont(gameFont);
-	gameText.setFillColor(sf::Color::White);
+	gameText.setFillColor(color);
 	gameText.setPosition(position);
 
 	posChanged = false;

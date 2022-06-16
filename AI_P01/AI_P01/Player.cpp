@@ -5,6 +5,7 @@
 #include "PlayerStats.h"
 #include <vector>
 #include "Base.h"
+#include "Utility.h"
 
 
 Player::Player(sf::RenderWindow* _window, Scene* _scene, float _playerCount) : Character(_window, _scene, 100.0f)
@@ -33,13 +34,12 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene, float _playerCount) : C
 	actionText.setFillColor(sf::Color::Red);
 
 	base = nullptr;
-	playerGoldSFX.setVolume(15);
 	playerSFX.setVolume(20);
 
+	purchaseBuffer.loadFromFile("Resources/SFX/Purchase.wav");
 	goldBuffer.loadFromFile("Resources/SFX/Gold.wav");
 	hurtSFXBuffer.loadFromFile("Resources/SFX/PlayerHurt.wav");
 	dieSFXBuffer.loadFromFile("Resources/SFX/PlayerDie.wav");
-	playerGoldSFX.setBuffer(goldBuffer);
 }
 
 Player::~Player()
@@ -61,6 +61,7 @@ void Player::Update(float _deltatime)
 
 	if (playerNum == 1)
 	{
+		scene->GetUI()->getPlayer1Stats()->setPlayerNumber(playerNum);
 		scene->GetUI()->getPlayer1Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer1Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer1Stats()->UpdateAmmo(0);
@@ -69,6 +70,7 @@ void Player::Update(float _deltatime)
 
 	else if (playerNum == 2)
 	{
+		scene->GetUI()->getPlayer2Stats()->setPlayerNumber(playerNum);
 		scene->GetUI()->getPlayer2Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer2Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer2Stats()->UpdateAmmo(0);
@@ -77,6 +79,7 @@ void Player::Update(float _deltatime)
 
 	else if (playerNum == 3)
 	{
+		scene->GetUI()->getPlayer3Stats()->setPlayerNumber(playerNum);
 		scene->GetUI()->getPlayer3Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer3Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer3Stats()->UpdateAmmo(0);
@@ -85,6 +88,7 @@ void Player::Update(float _deltatime)
 
 	else if (playerNum == 4)
 	{
+		scene->GetUI()->getPlayer4Stats()->setPlayerNumber(playerNum);
 		scene->GetUI()->getPlayer4Stats()->UpdateHealth(currentHealth);
 		scene->GetUI()->getPlayer4Stats()->UpdateGold(currentGold);
 		scene->GetUI()->getPlayer4Stats()->UpdateAmmo(0);
@@ -144,6 +148,8 @@ void Player::Update(float _deltatime)
 		UpdateActionText();
 	}
 
+
+	checkConstraints();
 }
 
 void Player::Render()
@@ -178,12 +184,17 @@ void Player::AddGold(int _amount)
 	currentGold += _amount;
 	//std::cout << "Gold: " << currentGold << std::endl;
 
+	playerGoldSFX.setVolume(15);
+	playerGoldSFX.setBuffer(goldBuffer);
 	playerGoldSFX.play();
 }
 
 void Player::RemoveGold(int _amount)
 {
 	currentGold -= _amount;
+	playerGoldSFX.setVolume(50);
+	playerGoldSFX.setBuffer(purchaseBuffer);
+	playerGoldSFX.play();
 
 }
 
@@ -475,6 +486,31 @@ void Player::ReloadWeapon()
 	{
 		equippedWeapon->Reload();
 	}
+}
+
+void Player::checkConstraints()
+{
+	if (this->GetPosition().x < 0 + GetRadius() / 2)
+	{
+		this->SetPosition(sf::Vector2f(0 + GetRadius() / 2, this->GetPosition().y));
+	}
+
+	if (this->GetPosition().x > Utils::WINDOW_X - GetRadius() / 2)
+	{
+		this->SetPosition(sf::Vector2f(Utils::WINDOW_X, this->GetPosition().y));
+	}
+
+	if (this->GetPosition().y < 0 + GetRadius() / 2)
+	{
+		this->SetPosition(sf::Vector2f(this->GetPosition().x, 0 + GetRadius() / 2));
+	}
+
+	if (this->GetPosition().y > Utils::WINDOW_Y - GetRadius() / 2)
+	{
+		this->SetPosition(sf::Vector2f(this->GetPosition().x, Utils::WINDOW_Y - GetRadius() / 2));
+	}
+
+
 }
 
 void Player::UpdateActionText()

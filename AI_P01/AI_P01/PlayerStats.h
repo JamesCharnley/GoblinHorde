@@ -18,12 +18,13 @@ class PlayerStats
 public:
 
 	//Constructor takes in a vector 2f which is the position of the PlayerStats display
-	PlayerStats(sf::Vector2f _position);
+	PlayerStats(sf::Vector2f _position, sf::Color _color);
 
 	//Renders each of the players stats: health, gold, ammo
 	void Render(sf::RenderWindow* _window);
 
 	//The update functions would be called in the Player.cpp whenever a stat value is changing e.g. gold increase
+	void setPlayerNumber(int _num);
 	void UpdateHealth(int _num);
 	void UpdateGold(int _num);
 	void UpdateAmmo(int _num);
@@ -35,6 +36,7 @@ private:
 	sf::Vector2f statsPosition;
 
 	// pointer to GameText for each of the players stat
+	class GameText* playerNum;
 	class GameText* playerHealth;
 	class GameText* playerGold;
 	class GameText* playerAmmo;

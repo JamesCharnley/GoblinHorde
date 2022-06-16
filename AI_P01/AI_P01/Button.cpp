@@ -6,7 +6,7 @@ Button::Button(sf::Vector2f position, std::string text, sf::RenderWindow* _windo
 	GameObjectRectangle(_window, _scnene) //Potential Error
 {
 	window = _window;
-	buttonText = new GameText("Resources/Font/WarPriest.ttf", position);
+	buttonText = new GameText("Resources/Font/WarPriest.ttf", position, sf::Color::White);
 	buttonText->SetString(text);
 	
 	AddSprite("Resources/Textures/ButtonSprite.png");

@@ -153,6 +153,9 @@ protected:
     void UpdateActionText();
     void ReloadWeapon();
 
+    //Checks if player is near the edges
+    void checkConstraints();
+
 private:
     ControllerState input;
     std::vector<Weapon*> weapons;
@@ -168,6 +171,7 @@ private:
 
     sf::Sound playerSFX;
     sf::Sound playerGoldSFX;
+    sf::SoundBuffer purchaseBuffer;
     sf::SoundBuffer hurtSFXBuffer;
     sf::SoundBuffer dieSFXBuffer;
     sf::SoundBuffer goldBuffer;

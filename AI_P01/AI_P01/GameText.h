@@ -18,7 +18,7 @@ class GameText
 public:
 
 	//Takes in a filepath string and vector 2F position. File path string used to create a font for the text
-	GameText(std::string _filePath, sf::Vector2f _position);
+	GameText(std::string _filePath, sf::Vector2f _position, sf::Color _Color);
 
 	//Sets a string for the sf::Text
 	void SetString(std::string newText);
@@ -31,6 +31,7 @@ public:
 private:
 	sf::Font gameFont;
 	sf::Text gameText;
+	sf::Color gameColor;
 
 	bool posChanged;
 };

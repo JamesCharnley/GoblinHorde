@@ -5,9 +5,9 @@ WaveDisplay::WaveDisplay(sf::Vector2f _position) :
 	displayPosition(_position)
 {
 	waveTimerVal = 0.0f;
-	numOfEnemies = new GameText("Resources/Font/WarPriest.ttf", _position);
-	waveNumber = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 30));
-	waveTimer = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 60));
+	numOfEnemies = new GameText("Resources/Font/WarPriest.ttf", _position, sf::Color::White);
+	waveNumber = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 30), sf::Color::White);
+	waveTimer = new GameText("Resources/Font/WarPriest.ttf", sf::Vector2f(_position.x, _position.y + 60), sf::Color::White);
 }
 
 void WaveDisplay::Render(sf::RenderWindow* _window)
