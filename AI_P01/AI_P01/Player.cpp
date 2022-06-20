@@ -34,20 +34,20 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene, float _playerCount) : C
 	actionText.setFillColor(sf::Color::Red);
 
 	base = nullptr;
-<<<<<<< HEAD
+
 	playerSFX.setVolume(20);
 
 	purchaseBuffer.loadFromFile("Resources/SFX/Purchase.wav");
 	goldBuffer.loadFromFile("Resources/SFX/Gold.wav");
 	hurtSFXBuffer.loadFromFile("Resources/SFX/PlayerHurt.wav");
 	dieSFXBuffer.loadFromFile("Resources/SFX/PlayerDie.wav");
-=======
+
 
 	if (!baseRepairSFXBuffer.loadFromFile("Resources/SFX/Repair.wav"))
 	{
 		std::cout << "Failed to load Repair.wav" << std::endl;
 	}
->>>>>>> James
+
 }
 
 Player::~Player()
@@ -388,7 +388,7 @@ void Player::CheckForInput(int _player)
 
 	rotVelocity = SFMLVectorMath::Clamp(rotVelocity);
 
-	if (rStickX != 0 || rStickY != 0)
+	if (rotVelocity.x || rotVelocity.y)
 	{
 		targetRotation = SFMLVectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
 		SetRotation(targetRotation);
