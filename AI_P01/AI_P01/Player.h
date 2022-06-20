@@ -169,11 +169,23 @@ private:
 
     sf::Vector2f spawnpoint;
 
+<<<<<<< HEAD
     sf::Sound playerSFX;
     sf::Sound playerGoldSFX;
     sf::SoundBuffer purchaseBuffer;
     sf::SoundBuffer hurtSFXBuffer;
     sf::SoundBuffer dieSFXBuffer;
     sf::SoundBuffer goldBuffer;
+=======
+    sf::Sound PlayerDieSFX;
+    sf::Sound PlayerGoldSFX;
+    sf::SoundBuffer buffer;
+
+    sf::Sound baseRepairSFX;
+    sf::SoundBuffer baseRepairSFXBuffer;
+
+    float baseRepairSFXInterval = 1;
+    float baseRepairSFXTimer = 0;
+>>>>>>> James
 };
 

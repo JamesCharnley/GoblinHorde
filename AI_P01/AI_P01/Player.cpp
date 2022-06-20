@@ -34,12 +34,20 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene, float _playerCount) : C
 	actionText.setFillColor(sf::Color::Red);
 
 	base = nullptr;
+<<<<<<< HEAD
 	playerSFX.setVolume(20);
 
 	purchaseBuffer.loadFromFile("Resources/SFX/Purchase.wav");
 	goldBuffer.loadFromFile("Resources/SFX/Gold.wav");
 	hurtSFXBuffer.loadFromFile("Resources/SFX/PlayerHurt.wav");
 	dieSFXBuffer.loadFromFile("Resources/SFX/PlayerDie.wav");
+=======
+
+	if (!baseRepairSFXBuffer.loadFromFile("Resources/SFX/Repair.wav"))
+	{
+		std::cout << "Failed to load Repair.wav" << std::endl;
+	}
+>>>>>>> James
 }
 
 Player::~Player()
@@ -99,14 +107,7 @@ void Player::Update(float _deltatime)
 	PollController(playerNumber - 1);
 
 	CheckForInput(playerNumber);
-	if (rotationDelayTimer <= 0 && !lockRotation)
-	{
-		SetRotation(targetRotation);
-	}
-	else
-	{
-		rotationDelayTimer -= _deltatime;
-	}
+	
 
 	// check current interactable
 	if (currentInteractable)
@@ -114,6 +115,10 @@ void Player::Update(float _deltatime)
 		PollInteractable();
 	}
 
+	if (baseRepairSFXTimer > 0)
+	{
+		baseRepairSFXTimer -= _deltatime;
+	}
 	if (base != nullptr && currentInteractable == nullptr)
 	{
 		if (base->InRange(this))
@@ -125,6 +130,15 @@ void Player::Update(float _deltatime)
 				if (input.button.A)
 				{
 					base->Repair(_deltatime);
+					if (baseRepairSFXTimer <= 0)
+					{
+						//play sound
+						baseRepairSFX.setBuffer(baseRepairSFXBuffer);
+						baseRepairSFX.setVolume(25);
+						baseRepairSFX.play();
+						//reset timer
+						baseRepairSFXTimer = baseRepairSFXInterval;
+					}
 				}
 			}
 			else
@@ -374,7 +388,13 @@ void Player::CheckForInput(int _player)
 
 	rotVelocity = SFMLVectorMath::Clamp(rotVelocity);
 
-	targetRotation = SFMLVectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
+	if (rStickX != 0 || rStickY != 0)
+	{
+		targetRotation = SFMLVectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
+		SetRotation(targetRotation);
+	}
+
+	
 	
 	bool isKeyboard = false;
 

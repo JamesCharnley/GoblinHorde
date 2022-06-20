@@ -311,5 +311,13 @@ void MainMenu::CheckForControllerInput()
 		stickCoolDown = true;
 		stickTimer = stickCoolDownTime;
 	}
+
+	float dPadY = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::PovY);
+	if (dPadY != 0.0f)
+	{
+		SetSelectedButton(sf::Vector2f(0, -dPadY));
+		//stickCoolDown = true;
+		//stickTimer = stickCoolDownTime;
+	}
 	
 }
