@@ -33,6 +33,11 @@ Player::Player(sf::RenderWindow* _window, Scene* _scene) : Character(_window, _s
 	actionText.setFillColor(sf::Color::Red);
 
 	base = nullptr;
+
+	if (!baseRepairSFXBuffer.loadFromFile("Resources/SFX/Repair.wav"))
+	{
+		std::cout << "Failed to load Repair.wav" << std::endl;
+	}
 }
 
 Player::~Player()
@@ -85,14 +90,7 @@ void Player::Update(float _deltatime)
 	}
 
 	CheckForInput(playerNumber);
-	if (rotationDelayTimer <= 0 && !lockRotation)
-	{
-		SetRotation(targetRotation);
-	}
-	else
-	{
-		rotationDelayTimer -= _deltatime;
-	}
+	
 
 	// check current interactable
 	if (currentInteractable)
@@ -100,6 +98,10 @@ void Player::Update(float _deltatime)
 		PollInteractable();
 	}
 
+	if (baseRepairSFXTimer > 0)
+	{
+		baseRepairSFXTimer -= _deltatime;
+	}
 	if (base != nullptr && currentInteractable == nullptr)
 	{
 		if (base->InRange(this))
@@ -111,6 +113,15 @@ void Player::Update(float _deltatime)
 				if (sf::Joystick::isButtonPressed(playerNumber - 1, 0))
 				{
 					base->Repair(_deltatime);
+					if (baseRepairSFXTimer <= 0)
+					{
+						//play sound
+						baseRepairSFX.setBuffer(baseRepairSFXBuffer);
+						baseRepairSFX.setVolume(25);
+						baseRepairSFX.play();
+						//reset timer
+						baseRepairSFXTimer = baseRepairSFXInterval;
+					}
 				}
 			}
 			else
@@ -368,7 +379,13 @@ void Player::CheckForInput(int _player)
 
 	rotVelocity = SFMLVectorMath::Clamp(rotVelocity);
 
-	targetRotation = SFMLVectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
+	if (rStickX != 0 || rStickY != 0)
+	{
+		targetRotation = SFMLVectorMath::DirectionToAngle(GetPosition(), GetPosition() + rotVelocity);
+		SetRotation(targetRotation);
+	}
+
+	
 	
 	bool isKeyboard = false;
 

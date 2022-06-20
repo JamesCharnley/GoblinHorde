@@ -51,6 +51,9 @@ private:
     sf::Sound hitSFX;
     sf::Sound goblinDieSFX;
     sf::SoundBuffer buffer;
+
+    sf::Sound baseDamageSFX;
+    sf::SoundBuffer baseDamageSFXBuffer;
  
 };
 

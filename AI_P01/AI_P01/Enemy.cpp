@@ -10,6 +10,8 @@ Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, Base* _base, float _healt
 	moveSpeed = 50.0f;
 	//circle.setFillColor(sf::Color::Red);
 	AddCollider(ECollisionType::Block);
+
+	baseDamageSFXBuffer.loadFromFile("Resources/SFX/BaseDamage.wav");
 }
 
 Enemy::Enemy(sf::RenderWindow* _window, Scene* _scene, EnemySpawner* _spawner, Base* _base, float _health, float _damage) : Enemy(_window, _scene, _base, _health, _damage)
@@ -69,6 +71,9 @@ void Enemy::Update(float _deltatime)
 		{
 			//damage the player and reset timer
 			base->TakeDamage(damage);
+			baseDamageSFX.setBuffer(baseDamageSFXBuffer);
+			baseDamageSFX.setVolume(25);
+			baseDamageSFX.play();
 			damageTimer = damageIntervial;
 
 		}
