@@ -8,59 +8,51 @@
 
 GoblinHordeUI::GoblinHordeUI()
 {	
-	player1Stats = new PlayerStats(sf::Vector2f(100, 15), sf::Color::Red);
-	player2Stats = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, 15), sf::Color::Blue);
-	player3Stats = new PlayerStats(sf::Vector2f(100, Utils::WINDOW_Y - 150), sf::Color::Yellow);
-	player4Stats = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, Utils::WINDOW_Y - 150), sf::Color::Cyan);
+	playerStats[0] = new PlayerStats(sf::Vector2f(100, 15), sf::Color::Red);
+	playerStats[1] = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, 15), sf::Color::Blue);
+	playerStats[2] = new PlayerStats(sf::Vector2f(100, Utils::WINDOW_Y - 150), sf::Color::Yellow);
+	playerStats[3] = new PlayerStats(sf::Vector2f(Utils::WINDOW_X - 210, Utils::WINDOW_Y - 150), sf::Color::Cyan);
 	waveDisplay = new WaveDisplay(sf::Vector2f(800, 15));
 }
 
 GoblinHordeUI::~GoblinHordeUI()
 {
-	delete player1Stats;
-	delete player2Stats;
+	for (int i = 0; i < sizeof(playerStats) / sizeof(playerStats[0]); i++)
+	{
+		if (playerStats[i] != nullptr)
+		{
+			delete playerStats[i];
+			playerStats[i] = nullptr;
+		}
+	}
 	delete waveDisplay;
-
-	player1Stats = nullptr;
-	player2Stats = nullptr;
-	player3Stats = nullptr;
-	player4Stats = nullptr;
 	waveDisplay = nullptr;
 }
 
 //Renders all the game texts
-void GoblinHordeUI::Render(sf::RenderWindow* window)
+void GoblinHordeUI::Render(sf::RenderWindow* _window)
 {
-	player1Stats->Render(window);
-	player2Stats->Render(window);
-	player3Stats->Render(window);
-	player4Stats->Render(window);
-	waveDisplay->Render(window);
+	for (int i = 0; i < sizeof(playerStats) / sizeof(playerStats[0]); i++)
+	{
+		if (playerStats[i] != nullptr)
+		{
+			playerStats[i]->Render(_window);
+		}
+	}
+	waveDisplay->Render(_window);
 }
 
-//Player class will be able to display there gold, health and ammo onto the UI
-PlayerStats* GoblinHordeUI::getPlayer1Stats()
+PlayerStats* GoblinHordeUI::GetPlayerStats(int _playerNum)
 {
-	return player1Stats;
-}
-
-PlayerStats* GoblinHordeUI::getPlayer2Stats()
-{
-	return player2Stats;
-}
-
-PlayerStats* GoblinHordeUI::getPlayer3Stats()
-{
-	return player3Stats;
-}
-
-PlayerStats* GoblinHordeUI::getPlayer4Stats()
-{
-	return player4Stats;
+	if (_playerNum > 4 || _playerNum < 0)
+	{
+		throw "Invalid player number, array out of bounds";
+	}
+	return playerStats[_playerNum - 1];
 }
 
 //Wave manage class will be able to display the breakTimer, current num of enemies and current wave onto the UI
-WaveDisplay* GoblinHordeUI::getWaveDisplay()
+WaveDisplay* GoblinHordeUI::GetWaveDisplay()
 {
 	return waveDisplay;
 }

@@ -67,6 +67,7 @@ public:
     FWeapon::Data GetWeaponData();
 
     inline int GetLevel() { return weaponData.level; }
+    inline int GetCurrentAmmo() { return currentAmmo; }
     //increment this weapon's level
     void Upgrade();
 

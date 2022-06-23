@@ -67,40 +67,17 @@ void Player::Update(float _deltatime)
 		equippedWeapon->Update(_deltatime);
 	}
 
-	if (playerNum == 1)
-	{
-		scene->GetUI()->getPlayer1Stats()->setPlayerNumber(playerNum);
-		scene->GetUI()->getPlayer1Stats()->UpdateHealth(currentHealth);
-		scene->GetUI()->getPlayer1Stats()->UpdateGold(currentGold);
-		scene->GetUI()->getPlayer1Stats()->UpdateAmmo(0);
-		scene->GetUI()->getPlayer1Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
-	}
+	
+	PlayerStats* stats = scene->GetUI()->GetPlayerStats(playerNum);
 
-	else if (playerNum == 2)
-	{
-		scene->GetUI()->getPlayer2Stats()->setPlayerNumber(playerNum);
-		scene->GetUI()->getPlayer2Stats()->UpdateHealth(currentHealth);
-		scene->GetUI()->getPlayer2Stats()->UpdateGold(currentGold);
-		scene->GetUI()->getPlayer2Stats()->UpdateAmmo(0);
-		scene->GetUI()->getPlayer2Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
-	}
+	stats->setPlayerNumber(playerNum);
+	stats->UpdateHealth(currentHealth);
+	stats->UpdateGold(currentGold);
 
-	else if (playerNum == 3)
+	if (equippedWeapon != nullptr)
 	{
-		scene->GetUI()->getPlayer3Stats()->setPlayerNumber(playerNum);
-		scene->GetUI()->getPlayer3Stats()->UpdateHealth(currentHealth);
-		scene->GetUI()->getPlayer3Stats()->UpdateGold(currentGold);
-		scene->GetUI()->getPlayer3Stats()->UpdateAmmo(0);
-		scene->GetUI()->getPlayer3Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
-	}
-
-	else if (playerNum == 4)
-	{
-		scene->GetUI()->getPlayer4Stats()->setPlayerNumber(playerNum);
-		scene->GetUI()->getPlayer4Stats()->UpdateHealth(currentHealth);
-		scene->GetUI()->getPlayer4Stats()->UpdateGold(currentGold);
-		scene->GetUI()->getPlayer4Stats()->UpdateAmmo(0);
-		scene->GetUI()->getPlayer4Stats()->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
+		stats->UpdateAmmo(equippedWeapon->GetCurrentAmmo());
+		stats->UpdateEquippedWeapon(equippedWeapon->name, GetWeaponLevel());
 	}
 
 	//populate input struct
