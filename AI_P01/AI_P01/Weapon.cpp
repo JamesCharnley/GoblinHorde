@@ -8,9 +8,9 @@
 //assign weapon stats here
 std::map<EWeapon, FWeapon::Data> FWeapon::dataMap =
 {															      //dmg |   firerate  | ammo  | reload time  | bullet speed | name
-	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			7.0f,		3.0f,	 7,			1.0f,		600.0f,		"Glock")},
-	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				6.0f,		7.0f,	 35,		2.0f,		800.0f,		"SMG")},
-	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			25.0f,		2.5f,	 5,			3.0f,		1000.0f,	"Rifle")},
+	{EWeapon::Glock, Data(EWeapon::Glock, EWeaponType::Gun,			7.0f,		3.2f,	 14,		0.5f,		600.0f,		"Glock")},
+	{EWeapon::SMG, Data(EWeapon::SMG, EWeaponType::Gun,				6.0f,		7.0f,	 35,		1.0f,		800.0f,		"SMG")},
+	{EWeapon::Rifle, Data(EWeapon::Rifle, EWeaponType::Gun,			28.0f,		2.2f,	 7,			1.5f,		1000.0f,	"Rifle")},
 	{EWeapon::DebugGun, Data(EWeapon::DebugGun, EWeaponType::Gun,	200.0f,		80.0f,	 INFINITY,	0.0f,		600.0f,		"Debug gun")},
 };
 
@@ -52,7 +52,7 @@ Weapon::Weapon(sf::RenderWindow* _window, Scene* _scene, GameObject* _owner, EWe
 
 	gunshotSound.setBuffer(gunshotBuffer);
 	gunshotSound.setVolume(50.0f * _gunshotVolumeScale);
-	reloadSound.setVolume(50.0f * _gunshotVolumeScale);
+	reloadSound.setVolume(40.0f * _gunshotVolumeScale);
 }
 
 void Weapon::Update(float _deltatime)
