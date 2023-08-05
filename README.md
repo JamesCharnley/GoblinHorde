@@ -1,2 +1,2 @@
 # GoblinHorde
- Best game ever made!
+ A prototype game made with C++ and SFML
